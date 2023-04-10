@@ -4,8 +4,13 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
+import { Address } from "./address.entity";
+import { Cart } from "./cart.entity";
 
 @Entity("users")
 export class User {
@@ -32,4 +37,17 @@ export class User {
 
   @Column({ length: 14 })
   phone: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @ManyToOne(() => Address, (address) => address.users, { eager: true })
+  address: Address;
+
+  @OneToOne(() => Cart, (cart) => cart.user, { eager: true })
+  @JoinColumn()
+  cart: Cart;
 }
