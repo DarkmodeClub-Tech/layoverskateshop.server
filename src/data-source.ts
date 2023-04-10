@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
+import { User, Address, Cart, Order, Product } from "./entities";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "production"
@@ -9,7 +10,7 @@ const AppDataSource = new DataSource(
         ssl: { rejectUnauthorized: false },
         synchronize: false,
         logging: true,
-        entities: [],
+        entities: [User, Address, Cart, Order, Product],
         migrations: [],
       }
     : {
@@ -21,7 +22,7 @@ const AppDataSource = new DataSource(
         database: process.env.POSTGRES_DB,
         logging: true,
         synchronize: false,
-        entities: [],
+        entities: [User, Address, Cart, Order, Product],
         migrations: [],
       }
 );
