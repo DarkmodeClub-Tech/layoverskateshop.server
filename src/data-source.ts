@@ -1,6 +1,15 @@
-import { DataSource } from "typeorm";
 import "dotenv/config";
+
+import { DataSource } from "typeorm";
 import { User, Address, Cart, Order, Product } from "./entities";
+import {
+  InitialMigrations1681211388494,
+  CreateTables1681211502804,
+  AlterTables1681214882297,
+  AlterTables1681218740737,
+  AlterTables1681218949606,
+  AlterTables1681219186397,
+} from "./migrations";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "production"
@@ -11,7 +20,12 @@ const AppDataSource = new DataSource(
         synchronize: false,
         logging: true,
         entities: [User, Address, Cart, Order, Product],
-        migrations: [],
+        migrations: [
+          InitialMigrations1681211388494,
+          CreateTables1681211502804,
+          AlterTables1681218949606,
+          AlterTables1681219186397,
+        ],
       }
     : {
         type: "postgres",
@@ -23,7 +37,12 @@ const AppDataSource = new DataSource(
         logging: true,
         synchronize: false,
         entities: [User, Address, Cart, Order, Product],
-        migrations: [],
+        migrations: [
+          InitialMigrations1681211388494,
+          CreateTables1681211502804,
+          AlterTables1681218949606,
+          AlterTables1681219186397,
+        ],
       }
 );
 
