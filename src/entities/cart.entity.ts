@@ -5,6 +5,7 @@ import {
   OneToOne,
   OneToMany,
   ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { User } from "./user.entity";
 import { Product } from "./product.entity";
@@ -13,9 +14,6 @@ import { Product } from "./product.entity";
 export class Cart {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
-
-  @OneToOne(() => User, (user) => user.cart)
-  user: User;
 
   @ManyToMany(() => Product, (product) => product.carts, { eager: true })
   products: Product[];

@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Cart } from "./cart.entity";
 import { Order } from "./order.entity";
@@ -17,16 +18,16 @@ export class Product {
   @Column({ length: 100 })
   title: string;
 
-  @Column({ length: 8 })
+  @Column()
   price: number;
 
-  @Column({ length: 3 })
+  @Column()
   max_installments: number;
 
   @Column({ default: true, nullable: true })
   available: boolean;
 
-  @Column({ length: 5, default: 1 })
+  @Column({ default: 1 })
   amount: number;
 
   @CreateDateColumn()
@@ -35,9 +36,9 @@ export class Product {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToMany(() => Cart)
-  carts: Cart;
+  @ManyToMany(() => Cart, (cart) => cart.products)
+  carts: Cart[];
 
-  @ManyToMany(() => Order)
+  @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
 }
