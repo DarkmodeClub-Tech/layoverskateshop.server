@@ -7,10 +7,13 @@ import {
   ManyToOne,
   OneToOne,
   JoinColumn,
+  JoinTable,
+  OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { Address } from "./address.entity";
 import { Cart } from "./cart.entity";
+import { Order } from "./order.entity";
 
 @Entity("users")
 export class User {
@@ -29,6 +32,7 @@ export class User {
   @Column({ length: 120 })
   email: string;
 
+  @Exclude()
   @Column({ length: 150 })
   password: string;
 
@@ -47,7 +51,9 @@ export class User {
   @ManyToOne(() => Address, (address) => address.users, { eager: true })
   address: Address;
 
-  @OneToOne(() => Cart, (cart) => cart.user, { eager: true })
-  @JoinColumn()
+  @OneToOne(() => Cart)
   cart: Cart;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 }

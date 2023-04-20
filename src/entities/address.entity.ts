@@ -18,7 +18,7 @@ export class Address {
   @Column({ length: 120 })
   street: string;
 
-  @Column({ length: 5 })
+  @Column({ nullable: true })
   number: number;
 
   @Column({ length: 20, nullable: true })
@@ -26,6 +26,12 @@ export class Address {
 
   @Column({ length: 120 })
   district: string;
+
+  @Column({ length: 120 })
+  city: string;
+
+  @Column({ length: 120 })
+  state: string;
 
   @OneToMany(() => User, (user) => user.address)
   users: User[];
