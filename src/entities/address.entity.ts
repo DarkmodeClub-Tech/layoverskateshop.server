@@ -4,8 +4,10 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  JoinTable,
 } from "typeorm";
 import { User } from "./user.entity";
+import { Customer } from "./customer.entity";
 
 @Entity("addresses")
 export class Address {
@@ -33,6 +35,6 @@ export class Address {
   @Column({ length: 120 })
   state: string;
 
-  @OneToMany(() => User, (user) => user.address)
-  users: User[];
+  @OneToMany(() => Customer, (customer) => customer.address)
+  customers: Customer[];
 }

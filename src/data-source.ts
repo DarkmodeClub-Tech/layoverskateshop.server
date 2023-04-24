@@ -1,14 +1,13 @@
 import "dotenv/config";
 
 import { DataSource } from "typeorm";
-import { User, Address, Cart, Order, Product } from "./entities";
+import { User, Address, Cart, Order, Product, Customer } from "./entities";
 import {
-  InitialMigrations1681211388494,
-  CreateTables1681211502804,
-  AlterTables1681214882297,
-  AlterTables1681218740737,
-  AlterTables1681218949606,
-  AlterTables1681219186397,
+  InitialMigration1682346444041,
+  CreateTables1682346648117,
+  AlterTables1682346922430,
+  AlterTables1682347365164,
+  AlterTables1682348287338,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -19,12 +18,13 @@ const AppDataSource = new DataSource(
         ssl: { rejectUnauthorized: false },
         synchronize: false,
         logging: true,
-        entities: [User, Address, Cart, Order, Product],
+        entities: [User, Customer, Address, Cart, Order, Product],
         migrations: [
-          InitialMigrations1681211388494,
-          CreateTables1681211502804,
-          AlterTables1681218949606,
-          AlterTables1681219186397,
+          InitialMigration1682346444041,
+          CreateTables1682346648117,
+          AlterTables1682346922430,
+          AlterTables1682347365164,
+          AlterTables1682348287338,
         ],
       }
     : {
@@ -36,12 +36,13 @@ const AppDataSource = new DataSource(
         database: process.env.POSTGRES_DB,
         logging: true,
         synchronize: false,
-        entities: [User, Address, Cart, Order, Product],
+        entities: [User, Customer, Address, Cart, Order, Product],
         migrations: [
-          InitialMigrations1681211388494,
-          CreateTables1681211502804,
-          AlterTables1681218949606,
-          AlterTables1681219186397,
+          InitialMigration1682346444041,
+          CreateTables1682346648117,
+          AlterTables1682346922430,
+          AlterTables1682347365164,
+          AlterTables1682348287338,
         ],
       }
 );

@@ -1,15 +1,13 @@
-import { InitialMigrations1681211388494 } from "./1681211388494-initial-migrations";
-import { CreateTables1681211502804 } from "./1681211502804-create-tables";
-import { AlterTables1681214882297 } from "./1681214882297-alter-tables";
-import { AlterTables1681218740737 } from "./1681218740737-alter-tables";
-import { AlterTables1681218949606 } from "./1681218949606-alter-tables";
-import { AlterTables1681219186397 } from "./1681219186397-alter-tables";
+import { InitialMigration1682346444041 } from "./1682346444041-initialMigration";
+import { CreateTables1682346648117 } from "./1682346648117-createTables";
+import { AlterTables1682346922430 } from "./1682346922430-alterTables";
+import { AlterTables1682347365164 } from "./1682347365164-alterTables";
+import { AlterTables1682348287338 } from "./1682348287338-alterTables";
 
 export {
-  InitialMigrations1681211388494,
-  CreateTables1681211502804,
-  AlterTables1681214882297,
-  AlterTables1681218740737,
-  AlterTables1681218949606,
-  AlterTables1681219186397,
+  InitialMigration1682346444041,
+  CreateTables1682346648117,
+  AlterTables1682346922430,
+  AlterTables1682347365164,
+  AlterTables1682348287338,
 };
