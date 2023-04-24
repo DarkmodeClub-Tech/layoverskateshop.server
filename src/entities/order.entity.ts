@@ -6,10 +6,9 @@ import {
   UpdateDateColumn,
   ManyToMany,
   ManyToOne,
-  JoinTable,
 } from "typeorm";
 import { Product } from "./product.entity";
-import { User } from "./user.entity";
+import { Customer } from "./customer.entity";
 
 @Entity("orders")
 export class Order {
@@ -22,8 +21,8 @@ export class Order {
   @ManyToMany(() => Product, (product) => product.orders)
   products: Product[];
 
-  @ManyToOne(() => User, (user) => user.orders)
-  user: User;
+  @ManyToOne(() => Customer, (customer) => customer.orders)
+  customer: Customer;
 
   @CreateDateColumn()
   created_at: Date;

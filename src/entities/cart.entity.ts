@@ -1,14 +1,6 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  OneToMany,
-  ManyToMany,
-  JoinTable,
-} from "typeorm";
-import { User } from "./user.entity";
+import { Entity, PrimaryGeneratedColumn, OneToOne, ManyToMany } from "typeorm";
 import { Product } from "./product.entity";
+import { Customer } from "./customer.entity";
 
 @Entity("carts")
 export class Cart {
@@ -16,5 +8,8 @@ export class Cart {
   readonly id: string;
 
   @ManyToMany(() => Product, (product) => product.carts, { eager: true })
-  products: Product[];
+  products: Product[] | [];
+
+  @OneToOne(() => Customer, (customer) => customer.cart)
+  customer: Customer;
 }

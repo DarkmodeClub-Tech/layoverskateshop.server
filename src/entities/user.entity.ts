@@ -6,8 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   OneToOne,
-  JoinColumn,
-  JoinTable,
   OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
@@ -42,18 +40,24 @@ export class User {
   @Column({ length: 14 })
   phone: string;
 
+  @Column({ default: false })
+  adm: boolean;
+
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  last_login: Date;
+
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  last_logout: Date;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  @ManyToOne(() => Address, (address) => address.users, { eager: true })
-  address: Address;
-
-  @OneToOne(() => Cart)
-  cart: Cart;
-
-  @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
 }
