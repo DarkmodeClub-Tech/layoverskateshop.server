@@ -4,6 +4,7 @@ import {
   updateUserService,
   deleteUserService,
   retrieveUserService,
+  deactivateAccountService,
 } from "../services/user";
 
 export const registerUserController = async (req: Request, res: Response) => {
@@ -21,7 +22,7 @@ export const retrieveUserController = async (req: Request, res: Response) => {
 };
 
 export const updateUserController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const { id } = req.user;
   const data = req.body;
   const updated_user = await updateUserService(id, data);
 
@@ -29,8 +30,18 @@ export const updateUserController = async (req: Request, res: Response) => {
 };
 
 export const deleteUserController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const { id } = req.user;
   await deleteUserService(id);
 
+  return res.status(204).send();
+};
+
+export const deactivateAccountController = async (
+  req: Request,
+  res: Response
+) => {
+  const { id } = req.user;
+
+  await deactivateAccountService(id);
   return res.status(204).send();
 };
