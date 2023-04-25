@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
 } from "typeorm";
 import { Cart } from "./cart.entity";
 import { Order } from "./order.entity";
+import { Seller } from "./seller.entity";
 
 @Entity("products")
 export class Product {
@@ -41,4 +43,7 @@ export class Product {
 
   @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
+
+  @ManyToOne(() => Seller)
+  seller: Seller[];
 }
