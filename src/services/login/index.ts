@@ -22,7 +22,7 @@ const loginService = async ({ email, username, password }: ILogin) => {
 
   if (!passwordMatch) throw new AppError("Invalid Data", 403);
 
-  const token = jwt.sign({ adm: user.adm }, String(process.env.SECRET_KEY), {
+  const token = jwt.sign({ adm: user.is_adm }, String(process.env.SECRET_KEY), {
     expiresIn: "3h",
     subject: user.id,
   });
