@@ -1,40 +1,24 @@
 import AppDataSource from "../../data-source";
-import { User, Address, Cart } from "../../entities";
+import { Customer, Address } from "../../entities";
+import { hash } from "bcrypt";
+import { instanceToPlain } from "class-transformer";
 
-export const registerUserService = async (data: User) => {
-  const userRepo = AppDataSource.getRepository(User);
+export const registerUserService = async (
+  data: Customer
+): Promise<Customer> => {
+  const userRepo = AppDataSource.getRepository(Customer);
   const addressRepo = AppDataSource.getRepository(Address);
-  const cartRepo = AppDataSource.getRepository(Cart);
 
-  const cpf = await userRepo.findOneBy({
-    cpf: data.cpf,
-  });
+  data.password = await hash(data.password, 10);
 
-  const username = await userRepo.findOneBy({
-    username: data.username,
-  });
-
-  const email = await userRepo.findOneBy({
-    email: data.email,
-  });
-
-  if (email) throw new Error("email already being used");
-  if (cpf) throw new Error("cpf already being used");
-  if (username) throw new Error("username already being used");
-
-  const address = addressRepo.create({ ...data.address });
-  await addressRepo.save(address);
-
-  const cart = new Cart();
-  await cartRepo.save(cart);
-
-  // data.cart = cart;
   const newUser = userRepo.create(data);
-  newUser.address = address;
+  const userAddress = addressRepo.create(data.address);
+
+  newUser.address = userAddress;
 
   await userRepo.save(newUser);
 
-  const user = await userRepo.findOneBy({ id: newUser.id });
+  const createdUser = await userRepo.findOneBy({ id: newUser.id });
 
-  return user;
+  return instanceToPlain(createdUser) as Customer;
 };
