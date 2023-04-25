@@ -5,12 +5,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
-  JoinTable,
   ManyToOne,
 } from "typeorm";
 import { Cart } from "./cart.entity";
 import { Order } from "./order.entity";
 import { Seller } from "./seller.entity";
+import { Category } from "./category.entity";
 
 @Entity("products")
 export class Product {
@@ -46,4 +46,7 @@ export class Product {
 
   @ManyToOne(() => Seller)
   seller: Seller[];
+
+  @ManyToOne(() => Category, (category) => category.products, { eager: true })
+  category: Category;
 }

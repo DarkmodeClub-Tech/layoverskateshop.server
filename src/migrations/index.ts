@@ -5,6 +5,7 @@ import { AlterTables1682347365164 } from "./1682347365164-alterTables";
 import { AlterTables1682348287338 } from "./1682348287338-alterTables";
 import { AlterTable1682448498485 } from "./1682448498485-alterTable";
 import { AlterTables1682459438455 } from "./1682459438455-alterTables";
+import { AlterTables1682464795384 } from "./1682464795384-alterTables";
 
 export {
   InitialMigration1682346444041,
@@ -14,4 +15,5 @@ export {
   AlterTables1682348287338,
   AlterTable1682448498485,
   AlterTables1682459438455,
+  AlterTables1682464795384,
 };
