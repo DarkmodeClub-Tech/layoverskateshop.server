@@ -12,6 +12,7 @@ import {
   verifyDuplicatedUsername,
 } from "../middlewares";
 import { authenticationMiddleware } from "../middlewares/authentication.middleware";
+import { customerIdValidator } from "../middlewares/customerIDValidator.middleware";
 
 export const userRouter = Router();
 
@@ -22,15 +23,27 @@ userRouter.post(
   verifyDuplicatedUsername,
   registerUserController
 );
-userRouter.get("/retrieve", authenticationMiddleware, retrieveUserController);
-userRouter.patch("/update", authenticationMiddleware, updateUserController);
+userRouter.get(
+  "/retrieve",
+  authenticationMiddleware,
+  customerIdValidator,
+  retrieveUserController
+);
+userRouter.patch(
+  "/update",
+  authenticationMiddleware,
+  customerIdValidator,
+  updateUserController
+);
 userRouter.patch(
   "/deactivate",
   authenticationMiddleware,
+  customerIdValidator,
   deactivateAccountController
 );
 userRouter.delete(
   "/destroy",
   authenticationMiddleware,
+  customerIdValidator,
   deleteAccountController
 );
