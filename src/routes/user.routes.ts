@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   deactivateAccountController,
-  deleteUserController,
+  deleteAccountController,
   registerUserController,
   retrieveUserController,
   updateUserController,
@@ -29,4 +29,8 @@ userRouter.patch(
   authenticationMiddleware,
   deactivateAccountController
 );
-userRouter.delete("/destroy", authenticationMiddleware, deleteUserController);
+userRouter.delete(
+  "/destroy",
+  authenticationMiddleware,
+  deleteAccountController
+);
