@@ -9,11 +9,9 @@ export const updateUserService = async (
 ): Promise<Customer> => {
   const customerRepo = AppDataSource.getRepository(Customer);
 
-  const account = await customerRepo.findOneBy({ id: id });
-
-  if (!account) throw new AppError("Not found", 404);
-  await customerRepo.update(id, { ...data });
+  await customerRepo.update(id, data);
 
   const updatedData = await customerRepo.findOneBy({ id: id });
+
   return instanceToPlain(updatedData) as Customer;
 };
