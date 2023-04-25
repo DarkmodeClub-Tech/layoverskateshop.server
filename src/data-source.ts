@@ -9,6 +9,7 @@ import {
   Product,
   Customer,
   Seller,
+  Category,
 } from "./entities";
 import {
   InitialMigration1682346444041,
@@ -18,6 +19,7 @@ import {
   AlterTables1682348287338,
   AlterTable1682448498485,
   AlterTables1682459438455,
+  AlterTables1682464795384,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -28,7 +30,16 @@ const AppDataSource = new DataSource(
         ssl: { rejectUnauthorized: false },
         synchronize: false,
         logging: true,
-        entities: [User, Customer, Seller, Address, Cart, Order, Product],
+        entities: [
+          User,
+          Customer,
+          Seller,
+          Address,
+          Cart,
+          Order,
+          Product,
+          Category,
+        ],
         migrations: [
           InitialMigration1682346444041,
           CreateTables1682346648117,
@@ -37,6 +48,7 @@ const AppDataSource = new DataSource(
           AlterTables1682348287338,
           AlterTable1682448498485,
           AlterTables1682459438455,
+          AlterTables1682464795384,
         ],
       }
     : {
@@ -48,7 +60,16 @@ const AppDataSource = new DataSource(
         database: process.env.POSTGRES_DB,
         logging: true,
         synchronize: false,
-        entities: [User, Customer, Seller, Address, Cart, Order, Product],
+        entities: [
+          User,
+          Customer,
+          Seller,
+          Address,
+          Cart,
+          Order,
+          Product,
+          Category,
+        ],
         migrations: [
           InitialMigration1682346444041,
           CreateTables1682346648117,
@@ -57,6 +78,7 @@ const AppDataSource = new DataSource(
           AlterTables1682348287338,
           AlterTable1682448498485,
           AlterTables1682459438455,
+          AlterTables1682464795384,
         ],
       }
 );
