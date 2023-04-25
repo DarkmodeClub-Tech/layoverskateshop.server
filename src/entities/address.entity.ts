@@ -35,6 +35,6 @@ export class Address {
   @Column({ length: 120 })
   state: string;
 
-  @OneToMany(() => Customer, (customer) => customer.address)
-  customers: Customer[];
+  @OneToMany(() => User, (user) => user.address)
+  users: User[];
 }
