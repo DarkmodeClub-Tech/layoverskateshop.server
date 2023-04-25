@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import {
   registerUserService,
   updateUserService,
-  deleteUserService,
   retrieveUserService,
   deactivateAccountService,
+  deleteAccountService,
 } from "../services/user";
 
 export const registerUserController = async (req: Request, res: Response) => {
@@ -29,9 +29,9 @@ export const updateUserController = async (req: Request, res: Response) => {
   return res.status(200).json(updated_user);
 };
 
-export const deleteUserController = async (req: Request, res: Response) => {
+export const deleteAccountController = async (req: Request, res: Response) => {
   const { id } = req.user;
-  await deleteUserService(id);
+  await deleteAccountService(id);
 
   return res.status(204).send();
 };

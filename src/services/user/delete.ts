@@ -1,14 +1,15 @@
 import AppDataSource from "../../data-source";
-import { User } from "../../entities";
+import { Customer } from "../../entities";
+import { AppError } from "../../errors/appError";
 
-export const deleteUserService = async (id: string) => {
-  const userRepo = AppDataSource.getRepository(User);
+export const deleteAccountService = async (id: string) => {
+  const customerRepo = AppDataSource.getRepository(Customer);
 
-  const user = await userRepo.findOneBy({ id: id });
+  const account = await customerRepo.findOneBy({ id: id });
 
-  if (!user) throw new Error("Not found");
+  if (!account) throw new AppError("Not found", 404);
 
-  await userRepo.delete(user);
+  await customerRepo.delete(id);
 
   return;
 };
