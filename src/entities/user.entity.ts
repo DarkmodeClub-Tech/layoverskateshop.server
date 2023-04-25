@@ -63,4 +63,10 @@ export class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @ManyToOne(() => Address, (address) => address.users, {
+    eager: true,
+    cascade: true,
+  })
+  address: Address;
 }
