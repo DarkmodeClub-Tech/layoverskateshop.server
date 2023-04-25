@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "repository": "git@github.com:Mazuquiebe/layoverskateshop.server.git",
-  "author": "mazuquiebe-filho <mazuquiebe75@gamil.com>",
+  "author": "mazuquiebe-filho <mazuquiebe75@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
@@ -12,10 +12,13 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.15.11",
+    "@types/uuid": "^9.0.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {

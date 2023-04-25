@@ -8,6 +8,7 @@ import {
   AlterTables1682346922430,
   AlterTables1682347365164,
   AlterTables1682348287338,
+  AlterTable1682448498485,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -25,6 +26,7 @@ const AppDataSource = new DataSource(
           AlterTables1682346922430,
           AlterTables1682347365164,
           AlterTables1682348287338,
+          AlterTable1682448498485,
         ],
       }
     : {
@@ -43,6 +45,7 @@ const AppDataSource = new DataSource(
           AlterTables1682346922430,
           AlterTables1682347365164,
           AlterTables1682348287338,
+          AlterTable1682448498485,
         ],
       }
 );

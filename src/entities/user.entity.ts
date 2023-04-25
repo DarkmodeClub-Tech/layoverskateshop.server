@@ -41,7 +41,10 @@ export class User {
   phone: string;
 
   @Column({ default: false })
-  adm: boolean;
+  is_adm: boolean;
+
+  @Column({ default: true })
+  is_active: boolean;
 
   @Column({
     type: "timestamp",
