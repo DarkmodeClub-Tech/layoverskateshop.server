@@ -6,5 +6,16 @@ import { Order } from "./order.entity";
 import { Customer } from "./customer.entity";
 import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
+import { Photo } from "./photos.entity";
 
-export { User, Address, Cart, Product, Order, Customer, Seller, Category };
+export {
+  User,
+  Address,
+  Cart,
+  Product,
+  Order,
+  Customer,
+  Seller,
+  Category,
+  Photo,
+};
