@@ -10,6 +10,7 @@ import {
   Customer,
   Seller,
   Category,
+  Photo,
 } from "./entities";
 import {
   InitialMigration1682346444041,
@@ -20,6 +21,7 @@ import {
   AlterTable1682448498485,
   AlterTables1682459438455,
   AlterTables1682464795384,
+  AlterTables1682467557649,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -39,6 +41,7 @@ const AppDataSource = new DataSource(
           Order,
           Product,
           Category,
+          Photo,
         ],
         migrations: [
           InitialMigration1682346444041,
@@ -49,6 +52,7 @@ const AppDataSource = new DataSource(
           AlterTable1682448498485,
           AlterTables1682459438455,
           AlterTables1682464795384,
+          AlterTables1682467557649,
         ],
       }
     : {
@@ -69,6 +73,7 @@ const AppDataSource = new DataSource(
           Order,
           Product,
           Category,
+          Photo,
         ],
         migrations: [
           InitialMigration1682346444041,
@@ -79,6 +84,7 @@ const AppDataSource = new DataSource(
           AlterTable1682448498485,
           AlterTables1682459438455,
           AlterTables1682464795384,
+          AlterTables1682467557649,
         ],
       }
 );
