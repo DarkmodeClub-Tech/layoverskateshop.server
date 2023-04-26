@@ -6,11 +6,13 @@ import {
   UpdateDateColumn,
   ManyToMany,
   ManyToOne,
+  OneToMany,
 } from "typeorm";
 import { Cart } from "./cart.entity";
 import { Order } from "./order.entity";
 import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
+import { Photo } from "./photos.entity";
 
 @Entity("products")
 export class Product {
@@ -49,4 +51,7 @@ export class Product {
 
   @ManyToOne(() => Category, (category) => category.products, { eager: true })
   category: Category;
+
+  @OneToMany(() => Photo, (photo) => photo.product)
+  photos: Photo[];
 }
