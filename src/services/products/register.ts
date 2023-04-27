@@ -10,16 +10,12 @@ export const registerProductService = async (
   const categoryRepo = AppDataSource.getRepository(Category);
 
   const productInstance = productRepo.create(data);
-
   productInstance.category = categoryRepo.create(data.category);
-  productInstance.photos = await photoUploaderService(
-    photos,
-    productInstance.id
-  );
+  productInstance.photos = await photoUploaderService(photos);
 
   await productRepo.save(productInstance);
 
-  const newProduct = await productRepo.findOneBy({ id: productInstance.id });
+  // const newProduct = await productRepo.findOneBy({ id: productInstance.id });
 
-  return newProduct as Product;
+  return productInstance;
 };
