@@ -13,5 +13,5 @@ export class Photo {
   public_id: string;
 
   @ManyToOne(() => Product, (product) => product.photos)
-  product: Product;
+  product?: Product;
 }
