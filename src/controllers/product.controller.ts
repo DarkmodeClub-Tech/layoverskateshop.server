@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
-import { registerProductService } from "../services/products/register";
+import {
+  registerProductService,
+  updateProductService,
+} from "../services/products/";
 import { Product } from "../entities";
-import { photoUploaderService } from "../services/photos";
 
 export const registerProductController = async (
   req: Request,
@@ -13,4 +15,13 @@ export const registerProductController = async (
   const product = await registerProductService(data, files);
 
   return res.status(201).json(product);
+};
+
+export const updateProductController = async (req: Request, res: Response) => {
+  const data = req.body;
+  const { id } = req.params;
+
+  const updateData = await updateProductService(id, data);
+
+  return res.status(200).json(updateData);
 };
