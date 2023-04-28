@@ -1,3 +1,4 @@
+import { deleteProductService } from "./destroy";
 import { getProductsService } from "./get";
 import { registerProductService } from "./register";
 import { deactivateProductAddService } from "./softdelete";
@@ -8,4 +9,5 @@ export {
   updateProductService,
   getProductsService,
   deactivateProductAddService,
+  deleteProductService,
 };
