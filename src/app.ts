@@ -3,6 +3,7 @@ import "express-async-errors";
 import express from "express";
 import cors from "cors";
 import {
+  categoryRouter,
   customerRouter,
   loginRouter,
   productRouter,
@@ -17,6 +18,7 @@ app.use(cors());
 app.use("/customers", customerRouter);
 app.use("/login", loginRouter);
 app.use("/products", productRouter);
+app.use("/categories", categoryRouter);
 
 // app.use(handleErrorMiddleware);
 
