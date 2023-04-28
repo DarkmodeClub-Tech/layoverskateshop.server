@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  getProductsService,
   registerProductService,
   updateProductService,
 } from "../services/products/";
@@ -15,6 +16,13 @@ export const registerProductController = async (
   const product = await registerProductService(data, files);
 
   return res.status(201).json(product);
+};
+
+export const getProductsController = async (req: Request, res: Response) => {
+  const { offset = 0, limit = 100 } = req.query;
+  const products = await getProductsService(Number(offset), Number(limit));
+
+  return res.status(200).json(products);
 };
 
 export const updateProductController = async (req: Request, res: Response) => {
