@@ -4,8 +4,10 @@ import {
   registerProductService,
   updateProductService,
   deactivateProductAddService,
+  deleteProductService,
 } from "../services/products/";
 import { Product } from "../entities";
+import { RepositoryNotTreeError } from "typeorm";
 
 export const registerProductController = async (
   req: Request,
@@ -39,5 +41,11 @@ export const deactivateProductAddController = async (
 ) => {
   const { id } = req.params;
   await deactivateProductAddService(id);
+  return res.status(204).send();
+};
+
+export const deleteProductController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  await deleteProductService(id);
   return res.status(204).send();
 };
