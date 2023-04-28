@@ -4,6 +4,7 @@ import {
   registerProductController,
   updateProductController,
   getProductsController,
+  deactivateProductAddController,
 } from "../controllers/product.controller";
 import { authenticationMiddleware } from "../middlewares/authentication.middleware";
 
@@ -19,3 +20,5 @@ productRouter.post(
 productRouter.get("/", getProductsController);
 
 productRouter.patch("/update/:id", updateProductController);
+
+productRouter.patch("/deactivate/:id", deactivateProductAddController);
