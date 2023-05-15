@@ -9,6 +9,7 @@ import {
   productRouter,
 } from "./routes/index.routes";
 import handleErrorMiddleware from "./middlewares/handleError";
+import { cartRouter } from "./routes/cart.routes";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/customers", customerRouter);
 app.use("/login", loginRouter);
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
+app.use("/cart", cartRouter);
 
 // app.use(handleErrorMiddleware);
 
