@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, OneToOne, ManyToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  ManyToMany,
+  OneToMany,
+  JoinTable,
+} from "typeorm";
 import { Product } from "./product.entity";
 import { Customer } from "./customer.entity";
 
@@ -8,7 +15,8 @@ export class Cart {
   readonly id: string;
 
   @ManyToMany(() => Product, (product) => product.carts, { eager: true })
-  products: Product[] | [];
+  @JoinTable()
+  products: Product[];
 
   @OneToOne(() => Customer, (customer) => customer.cart)
   customer: Customer;
