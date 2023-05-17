@@ -8,11 +8,12 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
-import { Cart } from "./cart.entity";
+// import { Cart } from "./cart.entity";
 import { Order } from "./order.entity";
 import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
 import { Photo } from "./photos.entity";
+import { CartToProducts } from "./cartToProduct.entity";
 
 @Entity("products")
 export class Product {
@@ -40,10 +41,11 @@ export class Product {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToMany(() => Cart, (cart) => cart.products)
-  carts: Cart[];
-  // @OneToMany(() => CartProducts, (cartProducts) => cartProducts.products)
-  // cart_products: CartProducts[];
+  // @ManyToMany(() => Cart, (cart) => cart.products)
+  // carts: Cart[];
+
+  @OneToMany(() => CartToProducts, (cartToProducts) => cartToProducts.product)
+  cart_to_products: CartToProducts[];
 
   @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
