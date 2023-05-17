@@ -1,3 +1,4 @@
+import { authenticationMiddleware } from "./authentication.middleware";
 import { uploadFileMiddleware } from "./fileUploader.middleware";
 import { verifyDuplicatedCPF } from "./verifyDuplicatedCPF";
 import { verifyDuplicatedEmail } from "./verifyDuplicatedEmail";
@@ -8,4 +9,5 @@ export {
   verifyDuplicatedCPF,
   verifyDuplicatedUsername,
   uploadFileMiddleware,
+  authenticationMiddleware,
 };

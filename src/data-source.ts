@@ -11,17 +11,13 @@ import {
   Seller,
   Category,
   Photo,
+  CartToProducts,
 } from "./entities";
 import {
   InitialMigration1682346444041,
-  CreateTables1682346648117,
-  AlterTables1682346922430,
-  AlterTables1682347365164,
-  AlterTables1682348287338,
-  AlterTable1682448498485,
-  AlterTables1682459438455,
-  AlterTables1682464795384,
-  AlterTables1682467557649,
+  CreateTables1684064393378,
+  CreateTables1684064708330,
+  AlterTables1684286281140,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -42,17 +38,13 @@ const AppDataSource = new DataSource(
           Product,
           Category,
           Photo,
+          CartToProducts,
         ],
         migrations: [
           InitialMigration1682346444041,
-          CreateTables1682346648117,
-          AlterTables1682346922430,
-          AlterTables1682347365164,
-          AlterTables1682348287338,
-          AlterTable1682448498485,
-          AlterTables1682459438455,
-          AlterTables1682464795384,
-          AlterTables1682467557649,
+          CreateTables1684064393378,
+          CreateTables1684064708330,
+          AlterTables1684286281140,
         ],
       }
     : {
@@ -74,17 +66,13 @@ const AppDataSource = new DataSource(
           Product,
           Category,
           Photo,
+          CartToProducts,
         ],
         migrations: [
           InitialMigration1682346444041,
-          CreateTables1682346648117,
-          AlterTables1682346922430,
-          AlterTables1682347365164,
-          AlterTables1682348287338,
-          AlterTable1682448498485,
-          AlterTables1682459438455,
-          AlterTables1682464795384,
-          AlterTables1682467557649,
+          CreateTables1684064393378,
+          CreateTables1684064708330,
+          AlterTables1684286281140,
         ],
       }
 );

@@ -1,5 +1,6 @@
 import AppDataSource from "../../data-source";
-import { Customer, Cart, Product } from "../../entities/";
+import { Customer, Cart, Product, CartToProducts } from "../../entities/";
+import { createCartProductsService } from "../cartToProducts/create";
 import { retrieveUserService } from "../customer";
 
 export const createCartService = async (
@@ -8,9 +9,16 @@ export const createCartService = async (
   const cartRepo = AppDataSource.getRepository(Cart);
 
   const cart: Cart = new Cart();
-  cart.products = products;
+  const cartProducts: CartToProducts[] = [];
 
-  await cartRepo.save(cart);
+  if (products.length > 0) {
+    products.map(async (p) => {
+      let cartProduct = await createCartProductsService(cart, p);
+      cartProducts.push(cartProduct);
+      cart.cart_to_product = cartProducts;
+      await cartRepo.save(cart);
+    });
+  }
 
   return cart;
 };
