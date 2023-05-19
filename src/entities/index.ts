@@ -8,7 +8,7 @@ import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
 import { Photo } from "./photos.entity";
 // import { OrderProducts } from "./orderProducts.entity";
-import { CartToProducts } from "./cartToProduct.entity";
+import { CartProduct } from "./cartProduct.entity";
 
 export {
   User,
@@ -21,5 +21,5 @@ export {
   Category,
   Photo,
   // OrderProducts,
-  CartToProducts,
+  CartProduct,
 };

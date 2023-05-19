@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 // import { Product } from "./product.entity";
 import { Customer } from "./customer.entity";
-import { CartToProducts } from "./cartToProduct.entity";
+import { CartProduct } from "./cartProduct.entity";
 
 @Entity("carts")
 export class Cart {
@@ -23,8 +23,8 @@ export class Cart {
   @OneToOne(() => Customer, (customer) => customer.cart)
   customer: Customer;
 
-  @OneToMany(() => CartToProducts, (cartToProducts) => cartToProducts.cart, {
+  @OneToMany(() => CartProduct, (cartProduct) => cartProduct.cart, {
     eager: true,
   })
-  cart_to_product: CartToProducts[];
+  products: CartProduct[];
 }
