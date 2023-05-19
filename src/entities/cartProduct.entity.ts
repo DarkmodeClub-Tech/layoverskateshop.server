@@ -2,8 +2,8 @@ import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Cart } from "./cart.entity";
 import { Product } from "./product.entity";
 
-@Entity("cart_to_products")
-export class CartToProducts {
+@Entity("cart_products")
+export class CartProduct {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 

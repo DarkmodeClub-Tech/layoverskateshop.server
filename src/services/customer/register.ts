@@ -2,23 +2,22 @@ import AppDataSource from "../../data-source";
 import { Customer, Address } from "../../entities";
 import { hash } from "bcrypt";
 import { instanceToPlain } from "class-transformer";
+import { createCartService } from "../cart";
 
 export const registerUserService = async (
   data: Customer
 ): Promise<Customer> => {
-  const userRepo = AppDataSource.getRepository(Customer);
+  const customerRepo = AppDataSource.getRepository(Customer);
   const addressRepo = AppDataSource.getRepository(Address);
 
   data.password = await hash(data.password, 10);
 
-  const newUser = userRepo.create(data);
+  const newCustomer = customerRepo.create(data);
   const userAddress = addressRepo.create(data.address);
 
-  newUser.address = userAddress;
+  newCustomer.address = userAddress;
+  newCustomer.cart = await createCartService();
+  await customerRepo.save(newCustomer);
 
-  await userRepo.save(newUser);
-
-  const createdUser = await userRepo.findOneBy({ id: newUser.id });
-
-  return instanceToPlain(createdUser) as Customer;
+  return instanceToPlain(newCustomer) as Customer;
 };

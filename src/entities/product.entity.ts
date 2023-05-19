@@ -13,7 +13,7 @@ import { Order } from "./order.entity";
 import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
 import { Photo } from "./photos.entity";
-import { CartToProducts } from "./cartToProduct.entity";
+import { CartProduct } from "./cartProduct.entity";
 
 @Entity("products")
 export class Product {
@@ -44,8 +44,8 @@ export class Product {
   // @ManyToMany(() => Cart, (cart) => cart.products)
   // carts: Cart[];
 
-  @OneToMany(() => CartToProducts, (cartToProducts) => cartToProducts.product)
-  cart_to_products: CartToProducts[];
+  @OneToMany(() => CartProduct, (cartProduct) => cartProduct.product)
+  carts: CartProduct[];
 
   @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];

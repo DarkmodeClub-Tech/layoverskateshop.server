@@ -7,7 +7,7 @@ import { authenticationMiddleware } from "../middlewares/";
 export const cartRouter: Router = Router();
 
 cartRouter.post("/register", authenticationMiddleware, createCartController);
-cartRouter.patch(
+cartRouter.post(
   "/products",
   authenticationMiddleware,
   insertProductsCartController

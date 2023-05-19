@@ -1,24 +1,21 @@
 import AppDataSource from "../../data-source";
-import { Cart, CartToProducts, Product } from "../../entities";
+import { Cart, CartProduct, Customer, Product } from "../../entities";
 import { retrieveCartService } from "../cart";
-import { createCartProductsService } from "../cartToProducts/create";
+import { createCartProductsService } from "../cartProducts/create";
+import { retrieveUserService } from "../customer";
 import { retrieveProductService } from "../products";
 
-export const insertProductsCartService = async (
-  cart_id: string,
-  products_id: string[]
-): Promise<Cart | CartToProducts> => {
-  const cartRepo = AppDataSource.getRepository(Cart);
-  const cartTOProductsRepo = AppDataSource.getRepository(CartToProducts);
-  const cart: Cart = await retrieveCartService(cart_id);
+export const insertProductsInCartService = async (
+  customer_id: string,
+  products_ids: string[]
+) => {
+  const { cart }: Customer = await retrieveUserService(customer_id);
 
-  products_id.map(async (product_id) => {
-    let product = await retrieveProductService(product_id);
-
-    const cartToProduct = await createCartProductsService(cart, product);
-    cart.cart_to_product.push(cartToProduct);
-    await cartRepo.save(cart);
+  products_ids.map(async (pId) => {
+    let product = await retrieveProductService(pId);
+    await createCartProductsService(cart, product);
   });
 
-  return cart;
+  const newCart = await AppDataSource.manager.findOneBy(Cart, { id: cart.id });
+  return newCart;
 };

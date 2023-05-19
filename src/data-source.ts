@@ -11,13 +11,14 @@ import {
   Seller,
   Category,
   Photo,
-  CartToProducts,
+  CartProduct,
 } from "./entities";
 import {
   InitialMigration1682346444041,
   CreateTables1684064393378,
   CreateTables1684064708330,
   AlterTables1684286281140,
+  AlterTables1684379137825,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -38,13 +39,14 @@ const AppDataSource = new DataSource(
           Product,
           Category,
           Photo,
-          CartToProducts,
+          CartProduct,
         ],
         migrations: [
           InitialMigration1682346444041,
           CreateTables1684064393378,
           CreateTables1684064708330,
           AlterTables1684286281140,
+          AlterTables1684379137825,
         ],
       }
     : {
@@ -66,13 +68,14 @@ const AppDataSource = new DataSource(
           Product,
           Category,
           Photo,
-          CartToProducts,
+          CartProduct,
         ],
         migrations: [
           InitialMigration1682346444041,
           CreateTables1684064393378,
           CreateTables1684064708330,
           AlterTables1684286281140,
+          AlterTables1684379137825,
         ],
       }
 );
