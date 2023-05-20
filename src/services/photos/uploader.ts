@@ -13,7 +13,6 @@ export const photoUploaderService = async (
 
   for (const file of files) {
     const upload = await cloudinaryV2.uploader.upload(file!.path);
-
     const photo = photoRepo.create({
       public_id: upload.public_id,
       url: cloudinaryV2.url(upload.public_id),
@@ -21,7 +20,6 @@ export const photoUploaderService = async (
     await photoRepo.save(photo);
 
     savedPhotos.push(photo);
-
     fs.unlink(file!.path, (error) => {
       if (error) throw new AppError(error.message);
     });
