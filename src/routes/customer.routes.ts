@@ -2,9 +2,9 @@ import { Router } from "express";
 import {
   deactivateAccountController,
   deleteAccountController,
-  registerUserController,
-  retrieveUserController,
-  updateUserController,
+  registerCustomerController,
+  retrieveCustomerController,
+  updateCustomerController,
 } from "../controllers/customer.controllers";
 import {
   verifyDuplicatedCPF,
@@ -21,19 +21,19 @@ customerRouter.post(
   verifyDuplicatedCPF,
   verifyDuplicatedEmail,
   verifyDuplicatedUsername,
-  registerUserController
+  registerCustomerController
 );
 customerRouter.get(
   "/retrieve",
   authenticationMiddleware,
   customerIdValidator,
-  retrieveUserController
+  retrieveCustomerController
 );
 customerRouter.patch(
   "/update",
   authenticationMiddleware,
   customerIdValidator,
-  updateUserController
+  updateCustomerController
 );
 customerRouter.patch(
   "/deactivate",

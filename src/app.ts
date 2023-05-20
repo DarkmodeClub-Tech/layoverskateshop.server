@@ -22,6 +22,6 @@ app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 app.use("/cart", cartRouter);
 
-// app.use(handleErrorMiddleware);
+app.use(handleErrorMiddleware);
 
 export default app;

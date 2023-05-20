@@ -1,13 +1,13 @@
-import { registerUserService } from "./register";
-import { updateUserService } from "./update";
+import { registerCustomerService } from "./register";
+import { updateCustomerService } from "./update";
+import { retrieveCustomerService } from "./retrieve";
 import { deleteAccountService } from "./delete";
-import { retrieveUserService } from "./retrieve";
 import { deactivateAccountService } from "./deactivate";
 
 export {
-  registerUserService,
-  updateUserService,
+  registerCustomerService,
+  updateCustomerService,
+  retrieveCustomerService,
   deleteAccountService,
-  retrieveUserService,
   deactivateAccountService,
 };
