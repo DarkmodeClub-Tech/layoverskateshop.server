@@ -8,7 +8,6 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
-// import { Cart } from "./cart.entity";
 import { Order } from "./order.entity";
 import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
@@ -33,16 +32,13 @@ export class Product {
   available: boolean;
 
   @Column({ default: 1 })
-  amount: number;
+  stock_amount: number;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  // @ManyToMany(() => Cart, (cart) => cart.products)
-  // carts: Cart[];
 
   @OneToMany(() => CartProduct, (cartProduct) => cartProduct.product)
   carts: CartProduct[];

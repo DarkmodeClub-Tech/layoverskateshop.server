@@ -5,13 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToOne,
-  OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { Address } from "./address.entity";
-import { Cart } from "./cart.entity";
-import { Order } from "./order.entity";
 
 @Entity("users")
 export class User {
