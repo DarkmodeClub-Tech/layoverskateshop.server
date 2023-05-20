@@ -3,28 +3,16 @@ import { Cart, CartProduct, Product } from "../../entities";
 
 export const createCartProductsService = async (
   cart: Cart,
-  product: Product
+  product: Product,
+  amount: number
 ): Promise<CartProduct> => {
   const cartProductRepo = AppDataSource.getRepository(CartProduct);
+  const cartProduct = cartProductRepo.create({
+    cart: cart,
+    product: product,
+    cart_amount: amount,
+  });
 
-  let cartProduct = cart.products.find((cp) => cp.product.id === product.id);
-
-  if (cartProduct) {
-    cartProduct.amount++;
-    await cartProductRepo.save(cartProduct);
-    cartProduct = (await cartProductRepo.findOneBy({
-      id: cartProduct.id,
-    })) as CartProduct;
-    return cartProduct;
-  } else {
-    cartProduct = new CartProduct();
-    cartProduct.cart = cart;
-    cartProduct.product = product;
-    cartProduct.amount = 1;
-    await cartProductRepo.save(cartProduct);
-    cartProduct = (await cartProductRepo.findOneBy({
-      id: cartProduct.id,
-    })) as CartProduct;
-  }
+  await cartProductRepo.save(cartProduct);
   return cartProduct;
 };
