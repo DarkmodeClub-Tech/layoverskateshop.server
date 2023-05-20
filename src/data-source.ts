@@ -15,10 +15,7 @@ import {
 } from "./entities";
 import {
   InitialMigration1682346444041,
-  CreateTables1684064393378,
-  CreateTables1684064708330,
-  AlterTables1684286281140,
-  AlterTables1684379137825,
+  CreateTables1684524108180,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -41,13 +38,7 @@ const AppDataSource = new DataSource(
           Photo,
           CartProduct,
         ],
-        migrations: [
-          InitialMigration1682346444041,
-          CreateTables1684064393378,
-          CreateTables1684064708330,
-          AlterTables1684286281140,
-          AlterTables1684379137825,
-        ],
+        migrations: [InitialMigration1682346444041, CreateTables1684524108180],
       }
     : {
         type: "postgres",
@@ -70,13 +61,7 @@ const AppDataSource = new DataSource(
           Photo,
           CartProduct,
         ],
-        migrations: [
-          InitialMigration1682346444041,
-          CreateTables1684064393378,
-          CreateTables1684064708330,
-          AlterTables1684286281140,
-          AlterTables1684379137825,
-        ],
+        migrations: [InitialMigration1682346444041, CreateTables1684524108180],
       }
 );
 

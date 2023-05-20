@@ -3,7 +3,7 @@ import {
   createCartService,
   insertProductsInCartService,
 } from "../services/cart";
-import { retrieveUserService } from "../services/customer";
+import { retrieveCustomerService } from "../services/customer";
 import { Customer } from "../entities";
 
 export const createCartController = async (
@@ -20,7 +20,8 @@ export const insertProductsCartController = async (
   res: Response
 ): Promise<Response> => {
   const { id } = req.user;
+  const { cart }: Customer = await retrieveCustomerService(id);
   const { products } = req.body;
-  const cartProducts = await insertProductsInCartService(id, products);
+  const cartProducts = await insertProductsInCartService(cart, products);
   return res.status(200).json(cartProducts);
 };
