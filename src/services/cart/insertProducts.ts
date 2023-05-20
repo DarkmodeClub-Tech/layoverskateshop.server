@@ -1,21 +1,35 @@
 import AppDataSource from "../../data-source";
-import { Cart, CartProduct, Customer, Product } from "../../entities";
+import { Cart, CartProduct } from "../../entities";
+import { AppError } from "../../errors/appError";
+import { TProduct } from "../../interfaces/product";
 import { retrieveCartService } from "../cart";
 import { createCartProductsService } from "../cartProducts/create";
-import { retrieveUserService } from "../customer";
 import { retrieveProductService } from "../products";
 
 export const insertProductsInCartService = async (
-  customer_id: string,
-  products_ids: string[]
+  cart: Cart,
+  products: TProduct[]
 ) => {
-  const { cart }: Customer = await retrieveUserService(customer_id);
+  let cartUpdated: Cart = cart;
+  const cartProductRepo = AppDataSource.getRepository(CartProduct);
 
-  products_ids.map(async (pId) => {
-    let product = await retrieveProductService(pId);
-    await createCartProductsService(cart, product);
-  });
+  for (const p of products) {
+    let product = await retrieveProductService(p.product_id);
 
-  const newCart = await AppDataSource.manager.findOneBy(Cart, { id: cart.id });
-  return newCart;
+    if (p.amount > product.stock_amount) {
+      throw new AppError(
+        `There is only ${product.stock_amount} unities of ${product.title}`
+      );
+    }
+
+    let cartProduct = cart.products.find((cp) => cp.product.id === product.id);
+    if (cartProduct) {
+      const cart_amount = { cart_amount: p.amount };
+      await cartProductRepo.update(cartProduct.id, cart_amount);
+    } else {
+      await createCartProductsService(cart, product, p.amount);
+    }
+    cartUpdated = await retrieveCartService(cart.id);
+  }
+  return cartUpdated;
 };
