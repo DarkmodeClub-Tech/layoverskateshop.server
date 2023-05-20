@@ -8,7 +8,7 @@ export class CartProduct {
   readonly id: string;
 
   @Column()
-  amount: number;
+  cart_amount: number;
 
   @ManyToOne(() => Cart)
   cart: Cart;
