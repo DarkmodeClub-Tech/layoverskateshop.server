@@ -1,22 +1,17 @@
 import AppDataSource from "../../data-source";
-import { Cart, Product, CartProduct } from "../../entities/";
+import { Cart } from "../../entities/";
 import { TProduct } from "../../interfaces/product";
-import { createCartProductsService } from "../cartProducts/create";
-import { retrieveProductService } from "../products";
+import { insertProductsInCartService } from "./insertProducts";
 
 export const createCartService = async (
   products?: TProduct[]
 ): Promise<Cart> => {
   const cartRepo = AppDataSource.getRepository(Cart);
-  const cart: Cart = new Cart();
+  let cart: Cart = new Cart();
+  await cartRepo.save(cart);
 
   if (products) {
-    products.map(async (p) => {
-      let product = await retrieveProductService(p.product_id);
-      await createCartProductsService(cart, product, p.amount);
-    });
+    cart = await insertProductsInCartService(cart, products);
   }
-
-  await cartRepo.save(cart);
   return cart;
 };
