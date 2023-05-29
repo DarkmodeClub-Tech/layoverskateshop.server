@@ -36,9 +36,6 @@ export class User {
   @Column({ length: 14 })
   phone: string;
 
-  @Column({ default: false })
-  is_adm: boolean;
-
   @Column({ default: true })
   is_active: boolean;
 
