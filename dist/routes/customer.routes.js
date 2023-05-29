@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.customerRouter = void 0;
+const express_1 = require("express");
+const customer_controllers_1 = require("../controllers/customer.controllers");
+const middlewares_1 = require("../middlewares");
+const authentication_middleware_1 = require("../middlewares/authentication.middleware");
+const customerIDValidator_middleware_1 = require("../middlewares/customerIDValidator.middleware");
+exports.customerRouter = (0, express_1.Router)();
+exports.customerRouter.post("/auth", customer_controllers_1.loginCustomerController);
+exports.customerRouter.post("/register", middlewares_1.verifyDuplicatedCPF, middlewares_1.verifyDuplicatedEmail, middlewares_1.verifyDuplicatedUsername, customer_controllers_1.registerCustomerController);
+exports.customerRouter.get("/retrieve", authentication_middleware_1.authenticationMiddleware, customerIDValidator_middleware_1.customerIdValidator, customer_controllers_1.retrieveCustomerController);
+exports.customerRouter.patch("/update", authentication_middleware_1.authenticationMiddleware, customerIDValidator_middleware_1.customerIdValidator, customer_controllers_1.updateCustomerController);
+exports.customerRouter.patch("/deactivate", authentication_middleware_1.authenticationMiddleware, customerIDValidator_middleware_1.customerIdValidator, customer_controllers_1.deactivateAccountController);
+exports.customerRouter.delete("/destroy", authentication_middleware_1.authenticationMiddleware, customerIDValidator_middleware_1.customerIdValidator, customer_controllers_1.deleteAccountController);

@@ -8,13 +8,16 @@ import {
   deleteProductController,
 } from "../controllers/product.controller";
 import { authenticationMiddleware } from "../middlewares/authentication.middleware";
+import { validateRequestBodyMiddleware } from "../middlewares/validateRequestBody.middleware";
+import { registerProductRequestSchema } from "../schemas/products.schemas";
 
 export const productRouter = Router();
 
 productRouter.post(
   "/register",
   // authenticationMiddleware,
-  uploadFileMiddleware.array("photos"),
+  uploadFileMiddleware.array("photos", 6),
+  validateRequestBodyMiddleware(registerProductRequestSchema),
   registerProductController
 );
 

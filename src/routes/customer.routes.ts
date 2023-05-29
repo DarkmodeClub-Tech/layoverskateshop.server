@@ -5,6 +5,7 @@ import {
   registerCustomerController,
   retrieveCustomerController,
   updateCustomerController,
+  loginCustomerController,
 } from "../controllers/customer.controllers";
 import {
   verifyDuplicatedCPF,
@@ -13,14 +14,27 @@ import {
 } from "../middlewares";
 import { authenticationMiddleware } from "../middlewares/authentication.middleware";
 import { customerIdValidator } from "../middlewares/customerIDValidator.middleware";
+import { validateRequestBodyMiddleware } from "../middlewares/validateRequestBody.middleware";
+import {
+  loginCustomerRequestSchema,
+  registerCustomerRequestSchema,
+  updateCustomerRequestSchema,
+} from "../schemas/customer.schemas";
+import { Customer } from "../entities";
 
 export const customerRouter = Router();
 
 customerRouter.post(
+  "/auth",
+  validateRequestBodyMiddleware(loginCustomerRequestSchema),
+  loginCustomerController
+);
+customerRouter.post(
   "/register",
-  verifyDuplicatedCPF,
-  verifyDuplicatedEmail,
-  verifyDuplicatedUsername,
+  validateRequestBodyMiddleware(registerCustomerRequestSchema),
+  verifyDuplicatedCPF(Customer),
+  verifyDuplicatedEmail(Customer),
+  verifyDuplicatedUsername(Customer),
   registerCustomerController
 );
 customerRouter.get(
@@ -32,6 +46,10 @@ customerRouter.get(
 customerRouter.patch(
   "/update",
   authenticationMiddleware,
+  validateRequestBodyMiddleware(updateCustomerRequestSchema.partial()),
+  verifyDuplicatedCPF(Customer),
+  verifyDuplicatedEmail(Customer),
+  verifyDuplicatedUsername(Customer),
   customerIdValidator,
   updateCustomerController
 );

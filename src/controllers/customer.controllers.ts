@@ -5,8 +5,17 @@ import {
   retrieveCustomerService,
   deactivateAccountService,
   deleteAccountService,
+  loginCustomerService,
 } from "../services/customer";
 import { ICustomer } from "../interfaces/customer";
+import { ILogin } from "../interfaces/user";
+
+export const loginCustomerController = async (req: Request, res: Response) => {
+  const data: ILogin = req.body;
+  const accessToken = await loginCustomerService(data);
+
+  return res.status(200).json(accessToken);
+};
 
 export const registerCustomerController = async (
   req: Request,

@@ -4,39 +4,22 @@ import { hash } from "bcrypt";
 import { instanceToPlain } from "class-transformer";
 import { createCartService } from "../cart";
 import { ICustomer } from "../../interfaces/customer";
+import { retrieveCustomerService } from "./retrieve";
 
 export const registerCustomerService = async (
   data: ICustomer
 ): Promise<Customer> => {
   const customerRepo = AppDataSource.getRepository(Customer);
   const addressRepo = AppDataSource.getRepository(Address);
-  const {
-    first_name,
-    last_name,
-    username,
-    email,
-    cpf,
-    password,
-    phone,
-    address,
-    products,
-  } = data;
+  const { address, password, products } = data;
 
-  const newCustomer = customerRepo.create({
-    password: await hash(password, 10),
-    first_name,
-    last_name,
-    username,
-    cpf,
-    email,
-    phone,
-  });
+  data.address = addressRepo.create(address);
+  data.password = await hash(password, 10);
+  data.cart = await createCartService(products);
 
-  const userAddress = addressRepo.create(address);
-
-  newCustomer.address = userAddress;
-  newCustomer.cart = await createCartService(products);
+  let newCustomer = customerRepo.create(data);
   await customerRepo.save(newCustomer);
+  newCustomer = await retrieveCustomerService(newCustomer.id);
 
   return instanceToPlain(newCustomer) as Customer;
 };

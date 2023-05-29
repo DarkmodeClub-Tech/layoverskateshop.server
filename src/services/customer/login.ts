@@ -5,16 +5,16 @@ import "dotenv/config";
 import { AppError } from "../../errors/appError";
 import { Customer } from "../../entities";
 
-import { ILogin } from "./interfaces";
+import { ILogin } from "../../interfaces/user";
 
-const loginService = async ({ email, username, password }: ILogin) => {
+export const loginCustomerService = async ({
+  email,
+  username,
+  password,
+}: ILogin) => {
   const userRepo = AppDataSource.getRepository(Customer);
 
-  const user = await userRepo.findOneBy(
-    {
-      email: email,
-    } || { username: username }
-  );
+  const user = await userRepo.findOneBy({ email } || { username });
 
   if (!user) throw new AppError("Invalid Data", 403);
 
@@ -28,5 +28,3 @@ const loginService = async ({ email, username, password }: ILogin) => {
   });
   return { token: token };
 };
-
-export default loginService;
