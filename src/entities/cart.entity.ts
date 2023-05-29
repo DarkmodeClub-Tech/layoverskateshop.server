@@ -1,22 +1,17 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  OneToMany,
-  ManyToMany,
-} from "typeorm";
-import { User } from "./user.entity";
-import { Product } from "./product.entity";
+import { Entity, PrimaryGeneratedColumn, OneToOne, OneToMany } from "typeorm";
+import { Customer } from "./customer.entity";
+import { CartProduct } from "./cartProduct.entity";
 
 @Entity("carts")
 export class Cart {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @OneToOne(() => User, (user) => user.cart)
-  user: User;
+  @OneToOne(() => Customer, (customer) => customer.cart)
+  customer: Customer;
 
-  @ManyToMany(() => Product, (product) => product.carts, { eager: true })
-  products: Product[];
+  @OneToMany(() => CartProduct, (cartProduct) => cartProduct.cart, {
+    eager: true,
+  })
+  products: CartProduct[];
 }

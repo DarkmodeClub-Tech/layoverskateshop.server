@@ -5,12 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToOne,
-  JoinColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { Address } from "./address.entity";
-import { Cart } from "./cart.entity";
 
 @Entity("users")
 export class User {
@@ -29,6 +26,7 @@ export class User {
   @Column({ length: 120 })
   email: string;
 
+  @Exclude()
   @Column({ length: 150 })
   password: string;
 
@@ -38,16 +36,30 @@ export class User {
   @Column({ length: 14 })
   phone: string;
 
+  @Column({ default: true })
+  is_active: boolean;
+
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  last_login: Date;
+
+  @Column({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  last_logout: Date;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Address, (address) => address.users, { eager: true })
+  @ManyToOne(() => Address, (address) => address.users, {
+    eager: true,
+    cascade: true,
+  })
   address: Address;
-
-  @OneToOne(() => Cart, (cart) => cart.user, { eager: true })
-  @JoinColumn()
-  cart: Cart;
 }

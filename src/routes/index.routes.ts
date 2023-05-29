@@ -1,3 +1,6 @@
-import { userRouter } from "./user.routes";
+import { customerRouter } from "./customer.routes";
+import { productRouter } from "./product.routes";
+import { categoryRouter } from "./category.routes";
+import { sellerRouter } from "./seller.routes";
 
-export { userRouter };
+export { customerRouter, productRouter, categoryRouter, sellerRouter };

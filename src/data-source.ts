@@ -1,14 +1,22 @@
 import "dotenv/config";
 
 import { DataSource } from "typeorm";
-import { User, Address, Cart, Order, Product } from "./entities";
 import {
-  InitialMigrations1681211388494,
-  CreateTables1681211502804,
-  AlterTables1681214882297,
-  AlterTables1681218740737,
-  AlterTables1681218949606,
-  AlterTables1681219186397,
+  User,
+  Address,
+  Cart,
+  Order,
+  Product,
+  Customer,
+  Seller,
+  Category,
+  Photo,
+  CartProduct,
+} from "./entities";
+import {
+  InitialMigration1682346444041,
+  CreateTables1684524108180,
+  AlterTables1685395288009,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -19,12 +27,22 @@ const AppDataSource = new DataSource(
         ssl: { rejectUnauthorized: false },
         synchronize: false,
         logging: true,
-        entities: [User, Address, Cart, Order, Product],
+        entities: [
+          User,
+          Customer,
+          Seller,
+          Address,
+          Cart,
+          Order,
+          Product,
+          Category,
+          Photo,
+          CartProduct,
+        ],
         migrations: [
-          InitialMigrations1681211388494,
-          CreateTables1681211502804,
-          AlterTables1681218949606,
-          AlterTables1681219186397,
+          InitialMigration1682346444041,
+          CreateTables1684524108180,
+          AlterTables1685395288009,
         ],
       }
     : {
@@ -36,12 +54,22 @@ const AppDataSource = new DataSource(
         database: process.env.POSTGRES_DB,
         logging: true,
         synchronize: false,
-        entities: [User, Address, Cart, Order, Product],
+        entities: [
+          User,
+          Customer,
+          Seller,
+          Address,
+          Cart,
+          Order,
+          Product,
+          Category,
+          Photo,
+          CartProduct,
+        ],
         migrations: [
-          InitialMigrations1681211388494,
-          CreateTables1681211502804,
-          AlterTables1681218949606,
-          AlterTables1681219186397,
+          InitialMigration1682346444041,
+          CreateTables1684524108180,
+          AlterTables1685395288009,
         ],
       }
 );
