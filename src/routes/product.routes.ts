@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { uploadFileMiddleware } from "../middlewares";
+import {
+  uploadFileMiddleware,
+  verifyAdmPermissionMiddleware,
+  validateRequestBodyMiddleware,
+} from "../middlewares";
 import {
   registerProductController,
   updateProductController,
@@ -8,14 +12,14 @@ import {
   deleteProductController,
 } from "../controllers/product.controller";
 import { authenticationMiddleware } from "../middlewares/authentication.middleware";
-import { validateRequestBodyMiddleware } from "../middlewares/validateRequestBody.middleware";
 import { registerProductRequestSchema } from "../schemas/products.schemas";
 
 export const productRouter = Router();
 
 productRouter.post(
   "/register",
-  // authenticationMiddleware,
+  authenticationMiddleware,
+  verifyAdmPermissionMiddleware,
   uploadFileMiddleware.array("photos", 6),
   validateRequestBodyMiddleware(registerProductRequestSchema),
   registerProductController

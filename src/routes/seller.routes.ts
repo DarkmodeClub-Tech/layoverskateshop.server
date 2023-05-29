@@ -15,8 +15,8 @@ export const sellerRouter = Router();
 
 sellerRouter.post(
   "/register",
-  verifyDuplicatedUsername,
-  verifyDuplicatedCPF,
+  verifyDuplicatedUsername(Seller),
+  verifyDuplicatedCPF(Seller),
   verifyDuplicatedEmail(Seller),
   registerSellerController
 );
