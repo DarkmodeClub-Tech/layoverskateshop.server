@@ -12,15 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyDuplicatedEmail = void 0;
-const data_source_1 = __importDefault(require("../data-source"));
-const verifyDuplicatedEmail = (entity) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email } = req.body;
-    const userRepo = data_source_1.default.getRepository(entity);
-    const errorMessage = { message: "Email already being used!" };
-    const emailAlreadyBeingUsed = yield userRepo.findOneBy({ email: email });
-    if (emailAlreadyBeingUsed)
-        return res.status(409).json(errorMessage);
-    return next();
+exports.retrieveAddressService = void 0;
+const data_source_1 = __importDefault(require("../../data-source"));
+const entities_1 = require("../../entities");
+const appError_1 = require("../../errors/appError");
+const retrieveAddressService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const addressRepo = data_source_1.default.getRepository(entities_1.Address);
+    const address = yield addressRepo.findOneBy({ id });
+    if (!address)
+        throw new appError_1.AppError("Not found", 404);
+    return address;
 });
-exports.verifyDuplicatedEmail = verifyDuplicatedEmail;
+exports.retrieveAddressService = retrieveAddressService;

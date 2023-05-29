@@ -16,14 +16,15 @@ exports.registerProductService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
 const photos_1 = require("../photos");
+const retrieve_1 = require("./retrieve");
 const registerProductService = (data, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
     const categoryRepo = data_source_1.default.getRepository(entities_1.Category);
-    const productInstance = productRepo.create(data);
+    let productInstance = productRepo.create(data);
     productInstance.category = categoryRepo.create(data.category);
     productInstance.photos = yield (0, photos_1.photoUploaderService)(photos);
     yield productRepo.save(productInstance);
-    // const newProduct = await productRepo.findOneBy({ id: productInstance.id });
+    productInstance = yield (0, retrieve_1.retrieveProductService)(productInstance.id);
     return productInstance;
 });
 exports.registerProductService = registerProductService;
