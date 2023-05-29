@@ -1,7 +1,7 @@
 import AppDataSource from "../../data-source";
 import { Cart } from "../../entities/";
 import { TProduct } from "../../interfaces/product";
-import { insertProductsInCartService } from "./insertProducts";
+import { addProductsToCartService } from "./addProducts";
 
 export const createCartService = async (
   products?: TProduct[]
@@ -11,7 +11,7 @@ export const createCartService = async (
   await cartRepo.save(cart);
 
   if (products) {
-    cart = await insertProductsInCartService(cart, products);
+    cart = await addProductsToCartService(cart, products);
   }
   return cart;
 };

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {
   createCartService,
-  insertProductsInCartService,
+  addProductsToCartService,
   retrieveCartService,
   removeProductsFromCartService,
 } from "../services/cart";
@@ -25,7 +25,7 @@ export const insertProductsCartController = async (
   const { id } = req.user;
   const { cart }: Customer = await retrieveCustomerService(id);
   const { products } = req.body;
-  const cartProducts = await insertProductsInCartService(cart, products);
+  const cartProducts = await addProductsToCartService(cart, products);
   return res.status(200).json(cartProducts);
 };
 

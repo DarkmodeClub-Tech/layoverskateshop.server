@@ -10,3 +10,9 @@ export interface IUserRegisterReq {
   password: string;
   address: IAddressRegisterReq;
 }
+
+export interface ILogin {
+  username?: string;
+  email?: string;
+  password: string;
+}

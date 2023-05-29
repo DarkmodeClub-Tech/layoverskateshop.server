@@ -2,11 +2,11 @@ import AppDataSource from "../../data-source";
 import { Cart, CartProduct } from "../../entities";
 import { AppError } from "../../errors/appError";
 import { TProduct } from "../../interfaces/product";
-import { retrieveCartService } from "../cart";
+import { retrieveCartService } from ".";
 import { createCartProductsService } from "../cartProducts/create";
 import { retrieveProductService } from "../products";
 
-export const insertProductsInCartService = async (
+export const addProductsToCartService = async (
   cart: Cart,
   products: TProduct[]
 ) => {

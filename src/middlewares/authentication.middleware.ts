@@ -10,9 +10,10 @@ export const authenticationMiddleware = async (
   let token = req.headers.authorization;
 
   if (!token) {
-    return res.status(401).json({
+    const errorMsg = {
       message: "Missing authorization token",
-    });
+    };
+    return res.status(401).json(errorMsg);
   }
 
   token = token.split(" ")[1];
