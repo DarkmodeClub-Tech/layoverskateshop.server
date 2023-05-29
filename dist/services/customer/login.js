@@ -27,7 +27,7 @@ const loginCustomerService = ({ email, username, password, }) => __awaiter(void 
     const passwordMatch = yield (0, bcrypt_1.compare)(password, user.password);
     if (!passwordMatch)
         throw new appError_1.AppError("Invalid Data", 403);
-    const token = jsonwebtoken_1.default.sign({ adm: user.is_adm }, String(process.env.SECRET_KEY), {
+    const token = jsonwebtoken_1.default.sign({}, String(process.env.SECRET_KEY), {
         expiresIn: "3h",
         subject: user.id,
     });

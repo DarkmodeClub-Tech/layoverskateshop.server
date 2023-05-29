@@ -23,7 +23,11 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
             entities_1.Photo,
             entities_1.CartProduct,
         ],
-        migrations: [migrations_1.InitialMigration1682346444041, migrations_1.CreateTables1684524108180],
+        migrations: [
+            migrations_1.InitialMigration1682346444041,
+            migrations_1.CreateTables1684524108180,
+            migrations_1.AlterTables1685395288009,
+        ],
     }
     : {
         type: "postgres",
@@ -46,6 +50,10 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
             entities_1.Photo,
             entities_1.CartProduct,
         ],
-        migrations: [migrations_1.InitialMigration1682346444041, migrations_1.CreateTables1684524108180],
+        migrations: [
+            migrations_1.InitialMigration1682346444041,
+            migrations_1.CreateTables1684524108180,
+            migrations_1.AlterTables1685395288009,
+        ],
     });
 exports.default = AppDataSource;
