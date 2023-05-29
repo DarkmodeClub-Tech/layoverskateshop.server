@@ -8,20 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerSellerService = void 0;
-const bcrypt_1 = require("bcrypt");
-const data_source_1 = __importDefault(require("../../data-source"));
-const entities_1 = require("../../entities");
-const registerSellerService = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
-    const { password } = data;
-    data.password = yield (0, bcrypt_1.hash)(password, 10);
-    const seller = sellerRepo.create(data);
-    yield sellerRepo.save(seller);
-    return seller;
+exports.verifyAdmPermissionMiddleware = void 0;
+const verifyAdmPermissionMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { adm } = req.user;
+    if (!adm)
+        return res
+            .status(403)
+            .json({ message: "You do not have permission to perform this action" });
+    return next();
 });
-exports.registerSellerService = registerSellerService;
+exports.verifyAdmPermissionMiddleware = verifyAdmPermissionMiddleware;
