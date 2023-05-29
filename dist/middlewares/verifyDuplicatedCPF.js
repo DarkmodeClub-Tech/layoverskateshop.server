@@ -14,10 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyDuplicatedCPF = void 0;
 const data_source_1 = __importDefault(require("../data-source"));
-const entities_1 = require("../entities");
-const verifyDuplicatedCPF = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const verifyDuplicatedCPF = (entity) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { cpf } = req.body;
-    const userRepo = data_source_1.default.getRepository(entities_1.User);
+    const userRepo = data_source_1.default.getRepository(entity);
     const errorMessage = { message: "CPF already being used!" };
     const cpfAlreadyBeingUsed = yield userRepo.findOneBy({ cpf: cpf });
     if (cpfAlreadyBeingUsed)
