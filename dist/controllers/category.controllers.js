@@ -13,7 +13,7 @@ exports.deleteCategoryController = exports.updateCategoryController = exports.ge
 const category_1 = require("../services/category");
 const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
-    const category = yield (0, category_1.registerCategoryService)(data);
+    const category = yield (0, category_1.registerCategoryService)(data.title);
     return res.status(201).json(category);
 });
 exports.registerCategoryController = registerCategoryController;
