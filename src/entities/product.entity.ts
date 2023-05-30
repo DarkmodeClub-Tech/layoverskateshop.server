@@ -34,6 +34,9 @@ export class Product {
   @Column({ default: 1 })
   stock_amount: number;
 
+  @Column()
+  description: string;
+
   @CreateDateColumn()
   created_at: Date;
 
