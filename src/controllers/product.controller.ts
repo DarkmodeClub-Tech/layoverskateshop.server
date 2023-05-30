@@ -8,13 +8,14 @@ import {
 } from "../services/products/";
 import { Product } from "../entities";
 import { RepositoryNotTreeError } from "typeorm";
+import { TRegisterProductRequest } from "../interfaces/product";
 
 export const registerProductController = async (
   req: Request,
   res: Response
 ) => {
   const files = req.files as Express.Multer.File[];
-  const data: Product = req.body;
+  const data: TRegisterProductRequest = req.body;
   const product = await registerProductService(data, files);
 
   return res.status(201).json(product);
