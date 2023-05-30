@@ -1,22 +1,29 @@
 import AppDataSource from "../../data-source";
-import { Product, Category } from "../../entities";
+import { Product } from "../../entities";
+import { TRegisterProductRequest } from "../../interfaces/product";
+import { registerCategoryService } from "../category";
 import { photoUploaderService } from "../photos";
 import { retrieveProductService } from "./retrieve";
 
 export const registerProductService = async (
-  data: Product,
+  data: TRegisterProductRequest,
   photos: Express.Multer.File[]
 ): Promise<Product> => {
   const productRepo = AppDataSource.getRepository(Product);
-  const categoryRepo = AppDataSource.getRepository(Category);
 
-  let productInstance = productRepo.create(data);
-  productInstance.category = categoryRepo.create(data.category);
-  productInstance.photos = await photoUploaderService(photos);
+  const { title, category, price, stock_amount, max_installments } = data;
 
-  await productRepo.save(productInstance);
+  let product = new Product();
+  product.title = title;
+  product.price = Number(price);
+  product.stock_amount = Number(stock_amount);
+  product.max_installments = Number(max_installments);
+  product.category = await registerCategoryService(category);
+  product.photos = await photoUploaderService(photos);
 
-  productInstance = await retrieveProductService(productInstance.id);
+  await productRepo.save(product);
 
-  return productInstance;
+  product = await retrieveProductService(product.id);
+
+  return product;
 };
