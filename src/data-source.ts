@@ -17,6 +17,7 @@ import {
   InitialMigration1682346444041,
   CreateTables1684524108180,
   AlterTables1685395288009,
+  AddDescriptionFieldToProduct1685473363142,
 } from "./migrations";
 
 const AppDataSource = new DataSource(
@@ -43,6 +44,7 @@ const AppDataSource = new DataSource(
           InitialMigration1682346444041,
           CreateTables1684524108180,
           AlterTables1685395288009,
+          AddDescriptionFieldToProduct1685473363142,
         ],
       }
     : {
@@ -70,6 +72,7 @@ const AppDataSource = new DataSource(
           InitialMigration1682346444041,
           CreateTables1684524108180,
           AlterTables1685395288009,
+          AddDescriptionFieldToProduct1685473363142,
         ],
       }
 );
