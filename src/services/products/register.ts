@@ -11,13 +11,21 @@ export const registerProductService = async (
 ): Promise<Product> => {
   const productRepo = AppDataSource.getRepository(Product);
 
-  const { title, category, price, stock_amount, max_installments } = data;
+  const {
+    title,
+    category,
+    price,
+    stock_amount,
+    max_installments,
+    description,
+  } = data;
 
   let product = new Product();
   product.title = title;
   product.price = Number(price);
   product.stock_amount = Number(stock_amount);
   product.max_installments = Number(max_installments);
+  product.description = description;
   product.category = await registerCategoryService(category);
   product.photos = await photoUploaderService(photos);
 
