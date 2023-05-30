@@ -27,6 +27,7 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
             migrations_1.InitialMigration1682346444041,
             migrations_1.CreateTables1684524108180,
             migrations_1.AlterTables1685395288009,
+            migrations_1.AddDescriptionFieldToProduct1685473703904,
         ],
     }
     : {
@@ -54,6 +55,7 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
             migrations_1.InitialMigration1682346444041,
             migrations_1.CreateTables1684524108180,
             migrations_1.AlterTables1685395288009,
+            migrations_1.AddDescriptionFieldToProduct1685473703904,
         ],
     });
 exports.default = AppDataSource;
