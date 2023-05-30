@@ -2,11 +2,14 @@ import AppDataSource from "../../data-source";
 import { Category } from "../../entities";
 
 export const registerCategoryService = async (
-  data: Category
+  title: string
 ): Promise<Category> => {
   const categoryRepo = AppDataSource.getRepository(Category);
-  const category = categoryRepo.create(data);
-  await categoryRepo.save(category);
 
+  let category = await categoryRepo.findOneBy({ title });
+  if (category) return category;
+
+  category = categoryRepo.create({ title });
+  await categoryRepo.save(category);
   return category;
 };

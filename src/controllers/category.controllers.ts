@@ -6,13 +6,14 @@ import {
   deleteCategoryService,
 } from "../services/category";
 import { Category } from "../entities";
+import { TRegisterCategoryRequest } from "../interfaces/category";
 
 export const registerCategoryController = async (
   req: Request,
   res: Response
 ) => {
-  const data: Category = req.body;
-  const category = await registerCategoryService(data);
+  const data: TRegisterCategoryRequest = req.body;
+  const category = await registerCategoryService(data.title);
   return res.status(201).json(category);
 };
 
