@@ -10,6 +10,12 @@ export class CartProduct {
   @Column()
   cart_amount: number;
 
+  @Column("text", { array: true, default: [""] })
+  requested_colors: string[];
+
+  @Column("text", { array: true, default: [""] })
+  requested_sizes: string[];
+
   @ManyToOne(() => Cart)
   cart: Cart;
 
