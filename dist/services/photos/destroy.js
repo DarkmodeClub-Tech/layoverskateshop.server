@@ -21,7 +21,7 @@ const photoDestroyerService = (id) => __awaiter(void 0, void 0, void 0, function
     const photoRepo = data_source_1.default.getRepository(entities_1.Photo);
     const photo = (yield photoRepo.findOneBy({ id }));
     yield cloudinary_1.v2.uploader.destroy(photo === null || photo === void 0 ? void 0 : photo.public_id);
-    yield photoRepo.delete(photo);
+    yield photoRepo.delete(photo.id);
     return;
 });
 exports.photoDestroyerService = photoDestroyerService;
