@@ -20,13 +20,15 @@ const photos_1 = require("../photos");
 const retrieve_1 = require("./retrieve");
 const registerProductService = (data, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
-    const { title, category, price, stock_amount, max_installments, description, } = data;
+    const { title, category, price, stock_amount, max_installments, description, available_colors, available_sizes, } = data;
     let product = new entities_1.Product();
     product.title = title;
     product.price = Number(price);
     product.stock_amount = Number(stock_amount);
     product.max_installments = Number(max_installments);
     product.description = description;
+    product.available_sizes = available_sizes;
+    product.available_colors = available_colors;
     product.category = yield (0, category_1.registerCategoryService)(category);
     product.photos = yield (0, photos_1.photoUploaderService)(photos);
     yield productRepo.save(product);
