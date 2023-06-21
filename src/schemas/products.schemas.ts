@@ -7,4 +7,6 @@ export const registerProductRequestSchema = z.object({
   max_installments: z.string(),
   stock_amount: z.string(),
   category: z.string(),
+  available_sizes: z.array(z.string()),
+  available_colors: z.array(z.string()),
 });
