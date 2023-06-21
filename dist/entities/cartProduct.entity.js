@@ -24,6 +24,14 @@ __decorate([
     __metadata("design:type", Number)
 ], CartProduct.prototype, "cart_amount", void 0);
 __decorate([
+    (0, typeorm_1.Column)("text", { array: true, default: [""] }),
+    __metadata("design:type", Array)
+], CartProduct.prototype, "requested_colors", void 0);
+__decorate([
+    (0, typeorm_1.Column)("text", { array: true, default: [""] }),
+    __metadata("design:type", Array)
+], CartProduct.prototype, "requested_sizes", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => cart_entity_1.Cart),
     __metadata("design:type", cart_entity_1.Cart)
 ], CartProduct.prototype, "cart", void 0);
