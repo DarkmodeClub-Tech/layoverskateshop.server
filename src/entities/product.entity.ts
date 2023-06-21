@@ -37,6 +37,12 @@ export class Product {
   @Column({ nullable: true })
   description: string;
 
+  @Column("text", { array: true, default: [""] })
+  available_sizes: string[];
+
+  @Column("text", { array: true, default: [""] })
+  available_colors: string[];
+
   @CreateDateColumn()
   created_at: Date;
 

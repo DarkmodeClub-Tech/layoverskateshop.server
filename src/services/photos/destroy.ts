@@ -9,7 +9,7 @@ export const photoDestroyerService = async (id: string): Promise<void> => {
   const photoRepo = AppDataSource.getRepository(Photo);
   const photo = (await photoRepo.findOneBy({ id })) as Photo;
   await cloudinaryV2.uploader.destroy(photo?.public_id);
-  await photoRepo.delete(photo);
+  await photoRepo.delete(photo.id);
 
   return;
 };
