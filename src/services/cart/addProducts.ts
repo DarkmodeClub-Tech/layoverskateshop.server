@@ -24,10 +24,20 @@ export const addProductsToCartService = async (
 
     let cartProduct = cart.products.find((cp) => cp.product.id === product.id);
     if (cartProduct) {
-      const cart_amount = { cart_amount: p.amount };
-      await cartProductRepo.update(cartProduct.id, cart_amount);
+      const updates = {
+        cart_amount: p.amount,
+        requested_colors: p.requested_colors,
+        requested_sizes: p.requested_sizes,
+      };
+      await cartProductRepo.update(cartProduct.id, updates);
     } else {
-      await createCartProductsService(cart, product, p.amount);
+      await createCartProductsService(
+        cart,
+        product,
+        p.amount,
+        p.requested_colors,
+        p.requested_sizes
+      );
     }
     cartUpdated = await retrieveCartService(cart.id);
   }
