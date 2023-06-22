@@ -29,11 +29,15 @@ const addProductsToCartService = (cart, products) => __awaiter(void 0, void 0, v
         }
         let cartProduct = cart.products.find((cp) => cp.product.id === product.id);
         if (cartProduct) {
-            const cart_amount = { cart_amount: p.amount };
-            yield cartProductRepo.update(cartProduct.id, cart_amount);
+            const updates = {
+                cart_amount: p.amount,
+                requested_colors: p.requested_colors,
+                requested_sizes: p.requested_sizes,
+            };
+            yield cartProductRepo.update(cartProduct.id, updates);
         }
         else {
-            yield (0, create_1.createCartProductsService)(cart, product, p.amount);
+            yield (0, create_1.createCartProductsService)(cart, product, p.amount, p.requested_colors, p.requested_sizes);
         }
         cartUpdated = yield (0, _1.retrieveCartService)(cart.id);
     }

@@ -15,12 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCartProductsService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
-const createCartProductsService = (cart, product, amount) => __awaiter(void 0, void 0, void 0, function* () {
+const createCartProductsService = (cart, product, amount, requested_colors, requested_sizes) => __awaiter(void 0, void 0, void 0, function* () {
     const cartProductRepo = data_source_1.default.getRepository(entities_1.CartProduct);
     const cartProduct = cartProductRepo.create({
         cart: cart,
         product: product,
         cart_amount: amount,
+        requested_colors: requested_colors,
+        requested_sizes: requested_sizes,
     });
     yield cartProductRepo.save(cartProduct);
     return cartProduct;
