@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddDescriptionFieldToProduct1685473703904 = exports.AddDescriptionFieldToProduct1685473363142 = exports.AlterTables1685395288009 = exports.CreateTables1684524108180 = exports.InitialMigration1682346444041 = void 0;
+exports.AlterTables1687388606344 = exports.AddDescriptionFieldToProduct1685473703904 = exports.AddDescriptionFieldToProduct1685473363142 = exports.AlterTables1685395288009 = exports.CreateTables1684524108180 = exports.InitialMigration1682346444041 = void 0;
 const _1682346444041_initialMigration_1 = require("./1682346444041-initialMigration");
 Object.defineProperty(exports, "InitialMigration1682346444041", { enumerable: true, get: function () { return _1682346444041_initialMigration_1.InitialMigration1682346444041; } });
 const _1684524108180_createTables_1 = require("./1684524108180-createTables");
@@ -11,3 +11,5 @@ const _1685473363142_addDescriptionFieldToProduct_1 = require("./1685473363142-a
 Object.defineProperty(exports, "AddDescriptionFieldToProduct1685473363142", { enumerable: true, get: function () { return _1685473363142_addDescriptionFieldToProduct_1.AddDescriptionFieldToProduct1685473363142; } });
 const _1685473703904_addDescriptionFieldToProduct_1 = require("./1685473703904-addDescriptionFieldToProduct");
 Object.defineProperty(exports, "AddDescriptionFieldToProduct1685473703904", { enumerable: true, get: function () { return _1685473703904_addDescriptionFieldToProduct_1.AddDescriptionFieldToProduct1685473703904; } });
+const _1687388606344_alterTables_1 = require("./1687388606344-alterTables");
+Object.defineProperty(exports, "AlterTables1687388606344", { enumerable: true, get: function () { return _1687388606344_alterTables_1.AlterTables1687388606344; } });

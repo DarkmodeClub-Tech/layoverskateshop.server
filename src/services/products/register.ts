@@ -18,6 +18,8 @@ export const registerProductService = async (
     stock_amount,
     max_installments,
     description,
+    available_colors,
+    available_sizes,
   } = data;
 
   let product = new Product();
@@ -26,6 +28,8 @@ export const registerProductService = async (
   product.stock_amount = Number(stock_amount);
   product.max_installments = Number(max_installments);
   product.description = description;
+  product.available_sizes = available_sizes;
+  product.available_colors = available_colors;
   product.category = await registerCategoryService(category);
   product.photos = await photoUploaderService(photos);
 

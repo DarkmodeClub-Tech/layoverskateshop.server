@@ -47,6 +47,14 @@ __decorate([
     __metadata("design:type", String)
 ], Product.prototype, "description", void 0);
 __decorate([
+    (0, typeorm_1.Column)("text", { array: true, default: [""] }),
+    __metadata("design:type", Array)
+], Product.prototype, "available_sizes", void 0);
+__decorate([
+    (0, typeorm_1.Column)("text", { array: true, default: [""] }),
+    __metadata("design:type", Array)
+], Product.prototype, "available_colors", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Product.prototype, "created_at", void 0);
