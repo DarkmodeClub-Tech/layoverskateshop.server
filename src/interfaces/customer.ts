@@ -1,10 +1,14 @@
 import { z } from "zod";
-import { Customer } from "../entities";
+import { Cart, Customer } from "../entities";
 import { registerCustomerRequestSchema } from "../schemas/customer.schemas";
 import { TProduct } from "./product";
+import { TRegisterCategoryRequest } from "./category";
 
-export interface ICustomer extends Customer {
+export type TRegisterCustomerReq = z.infer<
+  typeof registerCustomerRequestSchema
+>;
+
+export interface ICustomer extends TRegisterCustomerReq {
   products?: TProduct[];
+  cart?: Cart;
 }
-
-export type TCustomer = z.infer<typeof registerCustomerRequestSchema>;

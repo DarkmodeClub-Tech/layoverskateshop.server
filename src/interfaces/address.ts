@@ -1,9 +1,4 @@
-export interface IAddressRegisterReq {
-  cep: string;
-  street: string;
-  number: number;
-  complement: string;
-  district: string;
-  state: string;
-  city: string;
-}
+import { z } from "zod";
+import { registerAddressSchema } from "../schemas/address.schemas";
+
+export type TRegisterAddressReq = z.infer<typeof registerAddressSchema>;
