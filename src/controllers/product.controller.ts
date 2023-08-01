@@ -22,8 +22,12 @@ export const registerProductController = async (
 };
 
 export const getProductsController = async (req: Request, res: Response) => {
-  const { offset = 0, limit = 100 } = req.query;
-  const products = await getProductsService(Number(offset), Number(limit));
+  const { offset = 0, limit = 100, search } = req.query;
+  const products = await getProductsService(
+    Number(offset),
+    Number(limit),
+    search && String(search)
+  );
 
   return res.status(200).json(products);
 };
