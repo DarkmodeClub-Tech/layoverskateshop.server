@@ -1,4 +1,4 @@
-import { IAddressRegisterReq } from "./address";
+import { TRegisterAddressReq } from "./address";
 
 export interface IUserRegisterReq {
   username: string;
@@ -8,7 +8,7 @@ export interface IUserRegisterReq {
   email: string;
   phone: string;
   password: string;
-  address: IAddressRegisterReq;
+  address: TRegisterAddressReq;
 }
 
 export interface ILogin {
