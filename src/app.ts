@@ -14,8 +14,10 @@ import { cartRouter } from "./routes/cart.routes";
 
 const app = express();
 
+const corsOptions = { origin: "https://layoverskateshop.vercel.app" };
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use("/sellers", sellerRouter);
 app.use("/customers", customerRouter);
