@@ -22,10 +22,10 @@ export const loginSellerController = async (
 export const getSellerDataController = async (req: Request, res: Response) => {
   const { id } = req.user;
   const sellerData = await s.getSellerDataService(id);
-  res.setHeader(
-    "Access-Control-allow-Origin",
-    "https://layoverskateshop.vercel.app"
-  );
+  res.setHeader("Access-Control-allow-Origin", [
+    "https://layoverskateshop.vercel.app",
+    "https://layover-skateshop.onrender.com",
+  ]);
   return res.status(200).json(sellerData);
 };
 
