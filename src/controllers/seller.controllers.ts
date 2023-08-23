@@ -22,6 +22,10 @@ export const loginSellerController = async (
 export const getSellerDataController = async (req: Request, res: Response) => {
   const { id } = req.user;
   const sellerData = await s.getSellerDataService(id);
+  res.setHeader(
+    "Access-Control-allow-Origin",
+    "https://layoverskateshop.vercel.app"
+  );
   return res.status(200).json(sellerData);
 };
 
@@ -44,9 +48,6 @@ export const addAvatarPhotoController = async (req: Request, res: Response) => {
   const { id } = req.user;
   const file = req.file as Express.Multer.File;
   const seller = await s.addAvatarPhotoService(id, file);
-  res.setHeader(
-    "Access-Control-allow-Origin",
-    "https://layoverskateshop.vercel.app"
-  );
+
   return res.status(200).json(seller);
 };
