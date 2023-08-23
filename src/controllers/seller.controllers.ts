@@ -25,6 +25,7 @@ export const getSellerDataController = async (req: Request, res: Response) => {
   res.setHeader("Access-Control-allow-Origin", [
     "https://layoverskateshop.vercel.app",
     "https://layover-skateshop.onrender.com",
+    "http://localhost:3000",
   ]);
   return res.status(200).json(sellerData);
 };
