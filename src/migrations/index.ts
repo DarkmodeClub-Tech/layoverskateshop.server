@@ -5,6 +5,8 @@ import { AddDescriptionFieldToProduct1685473363142 } from "./1685473363142-addDe
 import { AddDescriptionFieldToProduct1685473703904 } from "./1685473703904-addDescriptionFieldToProduct";
 import { AlterTableables1687384939449 } from "./1687384939449-alterTableables";
 import { AlterTables1687388606344 } from "./1687388606344-alterTables";
+import { AlterTables1692741016765 } from "./1692741016765-alterTables";
+import { AlterTables1692758943041 } from "./1692758943041-alterTables";
 
 export {
   InitialMigration1682346444041,
@@ -13,4 +15,6 @@ export {
   AddDescriptionFieldToProduct1685473363142,
   AddDescriptionFieldToProduct1685473703904,
   AlterTables1687388606344,
+  AlterTables1692741016765,
+  AlterTables1692758943041,
 };

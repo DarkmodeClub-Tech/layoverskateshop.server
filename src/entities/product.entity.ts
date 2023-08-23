@@ -55,8 +55,8 @@ export class Product {
   @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
 
-  @ManyToOne(() => Seller)
-  seller: Seller[];
+  @ManyToOne(() => Seller, (seller) => seller.products)
+  seller: Seller;
 
   @ManyToOne(() => Category, (category) => category.products, {
     eager: true,

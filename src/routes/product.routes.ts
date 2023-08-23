@@ -1,33 +1,22 @@
 import { Router } from "express";
-import {
-  uploadFileMiddleware,
-  verifyAdmPermissionMiddleware,
-  validateRequestBodyMiddleware,
-} from "../middlewares";
-import {
-  registerProductController,
-  updateProductController,
-  getProductsController,
-  deactivateProductAddController,
-  deleteProductController,
-} from "../controllers/product.controller";
-import { authenticationMiddleware } from "../middlewares/authentication.middleware";
-import { registerProductRequestSchema } from "../schemas/products.schemas";
+import * as m from "../middlewares";
+import * as c from "../controllers/product.controller";
+import * as s from "../schemas/products.schemas";
 
 export const productRouter = Router();
 
 productRouter.post(
   "/register",
-  authenticationMiddleware,
-  verifyAdmPermissionMiddleware,
-  uploadFileMiddleware.array("photos", 6),
-  validateRequestBodyMiddleware(registerProductRequestSchema),
-  registerProductController
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  m.uploadFileMiddleware.array("photos", 6),
+  m.validateRequestBodyMiddleware(s.registerProductRequestSchema),
+  c.registerProductController
 );
 
-productRouter.get("/", getProductsController);
+productRouter.get("/", c.getProductsController);
 
-productRouter.patch("/update/:id", updateProductController);
+productRouter.patch("/update/:id", c.updateProductController);
 
-productRouter.patch("/deactivate/:id", deactivateProductAddController);
-productRouter.delete("/destroy/:id", deleteProductController);
+productRouter.patch("/deactivate/:id", c.deactivateProductAddController);
+productRouter.delete("/destroy/:id", c.deleteProductController);

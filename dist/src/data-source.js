@@ -1,9 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const typeorm_1 = require("typeorm");
-const entities_1 = require("./entities");
-const migrations_1 = require("./migrations");
+const e = __importStar(require("./entities"));
+const m = __importStar(require("./migrations"));
 const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "production"
     ? {
         type: "postgres",
@@ -12,23 +35,25 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
         synchronize: false,
         logging: true,
         entities: [
-            entities_1.User,
-            entities_1.Customer,
-            entities_1.Seller,
-            entities_1.Address,
-            entities_1.Cart,
-            entities_1.Order,
-            entities_1.Product,
-            entities_1.Category,
-            entities_1.Photo,
-            entities_1.CartProduct,
+            e.User,
+            e.Customer,
+            e.Seller,
+            e.Address,
+            e.Cart,
+            e.Order,
+            e.Product,
+            e.Category,
+            e.Photo,
+            e.CartProduct,
         ],
         migrations: [
-            migrations_1.InitialMigration1682346444041,
-            migrations_1.CreateTables1684524108180,
-            migrations_1.AlterTables1685395288009,
-            migrations_1.AddDescriptionFieldToProduct1685473703904,
-            migrations_1.AlterTables1687388606344,
+            m.InitialMigration1682346444041,
+            m.CreateTables1684524108180,
+            m.AlterTables1685395288009,
+            m.AddDescriptionFieldToProduct1685473703904,
+            m.AlterTables1692741016765,
+            m.AlterTables1687388606344,
+            m.AlterTables1692758943041,
         ],
     }
     : // : process.env.NODE_ENV === "test"
@@ -37,23 +62,26 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
         //     database: ":memory:",
         //     synchronize: true,
         //     entities: [
-        //       User,
-        //       Customer,
-        //       Seller,
-        //       Address,
-        //       Cart,
-        //       Order,
-        //       Product,
-        //       Category,
-        //       Photo,
-        //       CartProduct,
+        //       e.User,
+        //       e.Customer,
+        //       e.Seller,
+        //       e.Address,
+        //       e.Cart,
+        //       e.Order,
+        //       e.Product,
+        //       e.Category,
+        //       e.Photo,
+        //       e.CartProduct,
         //     ],
         //     migrations: [
-        //       InitialMigration1682346444041,
-        //       CreateTables1684524108180,
-        //       AlterTables1685395288009,
-        //       AddDescriptionFieldToProduct1685473703904,
-        //       AlterTables1687388606344,
+        //       m.InitialMigration1682346444041,
+        //       m.CreateTables1684524108180,
+        //       m.AlterTables1685395288009,
+        //       m.AddDescriptionFieldToProduct1685473703904,
+        //       m.AlterTables1687388606344,
+        //       m.AlterTables1692741016765,
+        //       m.AlterTables1692758943041
+        //
         //     ],
         //   }
         {
@@ -66,23 +94,25 @@ const AppDataSource = new typeorm_1.DataSource(process.env.NODE_ENV === "product
             logging: true,
             synchronize: false,
             entities: [
-                entities_1.User,
-                entities_1.Customer,
-                entities_1.Seller,
-                entities_1.Address,
-                entities_1.Cart,
-                entities_1.Order,
-                entities_1.Product,
-                entities_1.Category,
-                entities_1.Photo,
-                entities_1.CartProduct,
+                e.User,
+                e.Customer,
+                e.Seller,
+                e.Address,
+                e.Cart,
+                e.Order,
+                e.Product,
+                e.Category,
+                e.Photo,
+                e.CartProduct,
             ],
             migrations: [
-                migrations_1.InitialMigration1682346444041,
-                migrations_1.CreateTables1684524108180,
-                migrations_1.AlterTables1685395288009,
-                migrations_1.AddDescriptionFieldToProduct1685473703904,
-                migrations_1.AlterTables1687388606344,
+                m.InitialMigration1682346444041,
+                m.CreateTables1684524108180,
+                m.AlterTables1685395288009,
+                m.AddDescriptionFieldToProduct1685473703904,
+                m.AlterTables1687388606344,
+                m.AlterTables1692741016765,
+                m.AlterTables1692758943041,
             ],
         });
 exports.default = AppDataSource;

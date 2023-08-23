@@ -12,17 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerSellerService = void 0;
-const bcrypt_1 = require("bcrypt");
+exports.updateSellerService = void 0;
+const class_transformer_1 = require("class-transformer");
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
-const class_transformer_1 = require("class-transformer");
-const registerSellerService = (data) => __awaiter(void 0, void 0, void 0, function* () {
+const get_1 = require("./get");
+const updateSellerService = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
-    const { password } = data;
-    data.password = yield (0, bcrypt_1.hash)(password, 10);
-    const seller = sellerRepo.create(data);
-    yield sellerRepo.save(seller);
+    let seller = yield (0, get_1.getSellerDataService)(id);
+    yield sellerRepo.update(seller.id, data);
+    seller = yield (0, get_1.getSellerDataService)(id);
     return (0, class_transformer_1.instanceToPlain)(seller);
 });
-exports.registerSellerService = registerSellerService;
+exports.updateSellerService = updateSellerService;
