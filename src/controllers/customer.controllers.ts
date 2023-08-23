@@ -1,18 +1,11 @@
 import { Request, Response } from "express";
-import {
-  registerCustomerService,
-  updateCustomerService,
-  retrieveCustomerService,
-  deactivateAccountService,
-  deleteAccountService,
-  loginCustomerService,
-} from "../services/customer";
+import * as s from "../services/customer";
 import { ICustomer } from "../interfaces/customer";
 import { ILogin } from "../interfaces/user";
 
 export const loginCustomerController = async (req: Request, res: Response) => {
   const data: ILogin = req.body;
-  const accessToken = await loginCustomerService(data);
+  const accessToken = await s.loginCustomerService(data);
 
   return res.status(200).json(accessToken);
 };
@@ -22,7 +15,7 @@ export const registerCustomerController = async (
   res: Response
 ) => {
   const data: ICustomer = req.body;
-  const user = await registerCustomerService(data);
+  const user = await s.registerCustomerService(data);
   return res.status(201).json(user);
 };
 
@@ -31,21 +24,21 @@ export const retrieveCustomerController = async (
   res: Response
 ) => {
   const { id } = req.user;
-  const user = await retrieveCustomerService(id);
+  const user = await s.retrieveCustomerService(id);
   return res.status(200).json(user);
 };
 
 export const updateCustomerController = async (req: Request, res: Response) => {
   const { id } = req.user;
   const data = req.body;
-  const updated_user = await updateCustomerService(id, data);
+  const updated_user = await s.updateCustomerService(id, data);
 
   return res.status(200).json(updated_user);
 };
 
 export const deleteAccountController = async (req: Request, res: Response) => {
   const { id } = req.user;
-  await deleteAccountService(id);
+  await s.deleteAccountService(id);
   return res.status(204).send();
 };
 
@@ -54,6 +47,6 @@ export const deactivateAccountController = async (
   res: Response
 ) => {
   const { id } = req.user;
-  await deactivateAccountService(id);
+  await s.deactivateAccountService(id);
   return res.status(204).send();
 };

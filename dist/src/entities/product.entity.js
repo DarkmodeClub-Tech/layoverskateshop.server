@@ -71,8 +71,8 @@ __decorate([
     __metadata("design:type", Array)
 ], Product.prototype, "orders", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => seller_entity_1.Seller),
-    __metadata("design:type", Array)
+    (0, typeorm_1.ManyToOne)(() => seller_entity_1.Seller, (seller) => seller.products),
+    __metadata("design:type", seller_entity_1.Seller)
 ], Product.prototype, "seller", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => category_entity_1.Category, (category) => category.products, {

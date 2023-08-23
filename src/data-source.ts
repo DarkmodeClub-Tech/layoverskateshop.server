@@ -1,26 +1,8 @@
 import "dotenv/config";
 
 import { DataSource } from "typeorm";
-import {
-  User,
-  Address,
-  Cart,
-  Order,
-  Product,
-  Customer,
-  Seller,
-  Category,
-  Photo,
-  CartProduct,
-} from "./entities";
-import {
-  InitialMigration1682346444041,
-  CreateTables1684524108180,
-  AlterTables1685395288009,
-  AddDescriptionFieldToProduct1685473363142,
-  AddDescriptionFieldToProduct1685473703904,
-  AlterTables1687388606344,
-} from "./migrations";
+import * as e from "./entities";
+import * as m from "./migrations";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "production"
@@ -31,23 +13,25 @@ const AppDataSource = new DataSource(
         synchronize: false,
         logging: true,
         entities: [
-          User,
-          Customer,
-          Seller,
-          Address,
-          Cart,
-          Order,
-          Product,
-          Category,
-          Photo,
-          CartProduct,
+          e.User,
+          e.Customer,
+          e.Seller,
+          e.Address,
+          e.Cart,
+          e.Order,
+          e.Product,
+          e.Category,
+          e.Photo,
+          e.CartProduct,
         ],
         migrations: [
-          InitialMigration1682346444041,
-          CreateTables1684524108180,
-          AlterTables1685395288009,
-          AddDescriptionFieldToProduct1685473703904,
-          AlterTables1687388606344,
+          m.InitialMigration1682346444041,
+          m.CreateTables1684524108180,
+          m.AlterTables1685395288009,
+          m.AddDescriptionFieldToProduct1685473703904,
+          m.AlterTables1692741016765,
+          m.AlterTables1687388606344,
+          m.AlterTables1692758943041,
         ],
       }
     : // : process.env.NODE_ENV === "test"
@@ -56,23 +40,26 @@ const AppDataSource = new DataSource(
       //     database: ":memory:",
       //     synchronize: true,
       //     entities: [
-      //       User,
-      //       Customer,
-      //       Seller,
-      //       Address,
-      //       Cart,
-      //       Order,
-      //       Product,
-      //       Category,
-      //       Photo,
-      //       CartProduct,
+      //       e.User,
+      //       e.Customer,
+      //       e.Seller,
+      //       e.Address,
+      //       e.Cart,
+      //       e.Order,
+      //       e.Product,
+      //       e.Category,
+      //       e.Photo,
+      //       e.CartProduct,
       //     ],
       //     migrations: [
-      //       InitialMigration1682346444041,
-      //       CreateTables1684524108180,
-      //       AlterTables1685395288009,
-      //       AddDescriptionFieldToProduct1685473703904,
-      //       AlterTables1687388606344,
+      //       m.InitialMigration1682346444041,
+      //       m.CreateTables1684524108180,
+      //       m.AlterTables1685395288009,
+      //       m.AddDescriptionFieldToProduct1685473703904,
+      //       m.AlterTables1687388606344,
+      //       m.AlterTables1692741016765,
+      //       m.AlterTables1692758943041
+      //
       //     ],
       //   }
       {
@@ -85,23 +72,25 @@ const AppDataSource = new DataSource(
         logging: true,
         synchronize: false,
         entities: [
-          User,
-          Customer,
-          Seller,
-          Address,
-          Cart,
-          Order,
-          Product,
-          Category,
-          Photo,
-          CartProduct,
+          e.User,
+          e.Customer,
+          e.Seller,
+          e.Address,
+          e.Cart,
+          e.Order,
+          e.Product,
+          e.Category,
+          e.Photo,
+          e.CartProduct,
         ],
         migrations: [
-          InitialMigration1682346444041,
-          CreateTables1684524108180,
-          AlterTables1685395288009,
-          AddDescriptionFieldToProduct1685473703904,
-          AlterTables1687388606344,
+          m.InitialMigration1682346444041,
+          m.CreateTables1684524108180,
+          m.AlterTables1685395288009,
+          m.AddDescriptionFieldToProduct1685473703904,
+          m.AlterTables1687388606344,
+          m.AlterTables1692741016765,
+          m.AlterTables1692758943041,
         ],
       }
 );

@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToOne,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { Address } from "./address.entity";
+import { Photo } from "./photos.entity";
 
 @Entity("users")
 export class User {
