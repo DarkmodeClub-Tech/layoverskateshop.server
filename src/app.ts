@@ -7,7 +7,8 @@ import {
   customerRouter,
   productRouter,
   sellerRouter,
-} from "./routes/index.routes";
+  imageRouter,
+} from "./routes";
 import handleErrorMiddleware from "./middlewares/handleError";
 import { cartRouter } from "./routes/cart.routes";
 
@@ -21,6 +22,7 @@ app.use("/customers", customerRouter);
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 app.use("/cart", cartRouter);
+app.use("/photos", imageRouter);
 
 app.use(handleErrorMiddleware);
 

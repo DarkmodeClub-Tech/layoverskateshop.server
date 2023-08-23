@@ -1,24 +1,45 @@
 import { Router } from "express";
-
-import {
-  verifyDuplicatedCPF,
-  verifyDuplicatedEmail,
-  verifyDuplicatedUsername,
-} from "../middlewares";
-import {
-  registerSellerController,
-  loginSellerController,
-} from "../controllers/seller.controllers";
 import { Seller } from "../entities";
+
+import * as m from "../middlewares";
+import * as c from "../controllers/seller.controllers";
 
 export const sellerRouter = Router();
 
-sellerRouter.post(
-  "/register",
-  verifyDuplicatedUsername(Seller),
-  verifyDuplicatedCPF(Seller),
-  verifyDuplicatedEmail(Seller),
-  registerSellerController
+sellerRouter.get(
+  "/profile",
+  m.authenticationMiddleware,
+  c.getSellerDataController
 );
 
-sellerRouter.post("/auth", loginSellerController);
+sellerRouter.post(
+  "/register",
+  m.verifyDuplicatedUsername(Seller),
+  m.verifyDuplicatedCPF(Seller),
+  m.verifyDuplicatedEmail(Seller),
+  c.registerSellerController
+);
+
+sellerRouter.post("/auth", c.loginSellerController);
+
+sellerRouter.patch(
+  "/update",
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  c.updateSellerController
+);
+
+sellerRouter.post(
+  "/photos",
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  m.uploadFileMiddleware.array("photos", 6),
+  c.savePhotosController
+);
+
+sellerRouter.post(
+  "/avatar",
+  m.authenticationMiddleware,
+  m.uploadFileMiddleware.single("photo"),
+  c.addAvatarPhotoController
+);

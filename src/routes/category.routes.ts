@@ -1,14 +1,9 @@
 import { Router } from "express";
-import {
-  registerCategoryController,
-  getCategoriesController,
-  updateCategoryController,
-  deleteCategoryController,
-} from "../controllers/category.controllers";
+import * as c from "../controllers/category.controllers";
 
 export const categoryRouter = Router();
 
-categoryRouter.post("/register", registerCategoryController);
-categoryRouter.get("", getCategoriesController);
-categoryRouter.patch("/update/:id", updateCategoryController);
-categoryRouter.delete("/destroy/:id", deleteCategoryController);
+categoryRouter.post("/register", c.registerCategoryController);
+categoryRouter.get("", c.getCategoriesController);
+categoryRouter.patch("/update/:id", c.updateCategoryController);
+categoryRouter.delete("/destroy/:id", c.deleteCategoryController);
