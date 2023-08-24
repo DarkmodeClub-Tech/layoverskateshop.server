@@ -18,6 +18,7 @@ const photos_entity_1 = require("./photos.entity");
 const cartProduct_entity_1 = require("./cartProduct.entity");
 let Product = class Product {
 };
+exports.Product = Product;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -85,7 +86,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => photos_entity_1.Photo, (photo) => photo.product, { eager: true }),
     __metadata("design:type", Array)
 ], Product.prototype, "photos", void 0);
-Product = __decorate([
+exports.Product = Product = __decorate([
     (0, typeorm_1.Entity)("products")
 ], Product);
-exports.Product = Product;
