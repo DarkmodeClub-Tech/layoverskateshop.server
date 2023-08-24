@@ -16,6 +16,7 @@ const product_entity_1 = require("./product.entity");
 const photos_entity_1 = require("./photos.entity");
 let Seller = class Seller extends user_entity_1.User {
 };
+exports.Seller = Seller;
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
@@ -39,7 +40,6 @@ __decorate([
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", photos_entity_1.Photo)
 ], Seller.prototype, "avatar", void 0);
-Seller = __decorate([
+exports.Seller = Seller = __decorate([
     (0, typeorm_1.Entity)("sellers")
 ], Seller);
-exports.Seller = Seller;

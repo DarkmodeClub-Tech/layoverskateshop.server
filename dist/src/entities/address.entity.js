@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 let Address = class Address {
 };
+exports.Address = Address;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -50,7 +51,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => user_entity_1.User, (user) => user.address),
     __metadata("design:type", Array)
 ], Address.prototype, "users", void 0);
-Address = __decorate([
+exports.Address = Address = __decorate([
     (0, typeorm_1.Entity)("addresses")
 ], Address);
-exports.Address = Address;
