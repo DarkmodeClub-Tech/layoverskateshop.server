@@ -29,7 +29,7 @@ const entities_1 = require("../entities");
 const m = __importStar(require("../middlewares"));
 const c = __importStar(require("../controllers/seller.controllers"));
 exports.sellerRouter = (0, express_1.Router)();
-exports.sellerRouter.get("/profile", m.authenticationMiddleware, c.getSellerDataController);
+exports.sellerRouter.get("/retrieve", m.authenticationMiddleware, c.getSellerDataController);
 exports.sellerRouter.post("/register", m.verifyDuplicatedUsername(entities_1.Seller), m.verifyDuplicatedCPF(entities_1.Seller), m.verifyDuplicatedEmail(entities_1.Seller), c.registerSellerController);
 exports.sellerRouter.post("/auth", c.loginSellerController);
 exports.sellerRouter.patch("/update", m.authenticationMiddleware, m.verifyAdmPermissionMiddleware, c.updateSellerController);
