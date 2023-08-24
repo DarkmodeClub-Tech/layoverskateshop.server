@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addAvatarPhotoService = exports.savePhotosService = exports.updateSellerService = exports.getSellerDataService = exports.loginSellerService = exports.registerSellerService = void 0;
+exports.addAvatarPhotoService = exports.savePhotosService = exports.updateSellerService = exports.getAllSellersDataService = exports.getSellerDataService = exports.loginSellerService = exports.registerSellerService = void 0;
 const addAvatarPhoto_1 = require("./addAvatarPhoto");
 Object.defineProperty(exports, "addAvatarPhotoService", { enumerable: true, get: function () { return addAvatarPhoto_1.addAvatarPhotoService; } });
 const get_1 = require("./get");
+Object.defineProperty(exports, "getAllSellersDataService", { enumerable: true, get: function () { return get_1.getAllSellersDataService; } });
 Object.defineProperty(exports, "getSellerDataService", { enumerable: true, get: function () { return get_1.getSellerDataService; } });
 const login_1 = require("./login");
 Object.defineProperty(exports, "loginSellerService", { enumerable: true, get: function () { return login_1.loginSellerService; } });

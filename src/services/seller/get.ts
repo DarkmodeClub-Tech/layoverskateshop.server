@@ -12,3 +12,10 @@ export const getSellerDataService = async (
   if (!sellerData) throw new AppError("Not Found");
   return instanceToPlain(sellerData) as Seller;
 };
+
+export const getAllSellersDataService = async () => {
+  const sellerRepo = AppDataSource.getRepository(Seller);
+  const sellers = (await sellerRepo.find()).map((s) => instanceToPlain(s));
+
+  return sellers as Seller[];
+};

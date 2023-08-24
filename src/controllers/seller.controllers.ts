@@ -1,6 +1,14 @@
 import { Request, Response } from "express";
 import * as s from "../services/seller";
 
+export const getAllSellersDataController = async (
+  req: Request,
+  res: Response
+) => {
+  const sellers = await s.getAllSellersDataService();
+  return res.status(200).json(sellers);
+};
+
 export const registerSellerController = async (
   req: Request,
   res: Response

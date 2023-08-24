@@ -4,7 +4,9 @@ import { Seller } from "../entities";
 import * as m from "../middlewares";
 import * as c from "../controllers/seller.controllers";
 
-export const sellerRouter = Router();
+const sellerRouter = Router();
+
+sellerRouter.get("/", c.getAllSellersDataController);
 
 sellerRouter.get(
   "/retrieve",
@@ -44,3 +46,5 @@ sellerRouter.post(
   m.uploadFileMiddleware.single("photo"),
   c.addAvatarPhotoController
 );
+
+export default sellerRouter;
