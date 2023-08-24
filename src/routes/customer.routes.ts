@@ -1,67 +1,49 @@
 import { Router } from "express";
-import {
-  deactivateAccountController,
-  deleteAccountController,
-  registerCustomerController,
-  retrieveCustomerController,
-  updateCustomerController,
-  loginCustomerController,
-} from "../controllers/customer.controllers";
-import {
-  verifyDuplicatedCPF,
-  verifyDuplicatedEmail,
-  verifyDuplicatedUsername,
-} from "../middlewares";
-import { authenticationMiddleware } from "../middlewares/authentication.middleware";
-import { customerIdValidator } from "../middlewares/customerIDValidator.middleware";
-import { validateRequestBodyMiddleware } from "../middlewares/validateRequestBody.middleware";
-import {
-  loginCustomerRequestSchema,
-  registerCustomerRequestSchema,
-  updateCustomerRequestSchema,
-} from "../schemas/customer.schemas";
 import { Customer } from "../entities";
+import * as c from "../controllers/customer.controllers";
+import * as m from "../middlewares";
+import * as s from "../schemas/customer.schemas";
 
 export const customerRouter = Router();
 
 customerRouter.post(
   "/auth",
-  validateRequestBodyMiddleware(loginCustomerRequestSchema),
-  loginCustomerController
+  m.validateRequestBodyMiddleware(s.loginCustomerRequestSchema),
+  c.loginCustomerController
 );
 customerRouter.post(
   "/register",
-  validateRequestBodyMiddleware(registerCustomerRequestSchema),
-  verifyDuplicatedCPF(Customer),
-  verifyDuplicatedEmail(Customer),
-  verifyDuplicatedUsername(Customer),
-  registerCustomerController
+  m.validateRequestBodyMiddleware(s.registerCustomerRequestSchema),
+  m.verifyDuplicatedCPF(Customer),
+  m.verifyDuplicatedEmail(Customer),
+  m.verifyDuplicatedUsername(Customer),
+  c.registerCustomerController
 );
 customerRouter.get(
   "/retrieve",
-  authenticationMiddleware,
-  customerIdValidator,
-  retrieveCustomerController
+  m.authenticationMiddleware,
+  m.userIdValidator(Customer),
+  c.retrieveCustomerController
 );
 customerRouter.patch(
   "/update",
-  authenticationMiddleware,
-  validateRequestBodyMiddleware(updateCustomerRequestSchema.partial()),
-  verifyDuplicatedCPF(Customer),
-  verifyDuplicatedEmail(Customer),
-  verifyDuplicatedUsername(Customer),
-  customerIdValidator,
-  updateCustomerController
+  m.authenticationMiddleware,
+  m.validateRequestBodyMiddleware(s.updateCustomerRequestSchema.partial()),
+  m.verifyDuplicatedCPF(Customer),
+  m.verifyDuplicatedEmail(Customer),
+  m.verifyDuplicatedUsername(Customer),
+  m.userIdValidator(Customer),
+  c.updateCustomerController
 );
 customerRouter.patch(
   "/deactivate",
-  authenticationMiddleware,
-  customerIdValidator,
-  deactivateAccountController
+  m.authenticationMiddleware,
+  m.userIdValidator(Customer),
+  c.deactivateAccountController
 );
 customerRouter.delete(
   "/destroy",
-  authenticationMiddleware,
-  customerIdValidator,
-  deleteAccountController
+  m.authenticationMiddleware,
+  m.userIdValidator(Customer),
+  c.deleteAccountController
 );

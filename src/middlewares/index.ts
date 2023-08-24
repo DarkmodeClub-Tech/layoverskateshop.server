@@ -1,5 +1,6 @@
 import { authenticationMiddleware } from "./authentication.middleware";
 import { uploadFileMiddleware } from "./fileUploader.middleware";
+import { userIdValidator } from "./userIDValidator.middleware";
 import { validateRequestBodyMiddleware } from "./validateRequestBody.middleware";
 import { verifyDuplicatedCPF } from "./verifyDuplicatedCPF";
 import { verifyDuplicatedEmail } from "./verifyDuplicatedEmail";
@@ -14,4 +15,5 @@ export {
   authenticationMiddleware,
   validateRequestBodyMiddleware,
   verifyAdmPermissionMiddleware,
+  userIdValidator,
 };

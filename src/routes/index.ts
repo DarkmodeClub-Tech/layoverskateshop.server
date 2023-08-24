@@ -3,6 +3,7 @@ import { productRouter } from "./product.routes";
 import { categoryRouter } from "./category.routes";
 import { sellerRouter } from "./seller.routes";
 import { imageRouter } from "./images.routes";
+import { cartRouter } from "./cart.routes";
 
 export {
   customerRouter,
@@ -10,4 +11,5 @@ export {
   categoryRouter,
   sellerRouter,
   imageRouter,
+  cartRouter,
 };
