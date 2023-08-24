@@ -19,7 +19,7 @@ const corsOptions = {
     "https://layoverskateshop.vercel.app",
     "https://layoverskateshop.admview.vercel.app",
     "https://layover-skateshop.onrender.com",
-    "http://localhost:3000",
+    "http://localhost:3001",
   ],
 };
 cors({});
