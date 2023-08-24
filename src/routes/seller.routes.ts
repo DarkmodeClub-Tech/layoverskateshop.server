@@ -7,7 +7,7 @@ import * as c from "../controllers/seller.controllers";
 export const sellerRouter = Router();
 
 sellerRouter.get(
-  "/profile",
+  "/retrieve",
   m.authenticationMiddleware,
   c.getSellerDataController
 );
