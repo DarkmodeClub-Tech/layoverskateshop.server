@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyAdmPermissionMiddleware = exports.validateRequestBodyMiddleware = exports.authenticationMiddleware = exports.uploadFileMiddleware = exports.verifyDuplicatedUsername = exports.verifyDuplicatedCPF = exports.verifyDuplicatedEmail = void 0;
+exports.userIdValidator = exports.verifyAdmPermissionMiddleware = exports.validateRequestBodyMiddleware = exports.authenticationMiddleware = exports.uploadFileMiddleware = exports.verifyDuplicatedUsername = exports.verifyDuplicatedCPF = exports.verifyDuplicatedEmail = void 0;
 const authentication_middleware_1 = require("./authentication.middleware");
 Object.defineProperty(exports, "authenticationMiddleware", { enumerable: true, get: function () { return authentication_middleware_1.authenticationMiddleware; } });
 const fileUploader_middleware_1 = require("./fileUploader.middleware");
 Object.defineProperty(exports, "uploadFileMiddleware", { enumerable: true, get: function () { return fileUploader_middleware_1.uploadFileMiddleware; } });
+const userIDValidator_middleware_1 = require("./userIDValidator.middleware");
+Object.defineProperty(exports, "userIdValidator", { enumerable: true, get: function () { return userIDValidator_middleware_1.userIdValidator; } });
 const validateRequestBody_middleware_1 = require("./validateRequestBody.middleware");
 Object.defineProperty(exports, "validateRequestBodyMiddleware", { enumerable: true, get: function () { return validateRequestBody_middleware_1.validateRequestBodyMiddleware; } });
 const verifyDuplicatedCPF_1 = require("./verifyDuplicatedCPF");

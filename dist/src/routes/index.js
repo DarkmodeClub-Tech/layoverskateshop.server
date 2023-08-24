@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.imageRouter = exports.sellerRouter = exports.categoryRouter = exports.productRouter = exports.customerRouter = void 0;
+exports.cartRouter = exports.imageRouter = exports.sellerRouter = exports.categoryRouter = exports.productRouter = exports.customerRouter = void 0;
 const customer_routes_1 = require("./customer.routes");
 Object.defineProperty(exports, "customerRouter", { enumerable: true, get: function () { return customer_routes_1.customerRouter; } });
 const product_routes_1 = require("./product.routes");
@@ -11,3 +11,5 @@ const seller_routes_1 = require("./seller.routes");
 Object.defineProperty(exports, "sellerRouter", { enumerable: true, get: function () { return seller_routes_1.sellerRouter; } });
 const images_routes_1 = require("./images.routes");
 Object.defineProperty(exports, "imageRouter", { enumerable: true, get: function () { return images_routes_1.imageRouter; } });
+const cart_routes_1 = require("./cart.routes");
+Object.defineProperty(exports, "cartRouter", { enumerable: true, get: function () { return cart_routes_1.cartRouter; } });
