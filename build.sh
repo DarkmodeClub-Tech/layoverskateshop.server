@@ -3,4 +3,5 @@
 set -o errexit
 
 yarn
-yarn typeorm migration:run -d dist/data-source
+yarn build
+yarn typeorm migration:run -d dist/src/data-source
