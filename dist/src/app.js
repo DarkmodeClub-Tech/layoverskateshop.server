@@ -35,10 +35,10 @@ const handleError_1 = __importDefault(require("./middlewares/handleError"));
 const app = (0, express_1.default)();
 const corsOptions = {
     origin: [
-        "layoverskateshop.vercel.app",
-        "layoverskateshop.admview.vercel.app",
-        "layover-skateshop.onrender.com",
-        "localhost",
+        "https://layoverskateshop.vercel.app",
+        "https://layoverskateshop.admview.vercel.app",
+        "https://layover-skateshop.onrender.com",
+        "http://localhost:3001",
     ],
 };
 app.use(express_1.default.json());
