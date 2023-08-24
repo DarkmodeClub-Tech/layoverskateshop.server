@@ -9,6 +9,7 @@ export const sellerRouter = Router();
 sellerRouter.get(
   "/retrieve",
   m.authenticationMiddleware,
+  m.userIdValidator(Seller),
   c.getSellerDataController
 );
 
