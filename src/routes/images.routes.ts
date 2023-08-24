@@ -1,17 +1,14 @@
-import { Router, RouterOptions } from "express";
-import { photoUploaderController } from "../controllers/image.controllers";
-import {
-  authenticationMiddleware,
-  uploadFileMiddleware,
-  verifyAdmPermissionMiddleware,
-} from "../middlewares";
+import { Router } from "express";
+import * as c from "../controllers/image.controllers";
+import * as m from "../middlewares";
 
-export const imageRouter: Router = Router();
+const imageRouter: Router = Router();
 
 imageRouter.post(
   "/upload",
-  authenticationMiddleware,
-  verifyAdmPermissionMiddleware,
-  uploadFileMiddleware.array("photos", 6),
-  photoUploaderController
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  m.uploadFileMiddleware.array("photos", 6),
+  c.photoUploaderController
 );
+export default imageRouter;

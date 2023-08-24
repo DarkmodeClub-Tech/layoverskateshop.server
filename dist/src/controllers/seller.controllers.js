@@ -32,8 +32,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addAvatarPhotoController = exports.savePhotosController = exports.updateSellerController = exports.getSellerDataController = exports.loginSellerController = exports.registerSellerController = void 0;
+exports.addAvatarPhotoController = exports.savePhotosController = exports.updateSellerController = exports.getSellerDataController = exports.loginSellerController = exports.registerSellerController = exports.getAllSellersDataController = void 0;
 const s = __importStar(require("../services/seller"));
+const getAllSellersDataController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sellers = yield s.getAllSellersDataService();
+    return res.status(200).json(sellers);
+});
+exports.getAllSellersDataController = getAllSellersDataController;
 const registerSellerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const newSeller = yield s.registerSellerService(data);

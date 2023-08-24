@@ -1,5 +1,5 @@
 import { addAvatarPhotoService } from "./addAvatarPhoto";
-import { getSellerDataService } from "./get";
+import { getAllSellersDataService, getSellerDataService } from "./get";
 import { loginSellerService } from "./login";
 import { registerSellerService } from "./register";
 import { savePhotosService } from "./savePhotos";
@@ -9,6 +9,7 @@ export {
   registerSellerService,
   loginSellerService,
   getSellerDataService,
+  getAllSellersDataService,
   updateSellerService,
   savePhotosService,
   addAvatarPhotoService,
