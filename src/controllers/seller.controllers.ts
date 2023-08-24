@@ -22,6 +22,7 @@ export const loginSellerController = async (
 export const getSellerDataController = async (req: Request, res: Response) => {
   const { id } = req.user;
   const sellerData = await s.getSellerDataService(id);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
   return res.status(200).json(sellerData);
 };
 
