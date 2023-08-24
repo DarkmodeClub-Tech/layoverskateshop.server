@@ -9,10 +9,10 @@ const app = express();
 
 const corsOptions = {
   origin: [
-    "layoverskateshop.vercel.app",
-    "layoverskateshop.admview.vercel.app",
-    "layover-skateshop.onrender.com",
-    "localhost",
+    "https://layoverskateshop.vercel.app",
+    "https://layoverskateshop.admview.vercel.app",
+    "https://layover-skateshop.onrender.com",
+    "http://localhost:3001",
   ],
 };
 app.use(express.json());
