@@ -15,9 +15,11 @@ const corsOptions = {
     origin: [
         "https://layoverskateshop.vercel.app",
         "https://layoverskateshop.admview.vercel.app",
+        "https://layover-skateshop.onrender.com",
         "http://localhost:3000",
     ],
 };
+(0, cors_1.default)({});
 app.use(express_1.default.json());
 app.use((0, cors_1.default)(corsOptions));
 app.use("/sellers", routes_1.sellerRouter);
