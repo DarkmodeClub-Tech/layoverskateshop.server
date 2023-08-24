@@ -6,20 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 require("express-async-errors");
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const routes_1 = require("./routes");
 const handleError_1 = __importDefault(require("./middlewares/handleError"));
 const cart_routes_1 = require("./routes/cart.routes");
 const app = (0, express_1.default)();
-// const corsOptions = {
-//   origin: [
-//     "https://layoverskateshop.vercel.app",
-//     "https://layoverskateshop.admview.vercel.app",
-//     "https://layover-skateshop.onrender.com",
-//     "http://localhost:3001",
-//   ],
-// };
+const corsOptions = {
+    origin: [
+        "layoverskateshop.vercel.app",
+        "layoverskateshop.admview.vercel.app",
+        "layover-skateshop.onrender.com",
+        "localhost",
+    ],
+};
 app.use(express_1.default.json());
-// app.use(cors(corsOptions));
+app.use((0, cors_1.default)(corsOptions));
 app.use("/sellers", routes_1.sellerRouter);
 app.use("/customers", routes_1.customerRouter);
 app.use("/products", routes_1.productRouter);

@@ -49,7 +49,6 @@ exports.loginSellerController = loginSellerController;
 const getSellerDataController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
     const sellerData = yield s.getSellerDataService(id);
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
     return res.status(200).json(sellerData);
 });
 exports.getSellerDataController = getSellerDataController;
