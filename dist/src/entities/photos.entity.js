@@ -15,6 +15,7 @@ const product_entity_1 = require("./product.entity");
 const seller_entity_1 = require("./seller.entity");
 let Photo = class Photo {
 };
+exports.Photo = Photo;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -39,7 +40,6 @@ __decorate([
     (0, typeorm_1.OneToOne)(() => seller_entity_1.Seller, (profile) => profile.avatar),
     __metadata("design:type", seller_entity_1.Seller)
 ], Photo.prototype, "profile", void 0);
-Photo = __decorate([
+exports.Photo = Photo = __decorate([
     (0, typeorm_1.Entity)("photos")
 ], Photo);
-exports.Photo = Photo;

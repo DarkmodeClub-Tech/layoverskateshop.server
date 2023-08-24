@@ -15,6 +15,7 @@ const cart_entity_1 = require("./cart.entity");
 const product_entity_1 = require("./product.entity");
 let CartProduct = class CartProduct {
 };
+exports.CartProduct = CartProduct;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -41,7 +42,6 @@ __decorate([
     }),
     __metadata("design:type", product_entity_1.Product)
 ], CartProduct.prototype, "product", void 0);
-CartProduct = __decorate([
+exports.CartProduct = CartProduct = __decorate([
     (0, typeorm_1.Entity)("cart_products")
 ], CartProduct);
-exports.CartProduct = CartProduct;

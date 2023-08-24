@@ -16,6 +16,7 @@ const cart_entity_1 = require("./cart.entity");
 const order_entity_1 = require("./order.entity");
 let Customer = class Customer extends user_entity_1.User {
 };
+exports.Customer = Customer;
 __decorate([
     (0, typeorm_1.OneToOne)(() => cart_entity_1.Cart, (cart) => cart.customer, {
         onDelete: "CASCADE",
@@ -28,7 +29,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => order_entity_1.Order, (order) => order.customer, { cascade: true }),
     __metadata("design:type", Array)
 ], Customer.prototype, "orders", void 0);
-Customer = __decorate([
+exports.Customer = Customer = __decorate([
     (0, typeorm_1.Entity)("customers")
 ], Customer);
-exports.Customer = Customer;

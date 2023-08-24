@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const product_entity_1 = require("./product.entity");
 let Category = class Category {
 };
+exports.Category = Category;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -34,7 +35,6 @@ __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], Category.prototype, "updated_at", void 0);
-Category = __decorate([
+exports.Category = Category = __decorate([
     (0, typeorm_1.Entity)("categories")
 ], Category);
-exports.Category = Category;

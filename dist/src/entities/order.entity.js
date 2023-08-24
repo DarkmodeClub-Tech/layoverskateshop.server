@@ -16,6 +16,7 @@ const customer_entity_1 = require("./customer.entity");
 // import { OrderProducts } from "./orderProducts.entity";
 let Order = class Order {
 };
+exports.Order = Order;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -40,7 +41,6 @@ __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], Order.prototype, "updated_at", void 0);
-Order = __decorate([
+exports.Order = Order = __decorate([
     (0, typeorm_1.Entity)("orders")
 ], Order);
-exports.Order = Order;

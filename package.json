@@ -31,7 +31,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "typescript": "^5.0.4",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "cloudinary": "^1.35.0",

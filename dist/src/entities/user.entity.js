@@ -15,6 +15,7 @@ const class_transformer_1 = require("class-transformer");
 const address_entity_1 = require("./address.entity");
 let User = class User {
 };
+exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
@@ -81,7 +82,6 @@ __decorate([
     }),
     __metadata("design:type", address_entity_1.Address)
 ], User.prototype, "address", void 0);
-User = __decorate([
+exports.User = User = __decorate([
     (0, typeorm_1.Entity)("users")
 ], User);
-exports.User = User;
