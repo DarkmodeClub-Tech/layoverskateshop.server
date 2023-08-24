@@ -3,7 +3,7 @@ import * as m from "../middlewares";
 import * as c from "../controllers/product.controller";
 import * as s from "../schemas/products.schemas";
 
-export const productRouter = Router();
+const productRouter = Router();
 
 productRouter.post(
   "/register",
@@ -16,7 +16,25 @@ productRouter.post(
 
 productRouter.get("/", c.getProductsController);
 
-productRouter.patch("/update/:id", c.updateProductController);
+productRouter.patch(
+  "/update/:id",
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  c.updateProductController
+);
 
-productRouter.patch("/deactivate/:id", c.deactivateProductAddController);
-productRouter.delete("/destroy/:id", c.deleteProductController);
+productRouter.patch(
+  "/deactivate/:id",
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  c.deactivateProductAddController
+);
+
+productRouter.delete(
+  "/destroy/:id",
+  m.authenticationMiddleware,
+  m.verifyAdmPermissionMiddleware,
+  c.deleteProductController
+);
+
+export default productRouter;
