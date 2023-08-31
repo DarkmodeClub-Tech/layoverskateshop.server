@@ -17,8 +17,9 @@ const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
 const category_1 = require("../category");
 const photos_1 = require("../photos");
+const seller_1 = require("../seller");
 const retrieve_1 = require("./retrieve");
-const registerProductService = (data, photos) => __awaiter(void 0, void 0, void 0, function* () {
+const registerProductService = (sellerId, data, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
     const { title, category, price, stock_amount, max_installments, description, available_colors, available_sizes, } = data;
     let product = new entities_1.Product();
@@ -31,6 +32,7 @@ const registerProductService = (data, photos) => __awaiter(void 0, void 0, void 
     product.available_colors = available_colors;
     product.category = yield (0, category_1.registerCategoryService)(category);
     product.photos = yield (0, photos_1.photoUploaderService)(photos);
+    product.seller = yield (0, seller_1.getSellerDataService)(sellerId);
     yield productRepo.save(product);
     product = yield (0, retrieve_1.retrieveProductService)(product.id);
     return product;

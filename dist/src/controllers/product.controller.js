@@ -32,12 +32,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProductController = exports.deactivateProductAddController = exports.updateProductController = exports.getProductsController = exports.registerProductController = void 0;
+exports.deleteProductController = exports.deactivateProductAddController = exports.updateProductController = exports.getProductsBySellerIdController = exports.getProductsController = exports.registerProductController = void 0;
 const s = __importStar(require("../services/products/"));
 const registerProductController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sellerId = req.user.id;
     const files = req.files;
     const data = req.body;
-    const product = yield s.registerProductService(data, files);
+    const product = yield s.registerProductService(sellerId, data, files);
     return res.status(201).json(product);
 });
 exports.registerProductController = registerProductController;
@@ -47,6 +48,12 @@ const getProductsController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     return res.status(200).json(products);
 });
 exports.getProductsController = getProductsController;
+const getProductsBySellerIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sellerId = req.params.id;
+    const products = yield s.getProductsBySellerIdService(sellerId);
+    return res.status(200).json(products);
+});
+exports.getProductsBySellerIdController = getProductsBySellerIdController;
 const updateProductController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const { id } = req.params;

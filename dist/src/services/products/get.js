@@ -12,13 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProductsService = void 0;
+exports.getProductsBySellerIdService = exports.getProductsService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
 const fuse_js_1 = __importDefault(require("fuse.js"));
 const getProductsService = (offset, limit, search) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
-    const products = yield productRepo.find({ skip: offset, take: limit });
+    const products = yield productRepo.find({
+        skip: offset,
+        take: limit,
+        loadRelationIds: { relations: ["seller"] },
+        cache: true,
+    });
     if (search) {
         const fuseOptions = {
             keys: ["title", "description"],
@@ -34,3 +39,12 @@ const getProductsService = (offset, limit, search) => __awaiter(void 0, void 0, 
     return products;
 });
 exports.getProductsService = getProductsService;
+const getProductsBySellerIdService = (sellerId) => __awaiter(void 0, void 0, void 0, function* () {
+    const productRepo = data_source_1.default.getRepository(entities_1.Product);
+    const products = yield productRepo.find({
+        loadRelationIds: { relations: ["seller"] },
+        where: { seller: { id: sellerId } },
+    });
+    return products;
+});
+exports.getProductsBySellerIdService = getProductsBySellerIdService;
