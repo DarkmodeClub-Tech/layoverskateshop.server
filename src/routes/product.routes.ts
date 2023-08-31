@@ -16,6 +16,8 @@ productRouter.post(
 
 productRouter.get("/", c.getProductsController);
 
+productRouter.get("/sellers/:id", c.getProductsBySellerIdController);
+
 productRouter.patch(
   "/update/:id",
   m.authenticationMiddleware,

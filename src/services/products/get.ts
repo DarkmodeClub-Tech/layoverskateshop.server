@@ -9,7 +9,12 @@ export const getProductsService = async (
   search?: string
 ): Promise<Product[]> => {
   const productRepo = AppDataSource.getRepository(Product);
-  const products = await productRepo.find({ skip: offset, take: limit });
+  const products = await productRepo.find({
+    skip: offset,
+    take: limit,
+    loadRelationIds: { relations: ["seller"] },
+    cache: true,
+  });
 
   if (search) {
     const fuseOptions = {
@@ -25,5 +30,16 @@ export const getProductsService = async (
     // );
     // return foundProducts;
   }
+  return products;
+};
+
+export const getProductsBySellerIdService = async (sellerId: string) => {
+  const productRepo = AppDataSource.getRepository(Product);
+
+  const products = await productRepo.find({
+    loadRelationIds: { relations: ["seller"] },
+
+    where: { seller: { id: sellerId } },
+  });
   return products;
 };

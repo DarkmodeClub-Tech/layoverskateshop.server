@@ -9,7 +9,7 @@ export const getSellerDataService = async (
   const sellerRepo = AppDataSource.getRepository(Seller);
   const sellerData = await sellerRepo.findOneBy({ id: sellerId });
 
-  if (!sellerData) throw new AppError("Not Found");
+  if (!sellerData) throw new AppError("Not Found", 404);
   return instanceToPlain(sellerData) as Seller;
 };
 

@@ -3,9 +3,11 @@ import { Product } from "../../entities";
 import { TRegisterProductRequest } from "../../interfaces/product";
 import { registerCategoryService } from "../category";
 import { photoUploaderService } from "../photos";
+import { getSellerDataService } from "../seller";
 import { retrieveProductService } from "./retrieve";
 
 export const registerProductService = async (
+  sellerId: string,
   data: TRegisterProductRequest,
   photos: Express.Multer.File[]
 ): Promise<Product> => {
@@ -32,7 +34,7 @@ export const registerProductService = async (
   product.available_colors = available_colors;
   product.category = await registerCategoryService(category);
   product.photos = await photoUploaderService(photos);
-
+  product.seller = await getSellerDataService(sellerId);
   await productRepo.save(product);
 
   product = await retrieveProductService(product.id);
