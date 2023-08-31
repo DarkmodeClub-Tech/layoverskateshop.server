@@ -1,5 +1,5 @@
 import { deleteProductService } from "./destroy";
-import { getProductsService } from "./get";
+import { getProductsBySellerIdService, getProductsService } from "./get";
 import { registerProductService } from "./register";
 import { retrieveProductService } from "./retrieve";
 import { deactivateProductAddService } from "./softdelete";
@@ -12,4 +12,5 @@ export {
   retrieveProductService,
   deactivateProductAddService,
   deleteProductService,
+  getProductsBySellerIdService,
 };
