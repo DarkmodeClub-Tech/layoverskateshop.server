@@ -6,7 +6,12 @@ import * as c from "../controllers/seller.controllers";
 
 const sellerRouter = Router();
 
-sellerRouter.get("/", c.getAllSellersDataController);
+sellerRouter.get(
+  "/",
+  m.authenticationMiddleware,
+  m.userIdValidator(Seller),
+  c.getAllSellersDataController
+);
 
 sellerRouter.get(
   "/retrieve",

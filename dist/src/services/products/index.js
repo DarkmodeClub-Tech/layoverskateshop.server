@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProductService = exports.deactivateProductAddService = exports.retrieveProductService = exports.getProductsService = exports.updateProductService = exports.registerProductService = void 0;
+exports.getProductsBySellerIdService = exports.deleteProductService = exports.deactivateProductAddService = exports.retrieveProductService = exports.getProductsService = exports.updateProductService = exports.registerProductService = void 0;
 const destroy_1 = require("./destroy");
 Object.defineProperty(exports, "deleteProductService", { enumerable: true, get: function () { return destroy_1.deleteProductService; } });
 const get_1 = require("./get");
+Object.defineProperty(exports, "getProductsBySellerIdService", { enumerable: true, get: function () { return get_1.getProductsBySellerIdService; } });
 Object.defineProperty(exports, "getProductsService", { enumerable: true, get: function () { return get_1.getProductsService; } });
 const register_1 = require("./register");
 Object.defineProperty(exports, "registerProductService", { enumerable: true, get: function () { return register_1.registerProductService; } });
