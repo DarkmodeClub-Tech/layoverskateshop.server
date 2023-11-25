@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import "express-async-errors";
-import express from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import * as r from "./routes";
 import handleErrorMiddleware from "./middlewares/handleError";
 
-const app = express();
+const app: Application = express();
 
 const corsOptions = {
   origin: [

@@ -1,98 +1,29 @@
+import "reflect-metadata";
 import "dotenv/config";
+import { DataSource, DataSourceOptions } from "typeorm";
+import path from "path";
 
-import { DataSource } from "typeorm";
-import * as e from "./entities";
-import * as m from "./migrations";
+const dataSourceConfig = (): DataSourceOptions => {
+  const entityPath: string = path.join(__dirname, "./entities/**.{ts,js}");
+  const migrationPath: string = path.join(__dirname, "./migrations/**.{ts,js}");
+  //demo-M4-T18[WSL:Ubuntu]/src/entities/**.{ts,js} */
 
-const AppDataSource = new DataSource(
-  process.env.NODE_ENV === "production"
-    ? {
-        type: "postgres",
-        url: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false },
-        synchronize: false,
-        logging: true,
-        entities: [
-          e.User,
-          e.Customer,
-          e.Seller,
-          e.Address,
-          e.Cart,
-          e.Order,
-          e.Product,
-          e.Category,
-          e.Photo,
-          e.CartProduct,
-        ],
-        migrations: [
-          m.InitialMigration1682346444041,
-          m.CreateTables1684524108180,
-          m.AlterTables1685395288009,
-          m.AddDescriptionFieldToProduct1685473703904,
-          m.AlterTables1692741016765,
-          m.AlterTables1687388606344,
-          m.AlterTables1692758943041,
-        ],
-      }
-    : // : process.env.NODE_ENV === "test"
-      // ? {
-      //     type: "sqlite",
-      //     database: ":memory:",
-      //     synchronize: true,
-      //     entities: [
-      //       e.User,
-      //       e.Customer,
-      //       e.Seller,
-      //       e.Address,
-      //       e.Cart,
-      //       e.Order,
-      //       e.Product,
-      //       e.Category,
-      //       e.Photo,
-      //       e.CartProduct,
-      //     ],
-      //     migrations: [
-      //       m.InitialMigration1682346444041,
-      //       m.CreateTables1684524108180,
-      //       m.AlterTables1685395288009,
-      //       m.AddDescriptionFieldToProduct1685473703904,
-      //       m.AlterTables1687388606344,
-      //       m.AlterTables1692741016765,
-      //       m.AlterTables1692758943041
-      //
-      //     ],
-      //   }
-      {
-        type: "postgres",
-        host: process.env.DB_HOST,
-        port: 5432,
-        username: process.env.POSTGRES_USER,
-        password: process.env.POSTGRES_PASSWORD,
-        database: process.env.POSTGRES_DB,
-        logging: true,
-        synchronize: false,
-        entities: [
-          e.User,
-          e.Customer,
-          e.Seller,
-          e.Address,
-          e.Cart,
-          e.Order,
-          e.Product,
-          e.Category,
-          e.Photo,
-          e.CartProduct,
-        ],
-        migrations: [
-          m.InitialMigration1682346444041,
-          m.CreateTables1684524108180,
-          m.AlterTables1685395288009,
-          m.AddDescriptionFieldToProduct1685473703904,
-          m.AlterTables1687388606344,
-          m.AlterTables1692741016765,
-          m.AlterTables1692758943041,
-        ],
-      }
-);
+  const dbUrl: string | undefined = process.env.DATABASE_URL;
 
+  if (!dbUrl) {
+    throw new Error('Missing env: var "DATABASE_URL"');
+  }
+
+  return {
+    type: "postgres",
+    url: dbUrl,
+    logging: true,
+    entities: [entityPath],
+    migrations: [migrationPath],
+    ssl: { rejectUnauthorized: false },
+    synchronize: false,
+  };
+};
+
+const AppDataSource: DataSource = new DataSource(dataSourceConfig());
 export default AppDataSource;

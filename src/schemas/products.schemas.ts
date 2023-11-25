@@ -9,4 +9,9 @@ export const registerProductRequestSchema = z.object({
   category: z.string(),
   available_sizes: z.array(z.string()),
   available_colors: z.array(z.string()),
+  packaging_type: z.enum(["box", "bag"]),
+  box_length: z.string(),
+  box_height: z.string(),
+  box_width: z.string(),
+  box_weight: z.string(),
 });

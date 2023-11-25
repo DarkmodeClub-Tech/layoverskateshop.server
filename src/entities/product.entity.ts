@@ -1,69 +1,65 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-} from "typeorm";
+import * as t from "typeorm";
 import { Order } from "./order.entity";
 import { Seller } from "./seller.entity";
 import { Category } from "./category.entity";
 import { Photo } from "./photos.entity";
 import { CartProduct } from "./cartProduct.entity";
+import { ProductPackaging } from "./productPackaging.entity";
 
-@Entity("products")
+@t.Entity("products")
 export class Product {
-  @PrimaryGeneratedColumn("uuid")
+  @t.PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column({ length: 100 })
+  @t.Column({ length: 100 })
   title: string;
 
-  @Column()
+  @t.Column()
   price: number;
 
-  @Column()
+  @t.Column()
   max_installments: number;
 
-  @Column({ default: true, nullable: true })
+  @t.Column({ default: true, nullable: true })
   available: boolean;
 
-  @Column({ default: 1 })
+  @t.Column({ default: 1 })
   stock_amount: number;
 
-  @Column({ nullable: true })
+  @t.Column({ default: "" })
   description: string;
 
-  @Column("text", { array: true, default: [""] })
+  @t.Column("text", { array: true, default: [""] })
   available_sizes: string[];
 
-  @Column("text", { array: true, default: [""] })
+  @t.Column("text", { array: true, default: [""] })
   available_colors: string[];
 
-  @CreateDateColumn()
+  @t.CreateDateColumn()
   created_at: Date;
 
-  @UpdateDateColumn()
+  @t.UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => CartProduct, (cartProduct) => cartProduct.product)
+  @t.OneToMany(() => CartProduct, (cartProduct) => cartProduct.product)
   carts: CartProduct[];
 
-  @ManyToMany(() => Order, (order) => order.products)
+  @t.ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
 
-  @ManyToOne(() => Seller, (seller) => seller.products)
+  @t.ManyToOne(() => Seller, (seller) => seller.products)
   seller: Seller;
 
-  @ManyToOne(() => Category, (category) => category.products, {
+  @t.ManyToOne(() => Category, (category) => category.products, {
     eager: true,
     cascade: true,
   })
   category: Category;
 
-  @OneToMany(() => Photo, (photo) => photo.product, { eager: true })
+  @t.OneToMany(() => Photo, (photo) => photo.product, { eager: true })
   photos: Photo[];
+
+  @t.OneToOne(() => ProductPackaging, { eager: true, onDelete: "CASCADE" })
+  @t.JoinColumn()
+  packaging: ProductPackaging;
 }
