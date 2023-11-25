@@ -19,9 +19,9 @@ const entities_1 = require("../../entities");
 const get_1 = require("./get");
 const updateSellerService = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
-    let seller = yield (0, get_1.getSellerDataService)(id);
+    let seller = yield (0, get_1.getSellerDataByIdService)(id);
     yield sellerRepo.update(seller.id, data);
-    seller = yield (0, get_1.getSellerDataService)(id);
+    seller = yield (0, get_1.getSellerDataByIdService)(id);
     return (0, class_transformer_1.instanceToPlain)(seller);
 });
 exports.updateSellerService = updateSellerService;

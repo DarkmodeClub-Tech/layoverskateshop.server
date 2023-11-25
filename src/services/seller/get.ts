@@ -3,7 +3,7 @@ import AppDataSource from "../../data-source";
 import { Seller } from "../../entities";
 import { AppError } from "../../errors/appError";
 
-export const getSellerDataService = async (
+export const getSellerDataByIdService = async (
   sellerId: string
 ): Promise<Seller> => {
   const sellerRepo = AppDataSource.getRepository(Seller);

@@ -19,9 +19,9 @@ const photos_1 = require("../photos");
 const get_1 = require("./get");
 const savePhotosService = (sellerId, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
-    const seller = yield (0, get_1.getSellerDataService)(sellerId);
+    const seller = yield (0, get_1.getSellerDataByIdService)(sellerId);
     seller.cover_photos = yield (0, photos_1.photoUploaderService)(photos);
     yield sellerRepo.save(seller);
-    return yield (0, get_1.getSellerDataService)(sellerId);
+    return yield (0, get_1.getSellerDataByIdService)(sellerId);
 });
 exports.savePhotosService = savePhotosService;

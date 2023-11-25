@@ -9,6 +9,15 @@ export const getAllSellersDataController = async (
   return res.status(200).json(sellers);
 };
 
+export const getSellerDataByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  const id = req.params.id;
+  const seller = await s.getSellerDataByIdService(id);
+  return res.status(200).json(seller);
+};
+
 export const registerSellerController = async (
   req: Request,
   res: Response
@@ -29,7 +38,7 @@ export const loginSellerController = async (
 
 export const getSellerDataController = async (req: Request, res: Response) => {
   const { id } = req.user;
-  const sellerData = await s.getSellerDataService(id);
+  const sellerData = await s.getSellerDataByIdService(id);
   return res.status(200).json(sellerData);
 };
 
