@@ -1,30 +1,24 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  OneToOne,
-} from "typeorm";
+import * as t from "typeorm";
 import { Product } from "./product.entity";
 import { Seller } from "./seller.entity";
 
-@Entity("photos")
+@t.Entity("photos")
 export class Photo {
-  @PrimaryGeneratedColumn("uuid")
+  @t.PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column({ length: 300 })
+  @t.Column({ length: 300 })
   url: string;
 
-  @Column()
+  @t.Column()
   public_id: string;
 
-  @ManyToOne(() => Product, (product) => product.photos)
+  @t.ManyToOne(() => Product, (product) => product.photos)
   product?: Product;
 
-  @ManyToOne(() => Seller, (seller) => seller.photos)
+  @t.ManyToOne(() => Seller, (seller) => seller.cover_photos)
   owner: Seller;
 
-  @OneToOne(() => Seller, (profile) => profile.avatar)
+  @t.OneToOne(() => Seller, (profile) => profile.avatar)
   profile: Seller;
 }
