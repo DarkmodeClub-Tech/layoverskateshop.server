@@ -13,6 +13,8 @@ sellerRouter.get(
   c.getAllSellersDataController
 );
 
+sellerRouter.get("/:id", c.getSellerDataByIdController);
+
 sellerRouter.get(
   "/retrieve",
   m.authenticationMiddleware,

@@ -20,11 +20,11 @@ const photos_1 = require("../photos");
 const get_1 = require("./get");
 const addAvatarPhotoService = (sellerId, file) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
-    let seller = yield (0, get_1.getSellerDataService)(sellerId);
+    let seller = yield (0, get_1.getSellerDataByIdService)(sellerId);
     const photo = yield (0, photos_1.photoUploaderService)([file]);
     seller.avatar = photo[0];
     sellerRepo.save(seller);
-    seller = yield (0, get_1.getSellerDataService)(seller.id);
+    seller = yield (0, get_1.getSellerDataByIdService)(seller.id);
     return (0, class_transformer_1.instanceToPlain)(seller);
 });
 exports.addAvatarPhotoService = addAvatarPhotoService;

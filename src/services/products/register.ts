@@ -4,7 +4,7 @@ import { ProductPackaging } from "../../entities/productPackaging.entity";
 import { TRegisterProductRequest } from "../../interfaces/product";
 import { registerCategoryService } from "../category";
 import { photoUploaderService } from "../photos";
-import { getSellerDataService } from "../seller";
+import { getSellerDataByIdService } from "../seller";
 import { retrieveProductService } from "./retrieve";
 
 export const registerProductService = async (
@@ -49,7 +49,7 @@ export const registerProductService = async (
   product.available_colors = available_colors;
   product.category = await registerCategoryService(category);
   product.photos = await photoUploaderService(photos);
-  product.seller = await getSellerDataService(sellerId);
+  product.seller = await getSellerDataByIdService(sellerId);
   product.packaging = packaging;
   await productRepo.save(product);
 

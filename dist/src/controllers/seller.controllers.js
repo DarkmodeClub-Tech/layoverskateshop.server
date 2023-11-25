@@ -32,13 +32,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addAvatarPhotoController = exports.savePhotosController = exports.updateSellerController = exports.getSellerDataController = exports.loginSellerController = exports.registerSellerController = exports.getAllSellersDataController = void 0;
+exports.addAvatarPhotoController = exports.savePhotosController = exports.updateSellerController = exports.getSellerDataController = exports.loginSellerController = exports.registerSellerController = exports.getSellerDataByIdController = exports.getAllSellersDataController = void 0;
 const s = __importStar(require("../services/seller"));
 const getAllSellersDataController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const sellers = yield s.getAllSellersDataService();
     return res.status(200).json(sellers);
 });
 exports.getAllSellersDataController = getAllSellersDataController;
+const getSellerDataByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const seller = yield s.getSellerDataByIdService(id);
+    return res.status(200).json(seller);
+});
+exports.getSellerDataByIdController = getSellerDataByIdController;
 const registerSellerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const newSeller = yield s.registerSellerService(data);
@@ -53,7 +59,7 @@ const loginSellerController = (req, res) => __awaiter(void 0, void 0, void 0, fu
 exports.loginSellerController = loginSellerController;
 const getSellerDataController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
-    const sellerData = yield s.getSellerDataService(id);
+    const sellerData = yield s.getSellerDataByIdService(id);
     return res.status(200).json(sellerData);
 });
 exports.getSellerDataController = getSellerDataController;
