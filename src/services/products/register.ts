@@ -1,5 +1,6 @@
 import AppDataSource from "../../data-source";
 import { Product } from "../../entities";
+import { ProductPackaging } from "../../entities/productPackaging.entity";
 import { TRegisterProductRequest } from "../../interfaces/product";
 import { registerCategoryService } from "../category";
 import { photoUploaderService } from "../photos";
@@ -12,6 +13,7 @@ export const registerProductService = async (
   photos: Express.Multer.File[]
 ): Promise<Product> => {
   const productRepo = AppDataSource.getRepository(Product);
+  const packagingRepo = AppDataSource.getRepository(ProductPackaging);
 
   const {
     title,
@@ -22,7 +24,20 @@ export const registerProductService = async (
     description,
     available_colors,
     available_sizes,
+    packaging_type,
+    box_height,
+    box_length,
+    box_weight,
+    box_width,
   } = data;
+
+  let packaging = new ProductPackaging();
+  packaging.box_height = Number(box_height);
+  packaging.box_length = Number(box_length);
+  packaging.box_weight = Number(box_weight);
+  packaging.box_width = Number(box_width);
+  packaging.packaging_type = packaging_type;
+  await packagingRepo.save(packaging);
 
   let product = new Product();
   product.title = title;
@@ -35,6 +50,7 @@ export const registerProductService = async (
   product.category = await registerCategoryService(category);
   product.photos = await photoUploaderService(photos);
   product.seller = await getSellerDataService(sellerId);
+  product.packaging = packaging;
   await productRepo.save(product);
 
   product = await retrieveProductService(product.id);

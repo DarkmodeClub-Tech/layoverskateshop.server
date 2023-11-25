@@ -10,7 +10,7 @@ export const savePhotosService = async (
   const sellerRepo = AppDataSource.getRepository(Seller);
   const seller = await getSellerDataService(sellerId);
 
-  seller.photos = await photoUploaderService(photos);
+  seller.cover_photos = await photoUploaderService(photos);
 
   await sellerRepo.save(seller);
 
