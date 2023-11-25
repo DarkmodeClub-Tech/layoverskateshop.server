@@ -32,37 +32,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Seller = void 0;
+exports.ProductPackaging = void 0;
 const t = __importStar(require("typeorm"));
-const user_entity_1 = require("./user.entity");
 const product_entity_1 = require("./product.entity");
-const photos_entity_1 = require("./photos.entity");
-let Seller = class Seller extends user_entity_1.User {
+let ProductPackaging = class ProductPackaging {
 };
-exports.Seller = Seller;
+exports.ProductPackaging = ProductPackaging;
 __decorate([
-    t.Column({ default: true }),
-    __metadata("design:type", Boolean)
-], Seller.prototype, "adm", void 0);
+    t.PrimaryGeneratedColumn("uuid"),
+    __metadata("design:type", Number)
+], ProductPackaging.prototype, "id", void 0);
 __decorate([
-    t.OneToMany(() => product_entity_1.Product, (product) => product.seller),
-    __metadata("design:type", Array)
-], Seller.prototype, "products", void 0);
+    t.Column({ length: 10 }),
+    __metadata("design:type", String)
+], ProductPackaging.prototype, "packaging_type", void 0);
 __decorate([
-    t.OneToMany(() => photos_entity_1.Photo, (photo) => photo.owner, {
-        onDelete: "CASCADE",
-        eager: true,
-    }),
-    __metadata("design:type", Array)
-], Seller.prototype, "cover_photos", void 0);
+    t.Column(),
+    __metadata("design:type", Number)
+], ProductPackaging.prototype, "box_length", void 0);
 __decorate([
-    t.OneToOne(() => photos_entity_1.Photo, (avatar) => avatar.profile, {
-        onDelete: "CASCADE",
-        eager: true,
-    }),
-    t.JoinColumn(),
-    __metadata("design:type", photos_entity_1.Photo)
-], Seller.prototype, "avatar", void 0);
-exports.Seller = Seller = __decorate([
-    t.Entity("sellers")
-], Seller);
+    t.Column(),
+    __metadata("design:type", Number)
+], ProductPackaging.prototype, "box_height", void 0);
+__decorate([
+    t.Column(),
+    __metadata("design:type", Number)
+], ProductPackaging.prototype, "box_width", void 0);
+__decorate([
+    t.Column(),
+    __metadata("design:type", Number)
+], ProductPackaging.prototype, "box_weight", void 0);
+__decorate([
+    t.OneToOne(() => product_entity_1.Product, (product) => product.packaging),
+    __metadata("design:type", product_entity_1.Product)
+], ProductPackaging.prototype, "product", void 0);
+exports.ProductPackaging = ProductPackaging = __decorate([
+    t.Entity("product_packaging")
+], ProductPackaging);
