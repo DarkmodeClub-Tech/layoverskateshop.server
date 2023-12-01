@@ -32,16 +32,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addAvatarPhotoController = exports.savePhotosController = exports.updateSellerController = exports.getSellerDataController = exports.loginSellerController = exports.registerSellerController = exports.getSellerDataByIdController = exports.getGlobalSellerAndProductsController = void 0;
-const s = __importStar(require("../services/seller"));
+exports.addAvatarPhotoController = exports.savePhotosController = exports.updateSellerController = exports.getSellerDataController = exports.loginSellerController = exports.registerSellerController = exports.getSellerDataByIdController = exports.getGlobalSellerCategoriesAndProductsController = void 0;
+const s = __importStar(require("../services/"));
 const products_1 = require("../services/products");
-const getGlobalSellerAndProductsController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getGlobalSellerCategoriesAndProductsController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const globalSeller = yield s.getGlobalSellerService();
+    const categories = yield s.getCategoriesService();
     const products = yield (0, products_1.getProductsBySellerIdService)(globalSeller.id);
-    const results = { seller: globalSeller, products: products };
+    const results = {
+        seller: globalSeller,
+        categories: categories,
+        products: products,
+    };
     return res.status(200).json(results);
 });
-exports.getGlobalSellerAndProductsController = getGlobalSellerAndProductsController;
+exports.getGlobalSellerCategoriesAndProductsController = getGlobalSellerCategoriesAndProductsController;
 const getSellerDataByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const seller = yield s.getSellerDataByIdService(id);

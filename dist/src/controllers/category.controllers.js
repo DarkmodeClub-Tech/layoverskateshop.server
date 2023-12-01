@@ -33,7 +33,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCategoryController = exports.updateCategoryController = exports.getCategoriesController = exports.registerCategoryController = void 0;
-const s = __importStar(require("../services/category"));
+const s = __importStar(require("../services"));
 const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const category = yield s.registerCategoryService(data.title);
@@ -41,7 +41,7 @@ const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 
 });
 exports.registerCategoryController = registerCategoryController;
 const getCategoriesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { offset = 0, limit = 100 } = req.query;
+    const { offset, limit } = req.query;
     const categories = yield s.getCategoriesService(Number(offset), Number(limit));
     return res.status(200).json(categories);
 });
