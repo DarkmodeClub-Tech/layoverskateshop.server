@@ -39,10 +39,11 @@ const getProductsService = (offset, limit, search) => __awaiter(void 0, void 0, 
     return products;
 });
 exports.getProductsService = getProductsService;
-const getProductsBySellerIdService = (sellerId) => __awaiter(void 0, void 0, void 0, function* () {
+const getProductsBySellerIdService = (sellerId, offset = 0, limit = 50) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
     const products = yield productRepo.find({
-        loadRelationIds: { relations: ["seller"] },
+        skip: offset,
+        take: limit,
         where: { seller: { id: sellerId } },
     });
     return products;
