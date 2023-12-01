@@ -33,7 +33,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Seller = void 0;
-const t = __importStar(require("typeorm"));
+const T = __importStar(require("typeorm"));
 const user_entity_1 = require("./user.entity");
 const product_entity_1 = require("./product.entity");
 const photos_entity_1 = require("./photos.entity");
@@ -41,28 +41,30 @@ let Seller = class Seller extends user_entity_1.User {
 };
 exports.Seller = Seller;
 __decorate([
-    t.Column({ default: true }),
+    T.Column({ default: true }),
     __metadata("design:type", Boolean)
 ], Seller.prototype, "adm", void 0);
 __decorate([
-    t.OneToMany(() => product_entity_1.Product, (product) => product.seller),
+    T.OneToMany(() => product_entity_1.Product, (product) => product.seller, {
+        onDelete: "CASCADE",
+    }),
     __metadata("design:type", Array)
 ], Seller.prototype, "products", void 0);
 __decorate([
-    t.OneToMany(() => photos_entity_1.Photo, (photo) => photo.owner, {
+    T.OneToMany(() => photos_entity_1.Photo, (photo) => photo.owner, {
         onDelete: "CASCADE",
         eager: true,
     }),
     __metadata("design:type", Array)
 ], Seller.prototype, "cover_photos", void 0);
 __decorate([
-    t.OneToOne(() => photos_entity_1.Photo, (avatar) => avatar.profile, {
+    T.OneToOne(() => photos_entity_1.Photo, (avatar) => avatar.profile, {
         onDelete: "CASCADE",
         eager: true,
     }),
-    t.JoinColumn(),
+    T.JoinColumn(),
     __metadata("design:type", photos_entity_1.Photo)
 ], Seller.prototype, "avatar", void 0);
 exports.Seller = Seller = __decorate([
-    t.Entity("sellers")
+    T.Entity("sellers")
 ], Seller);

@@ -43,14 +43,15 @@ const registerProductController = (req, res) => __awaiter(void 0, void 0, void 0
 });
 exports.registerProductController = registerProductController;
 const getProductsController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { offset = 0, limit = 100, search } = req.query;
+    const { offset = 0, limit = 40, search } = req.query;
     const products = yield s.getProductsService(Number(offset), Number(limit), search && String(search));
     return res.status(200).json(products);
 });
 exports.getProductsController = getProductsController;
 const getProductsBySellerIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerId = req.params.id;
-    const products = yield s.getProductsBySellerIdService(sellerId);
+    const { offset = 0, limit = 40 } = req.query;
+    const products = yield s.getProductsBySellerIdService(sellerId, Number(offset), Number(limit));
     return res.status(200).json(products);
 });
 exports.getProductsBySellerIdController = getProductsBySellerIdController;
