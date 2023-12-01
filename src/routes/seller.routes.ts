@@ -2,16 +2,11 @@ import { Router } from "express";
 import { Seller } from "../entities";
 
 import * as m from "../middlewares";
-import * as c from "../controllers/seller.controllers";
+import * as c from "../controllers/";
 
 const sellerRouter = Router();
 
-sellerRouter.get(
-  "/",
-  m.authenticationMiddleware,
-  m.userIdValidator(Seller),
-  c.getAllSellersDataController
-);
+sellerRouter.get("/products", c.getGlobalSellerAndProductsController);
 
 sellerRouter.get("/:id", c.getSellerDataByIdController);
 

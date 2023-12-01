@@ -19,3 +19,13 @@ export const getAllSellersDataService = async () => {
 
   return sellers as Seller[];
 };
+
+export const getGlobalSellerService = async () => {
+  let globalSeller: Seller | Seller[] = await getAllSellersDataService();
+  globalSeller = globalSeller[0];
+
+  // const sellerRepo = AppDataSource.getRepository(Seller);
+  // const seller = await sellerRepo.findOneBy({});
+
+  return globalSeller;
+};

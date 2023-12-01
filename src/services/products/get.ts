@@ -1,6 +1,5 @@
 import AppDataSource from "../../data-source";
 import { Product } from "../../entities";
-import { AppError } from "../../errors/appError";
 import Fuse from "fuse.js";
 
 export const getProductsService = async (
@@ -33,12 +32,15 @@ export const getProductsService = async (
   return products;
 };
 
-export const getProductsBySellerIdService = async (sellerId: string) => {
+export const getProductsBySellerIdService = async (
+  sellerId: string,
+  offset: number = 0,
+  limit: number = 50
+) => {
   const productRepo = AppDataSource.getRepository(Product);
-
   const products = await productRepo.find({
-    loadRelationIds: { relations: ["seller"] },
-
+    skip: offset,
+    take: limit,
     where: { seller: { id: sellerId } },
   });
   return products;
