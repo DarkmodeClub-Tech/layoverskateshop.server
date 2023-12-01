@@ -10,7 +10,7 @@ categoryRouter.post(
   c.registerCategoryController
 );
 
-categoryRouter.get("/", m.authenticationMiddleware, c.getCategoriesController);
+categoryRouter.get("/", c.getCategoriesController);
 
 categoryRouter.patch(
   "/update/:id",

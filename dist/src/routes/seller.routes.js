@@ -29,6 +29,7 @@ const m = __importStar(require("../middlewares"));
 const c = __importStar(require("../controllers/seller.controllers"));
 const sellerRouter = (0, express_1.Router)();
 sellerRouter.get("/", m.authenticationMiddleware, m.userIdValidator(entities_1.Seller), c.getAllSellersDataController);
+sellerRouter.get("/:id", c.getSellerDataByIdController);
 sellerRouter.get("/retrieve", m.authenticationMiddleware, m.userIdValidator(entities_1.Seller), c.getSellerDataController);
 sellerRouter.post("/register", m.verifyDuplicatedUsername(entities_1.Seller), m.verifyDuplicatedCPF(entities_1.Seller), m.verifyDuplicatedEmail(entities_1.Seller), c.registerSellerController);
 sellerRouter.post("/auth", c.loginSellerController);

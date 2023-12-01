@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as m from "../middlewares";
-import * as c from "../controllers/product.controller";
-import * as s from "../schemas/products.schemas";
+import * as c from "../controllers/";
+import * as s from "../schemas/";
 
 const productRouter = Router();
 

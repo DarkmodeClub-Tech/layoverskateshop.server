@@ -15,7 +15,7 @@ export const registerProductController = async (
 };
 
 export const getProductsController = async (req: Request, res: Response) => {
-  const { offset = 0, limit = 100, search } = req.query;
+  const { offset = 0, limit = 40, search } = req.query;
   const products = await s.getProductsService(
     Number(offset),
     Number(limit),
@@ -30,7 +30,12 @@ export const getProductsBySellerIdController = async (
   res: Response
 ) => {
   const sellerId = req.params.id;
-  const products = await s.getProductsBySellerIdService(sellerId);
+  const { offset = 0, limit = 40 } = req.query;
+  const products = await s.getProductsBySellerIdService(
+    sellerId,
+    Number(offset),
+    Number(limit)
+  );
   return res.status(200).json(products);
 };
 

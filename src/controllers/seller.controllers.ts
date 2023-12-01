@@ -1,12 +1,24 @@
 import { Request, Response } from "express";
 import * as s from "../services/seller";
+import { getProductsBySellerIdService } from "../services/products";
 
-export const getAllSellersDataController = async (
+export const getGlobalSellerAndProductsController = async (
   req: Request,
   res: Response
 ) => {
-  const sellers = await s.getAllSellersDataService();
-  return res.status(200).json(sellers);
+  const globalSeller = await s.getGlobalSellerService();
+  const products = await getProductsBySellerIdService(globalSeller.id);
+  const results = { seller: globalSeller, products: products };
+  return res.status(200).json(results);
+};
+
+export const getSellerDataByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  const id = req.params.id;
+  const seller = await s.getSellerDataByIdService(id);
+  return res.status(200).json(seller);
 };
 
 export const registerSellerController = async (
@@ -29,7 +41,7 @@ export const loginSellerController = async (
 
 export const getSellerDataController = async (req: Request, res: Response) => {
   const { id } = req.user;
-  const sellerData = await s.getSellerDataService(id);
+  const sellerData = await s.getSellerDataByIdService(id);
   return res.status(200).json(sellerData);
 };
 

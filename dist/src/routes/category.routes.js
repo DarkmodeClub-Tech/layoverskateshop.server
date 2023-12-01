@@ -28,7 +28,7 @@ const c = __importStar(require("../controllers/category.controllers"));
 const m = __importStar(require("../middlewares"));
 const categoryRouter = (0, express_1.Router)();
 categoryRouter.post("/register", m.authenticationMiddleware, c.registerCategoryController);
-categoryRouter.get("/", m.authenticationMiddleware, c.getCategoriesController);
+categoryRouter.get("/", c.getCategoriesController);
 categoryRouter.patch("/update/:id", m.authenticationMiddleware, c.updateCategoryController);
 categoryRouter.delete("/destroy/:id", m.authenticationMiddleware, c.deleteCategoryController);
 exports.default = categoryRouter;

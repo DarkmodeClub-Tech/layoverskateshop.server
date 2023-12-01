@@ -3,7 +3,7 @@ import AppDataSource from "../../data-source";
 import { Seller } from "../../entities";
 import { AppError } from "../../errors/appError";
 
-export const getSellerDataService = async (
+export const getSellerDataByIdService = async (
   sellerId: string
 ): Promise<Seller> => {
   const sellerRepo = AppDataSource.getRepository(Seller);
@@ -18,4 +18,14 @@ export const getAllSellersDataService = async () => {
   const sellers = (await sellerRepo.find()).map((s) => instanceToPlain(s));
 
   return sellers as Seller[];
+};
+
+export const getGlobalSellerService = async () => {
+  let globalSeller: Seller | Seller[] = await getAllSellersDataService();
+  globalSeller = globalSeller[0];
+
+  // const sellerRepo = AppDataSource.getRepository(Seller);
+  // const seller = await sellerRepo.findOneBy({});
+
+  return globalSeller;
 };
