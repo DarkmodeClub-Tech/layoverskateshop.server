@@ -25,8 +25,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const m = __importStar(require("../middlewares"));
-const c = __importStar(require("../controllers/product.controller"));
-const s = __importStar(require("../schemas/products.schemas"));
+const c = __importStar(require("../controllers/"));
+const s = __importStar(require("../schemas/"));
 const productRouter = (0, express_1.Router)();
 productRouter.post("/register", m.authenticationMiddleware, m.verifyAdmPermissionMiddleware, m.uploadFileMiddleware.array("photos", 6), m.validateRequestBodyMiddleware(s.registerProductRequestSchema), c.registerProductController);
 productRouter.get("/", c.getProductsController);

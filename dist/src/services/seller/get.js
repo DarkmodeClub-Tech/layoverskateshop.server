@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllSellersDataService = exports.getSellerDataByIdService = void 0;
+exports.getGlobalSellerService = exports.getAllSellersDataService = exports.getSellerDataByIdService = void 0;
 const class_transformer_1 = require("class-transformer");
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
@@ -31,3 +31,11 @@ const getAllSellersDataService = () => __awaiter(void 0, void 0, void 0, functio
     return sellers;
 });
 exports.getAllSellersDataService = getAllSellersDataService;
+const getGlobalSellerService = () => __awaiter(void 0, void 0, void 0, function* () {
+    let globalSeller = yield (0, exports.getAllSellersDataService)();
+    globalSeller = globalSeller[0];
+    // const sellerRepo = AppDataSource.getRepository(Seller);
+    // const seller = await sellerRepo.findOneBy({});
+    return globalSeller;
+});
+exports.getGlobalSellerService = getGlobalSellerService;
