@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as s from "../services/category";
+import * as s from "../services";
 import { Category } from "../entities";
 import { TRegisterCategoryRequest } from "../interfaces/category";
 
@@ -13,7 +13,7 @@ export const registerCategoryController = async (
 };
 
 export const getCategoriesController = async (req: Request, res: Response) => {
-  const { offset = 0, limit = 100 } = req.query;
+  const { offset, limit } = req.query;
   const categories = await s.getCategoriesService(
     Number(offset),
     Number(limit)
