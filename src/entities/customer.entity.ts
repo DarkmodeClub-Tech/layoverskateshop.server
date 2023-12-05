@@ -1,17 +1,15 @@
-import { Entity, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
-import { User } from "./user.entity";
-import { Cart } from "./cart.entity";
-import { Order } from "./order.entity";
+import * as T from "typeorm";
+import { User, Cart, Order } from ".";
 
-@Entity("customers")
+@T.Entity("customers")
 export class Customer extends User {
-  @OneToOne(() => Cart, (cart) => cart.customer, {
+  @T.OneToOne(() => Cart, (cart) => cart.customer, {
     onDelete: "CASCADE",
     eager: true,
   })
-  @JoinColumn()
+  @T.JoinColumn()
   cart: Cart;
 
-  @OneToMany(() => Order, (order) => order.customer, { cascade: true })
+  @T.OneToMany(() => Order, (order) => order.customer, { cascade: true })
   orders: Order[] | [];
 }

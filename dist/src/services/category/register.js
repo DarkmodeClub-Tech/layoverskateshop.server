@@ -15,12 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerCategoryService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
-const registerCategoryService = (title) => __awaiter(void 0, void 0, void 0, function* () {
+const registerCategoryService = (title, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const categoryRepo = data_source_1.default.getRepository(entities_1.Category);
     let category = yield categoryRepo.findOneBy({ title });
-    if (category)
+    if (category) {
+        yield categoryRepo.update(category.id, { photos: photos });
         return category;
-    category = categoryRepo.create({ title });
+    }
+    category = categoryRepo.create({ title, photos });
     yield categoryRepo.save(category);
     return category;
 });

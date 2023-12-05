@@ -34,12 +34,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const T = __importStar(require("typeorm"));
-const order_entity_1 = require("./order.entity");
-const seller_entity_1 = require("./seller.entity");
-const category_entity_1 = require("./category.entity");
-const photos_entity_1 = require("./photos.entity");
-const cartProduct_entity_1 = require("./cartProduct.entity");
-const productPackaging_entity_1 = require("./productPackaging.entity");
+const _1 = require(".");
 let Product = class Product {
 };
 exports.Product = Product;
@@ -88,32 +83,32 @@ __decorate([
     __metadata("design:type", Date)
 ], Product.prototype, "updated_at", void 0);
 __decorate([
-    T.OneToMany(() => cartProduct_entity_1.CartProduct, (cartProduct) => cartProduct.product),
+    T.OneToMany(() => _1.CartProduct, (cartProduct) => cartProduct.product),
     __metadata("design:type", Array)
 ], Product.prototype, "carts", void 0);
 __decorate([
-    T.ManyToMany(() => order_entity_1.Order, (order) => order.products),
+    T.ManyToMany(() => _1.Order, (order) => order.products),
     __metadata("design:type", Array)
 ], Product.prototype, "orders", void 0);
 __decorate([
-    T.ManyToOne(() => seller_entity_1.Seller, (seller) => seller.products),
-    __metadata("design:type", seller_entity_1.Seller)
+    T.ManyToOne(() => _1.Seller, (seller) => seller.products),
+    __metadata("design:type", _1.Seller)
 ], Product.prototype, "seller", void 0);
 __decorate([
-    T.ManyToOne(() => category_entity_1.Category, (category) => category.products, {
+    T.ManyToOne(() => _1.Category, (category) => category.products, {
         eager: true,
         cascade: true,
     }),
-    __metadata("design:type", category_entity_1.Category)
+    __metadata("design:type", _1.Category)
 ], Product.prototype, "category", void 0);
 __decorate([
-    T.OneToMany(() => photos_entity_1.Photo, (photo) => photo.product, { eager: true }),
+    T.OneToMany(() => _1.Photo, (photo) => photo.product, { eager: true }),
     __metadata("design:type", Array)
 ], Product.prototype, "photos", void 0);
 __decorate([
-    T.OneToOne(() => productPackaging_entity_1.ProductPackaging, { eager: true, onDelete: "CASCADE" }),
+    T.OneToOne(() => _1.ProductPackaging, { eager: true, onDelete: "CASCADE" }),
     T.JoinColumn(),
-    __metadata("design:type", productPackaging_entity_1.ProductPackaging)
+    __metadata("design:type", _1.ProductPackaging)
 ], Product.prototype, "packaging", void 0);
 exports.Product = Product = __decorate([
     T.Entity("products")

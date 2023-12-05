@@ -47,8 +47,8 @@ export const registerProductService = async (
   product.description = description;
   product.available_sizes = available_sizes;
   product.available_colors = available_colors;
-  product.category = await registerCategoryService(category);
   product.photos = await photoUploaderService(photos);
+  product.category = await registerCategoryService(category, product.photos);
   product.seller = await getSellerDataByIdService(sellerId);
   product.packaging = packaging;
   await productRepo.save(product);

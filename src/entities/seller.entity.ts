@@ -1,7 +1,5 @@
 import * as T from "typeorm";
-import { User } from "./user.entity";
-import { Product } from "./product.entity";
-import { Photo } from "./photos.entity";
+import { User, Product, Photo } from ".";
 
 @T.Entity("sellers")
 export class Seller extends User {

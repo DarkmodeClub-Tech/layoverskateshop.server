@@ -1,27 +1,26 @@
-import * as t from "typeorm";
-import { Product } from "./product.entity";
-import { Customer } from "./customer.entity";
+import * as T from "typeorm";
+import { Product, Customer } from ".";
 // import { OrderProducts } from "./orderProducts.entity";
 
-@t.Entity("orders")
+@T.Entity("orders")
 export class Order {
-  @t.PrimaryGeneratedColumn("uuid")
+  @T.PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @t.Column({ default: true, nullable: true })
+  @T.Column({ default: true, nullable: true })
   active: boolean;
 
-  @t.ManyToMany(() => Product, (product) => product.orders)
+  @T.ManyToMany(() => Product, (product) => product.orders)
   products: Product[];
   // @OneToMany(() => OrderProducts, (cartProducts) => cartProducts.orders)
   // products: OrderProducts[];
 
-  @t.ManyToOne(() => Customer, (customer) => customer.orders)
+  @T.ManyToOne(() => Customer, (customer) => customer.orders)
   customer: Customer;
 
-  @t.CreateDateColumn()
+  @T.CreateDateColumn()
   created_at: Date;
 
-  @t.UpdateDateColumn()
+  @T.UpdateDateColumn()
   updated_at: Date;
 }
