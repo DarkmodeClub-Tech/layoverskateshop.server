@@ -39,8 +39,8 @@ const registerProductService = (sellerId, data, photos) => __awaiter(void 0, voi
     product.description = description;
     product.available_sizes = available_sizes;
     product.available_colors = available_colors;
-    product.category = yield (0, category_1.registerCategoryService)(category);
     product.photos = yield (0, photos_1.photoUploaderService)(photos);
+    product.category = yield (0, category_1.registerCategoryService)(category, product.photos);
     product.seller = yield (0, seller_1.getSellerDataByIdService)(sellerId);
     product.packaging = packaging;
     yield productRepo.save(product);

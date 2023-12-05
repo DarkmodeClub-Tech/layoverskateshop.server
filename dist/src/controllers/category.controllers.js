@@ -35,8 +35,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCategoryController = exports.updateCategoryController = exports.getCategoriesController = exports.registerCategoryController = void 0;
 const s = __importStar(require("../services"));
 const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const category = yield s.registerCategoryService(data.title);
+    const { title } = req.body;
+    const category = yield s.registerCategoryService(title);
     return res.status(201).json(category);
 });
 exports.registerCategoryController = registerCategoryController;

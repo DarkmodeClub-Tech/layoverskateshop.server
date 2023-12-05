@@ -1,32 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { User } from "./user.entity";
+import * as T from "typeorm";
+import { User } from ".";
 
-@Entity("addresses")
+@T.Entity("addresses")
 export class Address {
-  @PrimaryGeneratedColumn("uuid")
+  @T.PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column({ length: 8 })
+  @T.Column({ length: 8 })
   cep: string;
 
-  @Column({ length: 120 })
+  @T.Column({ length: 120 })
   street: string;
 
-  @Column({ nullable: true })
+  @T.Column({ nullable: true })
   number: number;
 
-  @Column({ length: 20, nullable: true })
+  @T.Column({ length: 20, nullable: true })
   complement: string;
 
-  @Column({ length: 120 })
+  @T.Column({ length: 120 })
   district: string;
 
-  @Column({ length: 120 })
+  @T.Column({ length: 120 })
   city: string;
 
-  @Column({ length: 120 })
+  @T.Column({ length: 120 })
   state: string;
 
-  @OneToMany(() => User, (user) => user.address)
+  @T.OneToMany(() => User, (user) => user.address)
   users: User[];
 }

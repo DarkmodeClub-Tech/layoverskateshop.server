@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import * as s from "../services";
-import { Category } from "../entities";
-import { TRegisterCategoryRequest } from "../interfaces/category";
+import { Category, Photo } from "../entities";
 
 export const registerCategoryController = async (
   req: Request,
   res: Response
 ) => {
-  const data: TRegisterCategoryRequest = req.body;
-  const category = await s.registerCategoryService(data.title);
+  const { title }: { title: string } = req.body;
+
+  const category = await s.registerCategoryService(title);
   return res.status(201).json(category);
 };
 

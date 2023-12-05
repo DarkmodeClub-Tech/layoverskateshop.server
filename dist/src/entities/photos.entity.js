@@ -33,36 +33,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Photo = void 0;
-const t = __importStar(require("typeorm"));
-const product_entity_1 = require("./product.entity");
-const seller_entity_1 = require("./seller.entity");
+const T = __importStar(require("typeorm"));
+const _1 = require(".");
 let Photo = class Photo {
 };
 exports.Photo = Photo;
 __decorate([
-    t.PrimaryGeneratedColumn("uuid"),
+    T.PrimaryGeneratedColumn("uuid"),
     __metadata("design:type", String)
 ], Photo.prototype, "id", void 0);
 __decorate([
-    t.Column({ length: 300 }),
+    T.Column({ length: 300 }),
     __metadata("design:type", String)
 ], Photo.prototype, "url", void 0);
 __decorate([
-    t.Column(),
+    T.Column(),
     __metadata("design:type", String)
 ], Photo.prototype, "public_id", void 0);
 __decorate([
-    t.ManyToOne(() => product_entity_1.Product, (product) => product.photos),
-    __metadata("design:type", product_entity_1.Product)
+    T.ManyToOne(() => _1.Product, (product) => product.photos),
+    __metadata("design:type", _1.Product)
 ], Photo.prototype, "product", void 0);
 __decorate([
-    t.ManyToOne(() => seller_entity_1.Seller, (seller) => seller.cover_photos),
-    __metadata("design:type", seller_entity_1.Seller)
+    T.ManyToOne(() => _1.Seller, (seller) => seller.cover_photos),
+    __metadata("design:type", _1.Seller)
 ], Photo.prototype, "owner", void 0);
 __decorate([
-    t.OneToOne(() => seller_entity_1.Seller, (profile) => profile.avatar),
-    __metadata("design:type", seller_entity_1.Seller)
+    T.OneToOne(() => _1.Seller, (profile) => profile.avatar),
+    __metadata("design:type", _1.Seller)
 ], Photo.prototype, "profile", void 0);
 exports.Photo = Photo = __decorate([
-    t.Entity("photos")
+    T.Entity("photos")
 ], Photo);
