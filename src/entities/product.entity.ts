@@ -16,11 +16,11 @@ export class Product {
   @T.Column({ length: 100 })
   title: string;
 
-  @T.Column()
+  @T.Column({ type: "decimal", precision: 10, scale: 2 })
   price: number;
 
-  @T.Column({ nullable: true })
-  promotionalPrice?: number;
+  @T.Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  promotional_price?: number;
 
   @T.Column()
   max_installments: number;

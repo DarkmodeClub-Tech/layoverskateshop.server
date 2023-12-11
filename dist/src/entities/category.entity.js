@@ -51,10 +51,6 @@ __decorate([
     __metadata("design:type", Array)
 ], Category.prototype, "products", void 0);
 __decorate([
-    T.OneToMany(() => Category, (category) => category.photos),
-    __metadata("design:type", Array)
-], Category.prototype, "photos", void 0);
-__decorate([
     T.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Category.prototype, "created_at", void 0);

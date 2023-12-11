@@ -12,9 +12,6 @@ export class Category {
   @T.OneToMany(() => Product, (product) => product.category)
   products: Product[];
 
-  @T.OneToMany(() => Category, (category) => category.photos)
-  photos: Photo[];
-
   @T.CreateDateColumn()
   created_at: Date;
 

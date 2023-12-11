@@ -9,16 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateTables1702306327262 = void 0;
-class CreateTables1702306327262 {
+exports.CreateTables1702334778530 = void 0;
+class CreateTables1702334778530 {
     constructor() {
-        this.name = 'CreateTables1702306327262';
+        this.name = 'CreateTables1702334778530';
     }
     up(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryRunner.query(`CREATE TABLE "users" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "username" character varying(80) NOT NULL, "first_name" character varying(80) NOT NULL, "last_name" character varying(80) NOT NULL, "email" character varying(120) NOT NULL, "password" character varying(150) NOT NULL, "cpf" character varying(11) NOT NULL, "phone" character varying(14) NOT NULL, "is_active" boolean NOT NULL DEFAULT true, "last_login" TIMESTAMP NOT NULL DEFAULT now(), "last_logout" TIMESTAMP NOT NULL DEFAULT now(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "addressId" uuid, CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`);
             yield queryRunner.query(`CREATE TABLE "carts" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), CONSTRAINT "PK_b5f695a59f5ebb50af3c8160816" PRIMARY KEY ("id"))`);
-            yield queryRunner.query(`CREATE TABLE "products" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "title" character varying(100) NOT NULL, "price" integer NOT NULL, "promotionalPrice" integer, "max_installments" integer NOT NULL, "available" boolean DEFAULT true, "stock_amount" integer NOT NULL DEFAULT '1', "description" character varying NOT NULL DEFAULT '', "available_sizes" text array NOT NULL DEFAULT '{}', "available_colors" text array NOT NULL DEFAULT '{}', "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "sellerId" uuid, "categoryId" uuid, "packagingId" uuid, CONSTRAINT "REL_37b1f6f78f0d1870b3b6ab7b40" UNIQUE ("packagingId"), CONSTRAINT "PK_0806c755e0aca124e67c0cf6d7d" PRIMARY KEY ("id"))`);
+            yield queryRunner.query(`CREATE TABLE "products" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "title" character varying(100) NOT NULL, "price" numeric(10,2) NOT NULL, "promotional_price" numeric(10,2), "max_installments" integer NOT NULL, "available" boolean DEFAULT true, "stock_amount" integer NOT NULL DEFAULT '1', "description" character varying NOT NULL DEFAULT '', "available_sizes" text array NOT NULL DEFAULT '{}', "available_colors" text array NOT NULL DEFAULT '{}', "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "sellerId" uuid, "categoryId" uuid, "packagingId" uuid, CONSTRAINT "REL_37b1f6f78f0d1870b3b6ab7b40" UNIQUE ("packagingId"), CONSTRAINT "PK_0806c755e0aca124e67c0cf6d7d" PRIMARY KEY ("id"))`);
             yield queryRunner.query(`CREATE TABLE "orders" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "active" boolean DEFAULT true, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "customerId" uuid, CONSTRAINT "PK_710e2d4957aa5878dfe94e4ac2f" PRIMARY KEY ("id"))`);
             yield queryRunner.query(`CREATE TABLE "customers" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "username" character varying(80) NOT NULL, "first_name" character varying(80) NOT NULL, "last_name" character varying(80) NOT NULL, "email" character varying(120) NOT NULL, "password" character varying(150) NOT NULL, "cpf" character varying(11) NOT NULL, "phone" character varying(14) NOT NULL, "is_active" boolean NOT NULL DEFAULT true, "last_login" TIMESTAMP NOT NULL DEFAULT now(), "last_logout" TIMESTAMP NOT NULL DEFAULT now(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "addressId" uuid, "cartId" uuid, CONSTRAINT "REL_cca5fdc20671318f60dca2cfb6" UNIQUE ("cartId"), CONSTRAINT "PK_133ec679a801fab5e070f73d3ea" PRIMARY KEY ("id"))`);
             yield queryRunner.query(`CREATE TABLE "sellers" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "username" character varying(80) NOT NULL, "first_name" character varying(80) NOT NULL, "last_name" character varying(80) NOT NULL, "email" character varying(120) NOT NULL, "password" character varying(150) NOT NULL, "cpf" character varying(11) NOT NULL, "phone" character varying(14) NOT NULL, "is_active" boolean NOT NULL DEFAULT true, "last_login" TIMESTAMP NOT NULL DEFAULT now(), "last_logout" TIMESTAMP NOT NULL DEFAULT now(), "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "adm" boolean NOT NULL DEFAULT true, "addressId" uuid, "avatarId" uuid, CONSTRAINT "REL_08bf3d7cccf825e5c999f8cc6e" UNIQUE ("avatarId"), CONSTRAINT "PK_97337ccbf692c58e6c7682de8a2" PRIMARY KEY ("id"))`);
@@ -71,4 +71,4 @@ class CreateTables1702306327262 {
         });
     }
 }
-exports.CreateTables1702306327262 = CreateTables1702306327262;
+exports.CreateTables1702334778530 = CreateTables1702334778530;

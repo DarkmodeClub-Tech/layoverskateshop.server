@@ -1,5 +1,5 @@
 import * as T from "typeorm";
-import { Product, Seller } from ".";
+import { Product, Seller, Category } from ".";
 
 @T.Entity("photos")
 export class Photo {
@@ -14,6 +14,9 @@ export class Photo {
 
   @T.ManyToOne(() => Product, (product) => product.photos)
   product?: Product;
+
+  // @T.ManyToOne(() => Category)
+  // category?: Category;
 
   @T.ManyToOne(() => Seller, (seller) => seller.cover_photos)
   owner: Seller;
