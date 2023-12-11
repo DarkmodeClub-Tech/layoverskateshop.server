@@ -12,16 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerCategoryService = void 0;
+exports.registerPhoto = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
-const registerCategoryService = (title) => __awaiter(void 0, void 0, void 0, function* () {
-    const categoryRepo = data_source_1.default.getRepository(entities_1.Category);
-    let category = yield categoryRepo.findOneBy({ title });
-    if (category)
-        return category;
-    category = categoryRepo.create({ title });
-    yield categoryRepo.save(category);
-    return category;
+const registerPhoto = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const photosRepo = data_source_1.default.getRepository(entities_1.Photo);
+    const newPhoto = photosRepo.create(data);
+    yield photosRepo.save(newPhoto);
+    return newPhoto;
 });
-exports.registerCategoryService = registerCategoryService;
+exports.registerPhoto = registerPhoto;

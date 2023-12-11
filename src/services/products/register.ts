@@ -43,14 +43,14 @@ export const registerProductService = async (
   let product = new Product();
   product.title = title;
   product.price = Number(price);
-  product.promotionalPrice = Number(promotionalPrice);
+  product.promotional_price = Number(promotionalPrice);
   product.stock_amount = Number(stock_amount);
   product.max_installments = Number(max_installments);
   product.description = description;
   product.available_sizes = available_sizes;
   product.available_colors = available_colors;
   product.photos = await photoUploaderService(photos);
-  product.category = await registerCategoryService(category, product.photos);
+  product.category = await registerCategoryService(category);
   product.seller = await getSellerDataByIdService(sellerId);
   product.packaging = packaging;
   await productRepo.save(product);

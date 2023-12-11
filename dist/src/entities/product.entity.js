@@ -47,13 +47,13 @@ __decorate([
     __metadata("design:type", String)
 ], Product.prototype, "title", void 0);
 __decorate([
-    T.Column(),
+    T.Column({ type: "decimal", precision: 10, scale: 2 }),
     __metadata("design:type", Number)
 ], Product.prototype, "price", void 0);
 __decorate([
-    T.Column({ nullable: true }),
+    T.Column({ type: "decimal", precision: 10, scale: 2, nullable: true }),
     __metadata("design:type", Number)
-], Product.prototype, "promotionalPrice", void 0);
+], Product.prototype, "promotional_price", void 0);
 __decorate([
     T.Column(),
     __metadata("design:type", Number)

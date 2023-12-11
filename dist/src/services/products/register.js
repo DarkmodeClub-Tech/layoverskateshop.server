@@ -34,14 +34,14 @@ const registerProductService = (sellerId, data, photos) => __awaiter(void 0, voi
     let product = new entities_1.Product();
     product.title = title;
     product.price = Number(price);
-    product.promotionalPrice = Number(promotionalPrice);
+    product.promotional_price = Number(promotionalPrice);
     product.stock_amount = Number(stock_amount);
     product.max_installments = Number(max_installments);
     product.description = description;
     product.available_sizes = available_sizes;
     product.available_colors = available_colors;
     product.photos = yield (0, photos_1.photoUploaderService)(photos);
-    product.category = yield (0, category_1.registerCategoryService)(category, product.photos);
+    product.category = yield (0, category_1.registerCategoryService)(category);
     product.seller = yield (0, seller_1.getSellerDataByIdService)(sellerId);
     product.packaging = packaging;
     yield productRepo.save(product);
