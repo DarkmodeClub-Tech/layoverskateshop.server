@@ -19,6 +19,9 @@ export class Product {
   @T.Column()
   price: number;
 
+  @T.Column({ nullable: true })
+  promotionalPrice?: number;
+
   @T.Column()
   max_installments: number;
 

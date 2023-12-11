@@ -23,7 +23,7 @@ const retrieve_1 = require("./retrieve");
 const registerProductService = (sellerId, data, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
     const packagingRepo = data_source_1.default.getRepository(productPackaging_entity_1.ProductPackaging);
-    const { title, category, price, stock_amount, max_installments, description, available_colors, available_sizes, packaging_type, box_height, box_length, box_weight, box_width, } = data;
+    const { title, category, price, promotionalPrice, stock_amount, max_installments, description, available_colors, available_sizes, packaging_type, box_height, box_length, box_weight, box_width, } = data;
     let packaging = new productPackaging_entity_1.ProductPackaging();
     packaging.box_height = Number(box_height);
     packaging.box_length = Number(box_length);
@@ -34,6 +34,7 @@ const registerProductService = (sellerId, data, photos) => __awaiter(void 0, voi
     let product = new entities_1.Product();
     product.title = title;
     product.price = Number(price);
+    product.promotionalPrice = Number(promotionalPrice);
     product.stock_amount = Number(stock_amount);
     product.max_installments = Number(max_installments);
     product.description = description;

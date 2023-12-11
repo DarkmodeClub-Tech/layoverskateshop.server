@@ -1,8 +1,7 @@
 import { z } from "zod";
-import { registerProductRequestSchema } from "../schemas/products.schemas";
-import { TPhoto } from "./photo";
+import { registerProductRequestSchema } from "../schemas/";
 
-export type TProduct = {
+export type TCartProduct = {
   product_id: string;
   amount: number;
   requested_colors: string[];
