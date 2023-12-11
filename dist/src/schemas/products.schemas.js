@@ -5,6 +5,7 @@ const zod_1 = require("zod");
 exports.registerProductRequestSchema = zod_1.z.object({
     title: zod_1.z.string(),
     price: zod_1.z.string(),
+    promotionalPrice: zod_1.z.string().optional(),
     description: zod_1.z.string(),
     max_installments: zod_1.z.string(),
     stock_amount: zod_1.z.string(),

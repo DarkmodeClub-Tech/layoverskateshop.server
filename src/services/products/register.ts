@@ -19,6 +19,7 @@ export const registerProductService = async (
     title,
     category,
     price,
+    promotionalPrice,
     stock_amount,
     max_installments,
     description,
@@ -42,6 +43,7 @@ export const registerProductService = async (
   let product = new Product();
   product.title = title;
   product.price = Number(price);
+  product.promotionalPrice = Number(promotionalPrice);
   product.stock_amount = Number(stock_amount);
   product.max_installments = Number(max_installments);
   product.description = description;

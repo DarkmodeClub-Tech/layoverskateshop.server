@@ -51,6 +51,10 @@ __decorate([
     __metadata("design:type", Number)
 ], Product.prototype, "price", void 0);
 __decorate([
+    T.Column({ nullable: true }),
+    __metadata("design:type", Number)
+], Product.prototype, "promotionalPrice", void 0);
+__decorate([
     T.Column(),
     __metadata("design:type", Number)
 ], Product.prototype, "max_installments", void 0);
