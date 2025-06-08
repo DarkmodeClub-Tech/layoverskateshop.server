@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCategoriesService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
-const getCategoriesService = (offset = 0, limit = 100) => __awaiter(void 0, void 0, void 0, function* () {
+const getCategoriesService = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (offset = 0, limit = 100) {
     const categoryRepo = data_source_1.default.getRepository(entities_1.Category);
     const categories = yield categoryRepo.find({ skip: offset, take: limit });
     return categories;

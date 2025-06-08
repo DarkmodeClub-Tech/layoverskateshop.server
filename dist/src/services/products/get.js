@@ -39,7 +39,7 @@ const getProductsService = (offset, limit, search) => __awaiter(void 0, void 0, 
     return products;
 });
 exports.getProductsService = getProductsService;
-const getProductsBySellerIdService = (sellerId, offset = 0, limit = 50) => __awaiter(void 0, void 0, void 0, function* () {
+const getProductsBySellerIdService = (sellerId_1, ...args_1) => __awaiter(void 0, [sellerId_1, ...args_1], void 0, function* (sellerId, offset = 0, limit = 50) {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
     const products = yield productRepo.find({
         skip: offset,

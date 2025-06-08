@@ -6,30 +6,33 @@ import * as scp from "../services/cartProducts/delete";
 export const createCartController = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   const { id } = req.user;
   const cart = await s.createCartService();
-  return res.status(201).json(cart);
+  res.status(201).json(cart);
+  return;
 };
 
 export const insertProductsCartController = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   const { id } = req.user;
   const { cart } = await sc.retrieveCustomerService(id);
   const { products } = req.body;
   const cartProducts = await s.addProductsToCartService(cart, products);
-  return res.status(200).json(cartProducts);
+  res.status(200).json(cartProducts);
+  return;
 };
 
 export const removeProductsFromCartController = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   const { products_ids } = req.body;
   const { id } = req.user;
   const { cart } = await sc.retrieveCustomerService(id);
   await s.removeProductsFromCartService(cart, products_ids);
-  return res.status(200).send();
+  res.status(200).send();
+  return;
 };

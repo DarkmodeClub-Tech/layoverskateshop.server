@@ -8,5 +8,5 @@ export const photoUploaderController = async (req: Request, res: Response) => {
 
   const seller = await getSellerDataByIdService(sellerId);
   const photos = await s.photoUploaderService(files, seller);
-  return res.status(201).json(photos);
+  res.status(201).json(photos);
 };

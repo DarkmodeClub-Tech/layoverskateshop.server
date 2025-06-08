@@ -15,13 +15,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,37 +47,37 @@ const s = __importStar(require("../services/customer"));
 const loginCustomerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const accessToken = yield s.loginCustomerService(data);
-    return res.status(200).json(accessToken);
+    res.status(200).json(accessToken);
 });
 exports.loginCustomerController = loginCustomerController;
 const registerCustomerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const user = yield s.registerCustomerService(data);
-    return res.status(201).json(user);
+    res.status(201).json(user);
 });
 exports.registerCustomerController = registerCustomerController;
 const retrieveCustomerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
     const user = yield s.retrieveCustomerService(id);
-    return res.status(200).json(user);
+    res.status(200).json(user);
 });
 exports.retrieveCustomerController = retrieveCustomerController;
 const updateCustomerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
     const data = req.body;
     const updated_user = yield s.updateCustomerService(id, data);
-    return res.status(200).json(updated_user);
+    res.status(200).json(updated_user);
 });
 exports.updateCustomerController = updateCustomerController;
 const deleteAccountController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
     yield s.deleteAccountService(id);
-    return res.status(204).send();
+    res.status(204).send();
 });
 exports.deleteAccountController = deleteAccountController;
 const deactivateAccountController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
     yield s.deactivateAccountService(id);
-    return res.status(204).send();
+    res.status(204).send();
 });
 exports.deactivateAccountController = deactivateAccountController;

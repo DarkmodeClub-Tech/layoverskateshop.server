@@ -14,11 +14,10 @@ export const loginSellerService = async ({
 }: ILogin) => {
   const userRepo = AppDataSource.getRepository(Seller);
 
-  const user = await userRepo.findOneBy(
-    {
-      email: email,
-    } || { username: username }
-  );
+  const user = await userRepo.findOneBy({
+    email,
+    username,
+  });
 
   if (!user) throw new AppError("Invalid Data", 403);
 

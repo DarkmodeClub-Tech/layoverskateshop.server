@@ -9,20 +9,23 @@ const handleErrorMiddleware = async (
   next: NextFunction
 ) => {
   if (error instanceof AppError) {
-    return res.status(error.statusCode).json({
+    res.status(error.statusCode).json({
       message: error.message,
     });
+    return;
   }
 
   if (error instanceof ZodError) {
-    return res.status(500).json({
+    res.status(500).json({
       message: error.errors,
     });
+    return;
   }
 
-  return res.status(500).json({
+  res.status(500).json({
     message: "Internal server error",
   });
+  return;
 };
 
 export default handleErrorMiddleware;

@@ -7,7 +7,7 @@ export const loginCustomerController = async (req: Request, res: Response) => {
   const data: ILogin = req.body;
   const accessToken = await s.loginCustomerService(data);
 
-  return res.status(200).json(accessToken);
+  res.status(200).json(accessToken);
 };
 
 export const registerCustomerController = async (
@@ -16,7 +16,7 @@ export const registerCustomerController = async (
 ) => {
   const data: ICustomer = req.body;
   const user = await s.registerCustomerService(data);
-  return res.status(201).json(user);
+  res.status(201).json(user);
 };
 
 export const retrieveCustomerController = async (
@@ -25,7 +25,7 @@ export const retrieveCustomerController = async (
 ) => {
   const { id } = req.user;
   const user = await s.retrieveCustomerService(id);
-  return res.status(200).json(user);
+  res.status(200).json(user);
 };
 
 export const updateCustomerController = async (req: Request, res: Response) => {
@@ -33,13 +33,13 @@ export const updateCustomerController = async (req: Request, res: Response) => {
   const data = req.body;
   const updated_user = await s.updateCustomerService(id, data);
 
-  return res.status(200).json(updated_user);
+  res.status(200).json(updated_user);
 };
 
 export const deleteAccountController = async (req: Request, res: Response) => {
   const { id } = req.user;
   await s.deleteAccountService(id);
-  return res.status(204).send();
+  res.status(204).send();
 };
 
 export const deactivateAccountController = async (
@@ -48,5 +48,5 @@ export const deactivateAccountController = async (
 ) => {
   const { id } = req.user;
   await s.deactivateAccountService(id);
-  return res.status(204).send();
+  res.status(204).send();
 };

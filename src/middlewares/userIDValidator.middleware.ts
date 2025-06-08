@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import AppDataSource from "../data-source";
 import { EntityTarget, ObjectLiteral } from "typeorm";
+import { AppError } from "../errors/appError";
 
 export const userIdValidator =
   (entity: EntityTarget<ObjectLiteral>) =>
@@ -8,9 +9,9 @@ export const userIdValidator =
     const userRepo = AppDataSource.getRepository(entity);
     const { id } = req.user;
     const account = await userRepo.findOneBy({ id: id });
-    const errorMessage = { message: "Not found" };
+    const errorMessage = "Not found";
 
-    if (!account) return res.status(404).json(errorMessage);
+    if (!account) throw new AppError(errorMessage, 404);
 
     return next();
   };

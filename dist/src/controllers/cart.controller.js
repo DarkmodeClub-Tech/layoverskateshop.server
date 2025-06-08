@@ -15,13 +15,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38,7 +48,8 @@ const sc = __importStar(require("../services/customer"));
 const createCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.user;
     const cart = yield s.createCartService();
-    return res.status(201).json(cart);
+    res.status(201).json(cart);
+    return;
 });
 exports.createCartController = createCartController;
 const insertProductsCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -46,7 +57,8 @@ const insertProductsCartController = (req, res) => __awaiter(void 0, void 0, voi
     const { cart } = yield sc.retrieveCustomerService(id);
     const { products } = req.body;
     const cartProducts = yield s.addProductsToCartService(cart, products);
-    return res.status(200).json(cartProducts);
+    res.status(200).json(cartProducts);
+    return;
 });
 exports.insertProductsCartController = insertProductsCartController;
 const removeProductsFromCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -54,6 +66,7 @@ const removeProductsFromCartController = (req, res) => __awaiter(void 0, void 0,
     const { id } = req.user;
     const { cart } = yield sc.retrieveCustomerService(id);
     yield s.removeProductsFromCartService(cart, products_ids);
-    return res.status(200).send();
+    res.status(200).send();
+    return;
 });
 exports.removeProductsFromCartController = removeProductsFromCartController;
