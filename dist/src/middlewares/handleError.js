@@ -13,17 +13,20 @@ const appError_1 = require("../errors/appError");
 const zod_1 = require("zod");
 const handleErrorMiddleware = (error, req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     if (error instanceof appError_1.AppError) {
-        return res.status(error.statusCode).json({
+        res.status(error.statusCode).json({
             message: error.message,
         });
+        return;
     }
     if (error instanceof zod_1.ZodError) {
-        return res.status(500).json({
+        res.status(500).json({
             message: error.errors,
         });
+        return;
     }
-    return res.status(500).json({
+    res.status(500).json({
         message: "Internal server error",
     });
+    return;
 });
 exports.default = handleErrorMiddleware;

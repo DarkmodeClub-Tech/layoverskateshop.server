@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import AppDataSource from "../data-source";
 import { User } from "../entities";
 import { EntityTarget, ObjectLiteral } from "typeorm";
+import { AppError } from "../errors/appError";
 
 export const verifyDuplicatedUsername =
   (entity: EntityTarget<ObjectLiteral>) =>
@@ -10,13 +11,13 @@ export const verifyDuplicatedUsername =
 
     const userRepo = AppDataSource.getRepository(entity);
 
-    const errorMessage = { message: "Username already being used!" };
+    const errorMessage = "Username already being used!";
 
     const usernameAlreadyBeingUsed = await userRepo.findOneBy({
       username: username,
     });
 
-    if (usernameAlreadyBeingUsed) return res.status(409).json(errorMessage);
+    if (usernameAlreadyBeingUsed) throw new AppError(errorMessage, 409);
 
     return next();
   };

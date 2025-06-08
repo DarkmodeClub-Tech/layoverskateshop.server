@@ -14,13 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userIdValidator = void 0;
 const data_source_1 = __importDefault(require("../data-source"));
+const appError_1 = require("../errors/appError");
 const userIdValidator = (entity) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userRepo = data_source_1.default.getRepository(entity);
     const { id } = req.user;
     const account = yield userRepo.findOneBy({ id: id });
-    const errorMessage = { message: "Not found" };
+    const errorMessage = "Not found";
     if (!account)
-        return res.status(404).json(errorMessage);
+        throw new appError_1.AppError(errorMessage, 404);
     return next();
 });
 exports.userIdValidator = userIdValidator;

@@ -15,7 +15,7 @@ export const registerProductController = async (
   const photos = await photoUploaderService(files, seller);
   const product = await s.registerProductService(seller, data, photos);
 
-  return res.status(201).json(product);
+  res.status(201).json(product);
 };
 
 export const getProductsController = async (req: Request, res: Response) => {
@@ -26,7 +26,7 @@ export const getProductsController = async (req: Request, res: Response) => {
     search && String(search)
   );
 
-  return res.status(200).json(products);
+  res.status(200).json(products);
 };
 
 export const getProductsBySellerIdController = async (
@@ -40,7 +40,7 @@ export const getProductsBySellerIdController = async (
     Number(offset),
     Number(limit)
   );
-  return res.status(200).json(products);
+  res.status(200).json(products);
 };
 
 export const updateProductController = async (req: Request, res: Response) => {
@@ -48,7 +48,7 @@ export const updateProductController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const updateData = await s.updateProductService(id, data);
 
-  return res.status(200).json(updateData);
+  res.status(200).json(updateData);
 };
 
 export const deactivateProductAddController = async (
@@ -57,11 +57,11 @@ export const deactivateProductAddController = async (
 ) => {
   const { id } = req.params;
   await s.deactivateProductAddService(id);
-  return res.status(204).send();
+  res.status(204).send();
 };
 
 export const deleteProductController = async (req: Request, res: Response) => {
   const { id } = req.params;
   await s.deleteProductService(id);
-  return res.status(204).send();
+  res.status(204).send();
 };

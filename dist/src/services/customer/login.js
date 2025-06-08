@@ -19,9 +19,9 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv/config");
 const appError_1 = require("../../errors/appError");
 const entities_1 = require("../../entities");
-const loginCustomerService = ({ email, username, password, }) => __awaiter(void 0, void 0, void 0, function* () {
+const loginCustomerService = (_a) => __awaiter(void 0, [_a], void 0, function* ({ email, username, password, }) {
     const userRepo = data_source_1.default.getRepository(entities_1.Customer);
-    const user = yield userRepo.findOneBy({ email } || { username });
+    const user = yield userRepo.findOneBy({ email, username });
     if (!user)
         throw new appError_1.AppError("Invalid Data", 403);
     const passwordMatch = yield (0, bcrypt_1.compare)(password, user.password);

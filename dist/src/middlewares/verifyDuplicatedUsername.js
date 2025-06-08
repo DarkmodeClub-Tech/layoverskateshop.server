@@ -14,15 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyDuplicatedUsername = void 0;
 const data_source_1 = __importDefault(require("../data-source"));
+const appError_1 = require("../errors/appError");
 const verifyDuplicatedUsername = (entity) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { username } = req.body;
     const userRepo = data_source_1.default.getRepository(entity);
-    const errorMessage = { message: "Username already being used!" };
+    const errorMessage = "Username already being used!";
     const usernameAlreadyBeingUsed = yield userRepo.findOneBy({
         username: username,
     });
     if (usernameAlreadyBeingUsed)
-        return res.status(409).json(errorMessage);
+        throw new appError_1.AppError(errorMessage, 409);
     return next();
 });
 exports.verifyDuplicatedUsername = verifyDuplicatedUsername;

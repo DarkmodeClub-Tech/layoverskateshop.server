@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyAdmPermissionMiddleware = void 0;
+const appError_1 = require("../errors/appError");
 const verifyAdmPermissionMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { adm } = req.user;
+    const errorMessage = "You do not have permission to perform this action";
     if (!adm)
-        return res
-            .status(403)
-            .json({ message: "You do not have permission to perform this action" });
+        throw new appError_1.AppError(errorMessage, 406);
     return next();
 });
 exports.verifyAdmPermissionMiddleware = verifyAdmPermissionMiddleware;

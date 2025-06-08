@@ -9,7 +9,8 @@ export const registerCategoryController = async (
   const { title }: { title: string } = req.body;
 
   const category = await s.registerCategoryService(title);
-  return res.status(201).json(category);
+  res.status(201).json(category);
+  return;
 };
 
 export const getCategoriesController = async (req: Request, res: Response) => {
@@ -19,7 +20,8 @@ export const getCategoriesController = async (req: Request, res: Response) => {
     Number(limit)
   );
 
-  return res.status(200).json(categories);
+  res.status(200).json(categories);
+  return;
 };
 
 export const updateCategoryController = async (req: Request, res: Response) => {
@@ -27,11 +29,13 @@ export const updateCategoryController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const updatedData = await s.updateCategoryService(id, data);
 
-  return res.status(200).json(updatedData);
+  res.status(200).json(updatedData);
+  return;
 };
 
 export const deleteCategoryController = async (req: Request, res: Response) => {
   const { id } = req.params;
   await s.deleteCategoryService(id);
-  return res.status(204).send();
+  res.status(204).send();
+  return;
 };

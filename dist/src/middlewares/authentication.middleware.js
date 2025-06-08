@@ -21,15 +21,17 @@ const authenticationMiddleware = (req, res, next) => __awaiter(void 0, void 0, v
         const errorMsg = {
             message: "Missing authorization token",
         };
-        return res.status(401).json(errorMsg);
+        res.status(401).json(errorMsg);
+        return;
     }
     token = token.split(" ")[1];
     jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
-            return res.status(401).json({
+            res.status(401).json({
                 message: "Invalid token",
                 error: error,
             });
+            return;
         }
         req.user = {
             id: decoded.sub,
