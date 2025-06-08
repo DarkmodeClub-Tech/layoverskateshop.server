@@ -54,9 +54,9 @@ __decorate([
         eager: true,
     }),
     __metadata("design:type", Array)
-], Seller.prototype, "cover_photos", void 0);
+], Seller.prototype, "photos", void 0);
 __decorate([
-    T.OneToOne(() => _1.Photo, (avatar) => avatar.profile, {
+    T.OneToOne(() => _1.Photo, (avatar) => avatar.owner, {
         onDelete: "CASCADE",
         eager: true,
     }),

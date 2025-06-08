@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as s from "../services/products/";
 import { TRegisterProductRequest } from "../interfaces/product";
+import { getSellerDataByIdService, photoUploaderService } from "../services";
 
 export const registerProductController = async (
   req: Request,
@@ -9,7 +10,10 @@ export const registerProductController = async (
   const sellerId = req.user.id;
   const files = req.files as Express.Multer.File[];
   const data: TRegisterProductRequest = req.body;
-  const product = await s.registerProductService(sellerId, data, files);
+
+  const seller = await getSellerDataByIdService(sellerId);
+  const photos = await photoUploaderService(files, seller);
+  const product = await s.registerProductService(seller, data, photos);
 
   return res.status(201).json(product);
 };

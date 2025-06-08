@@ -15,9 +15,9 @@ export class Seller extends User {
     onDelete: "CASCADE",
     eager: true,
   })
-  cover_photos: Photo[];
+  photos: Photo[];
 
-  @T.OneToOne(() => Photo, (avatar) => avatar.profile, {
+  @T.OneToOne(() => Photo, (avatar) => avatar.owner, {
     onDelete: "CASCADE",
     eager: true,
   })

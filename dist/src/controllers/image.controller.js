@@ -32,33 +32,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.photoUploaderService = void 0;
-require("dotenv/config");
-const cloudinary_1 = require("cloudinary");
-const fs = __importStar(require("fs"));
-const appError_1 = require("../../errors/appError");
-const register_1 = require("./register");
-const photoUploaderService = (files, owner, product) => __awaiter(void 0, void 0, void 0, function* () {
-    const savedPhotos = [];
-    for (const file of files) {
-        const upload = yield cloudinary_1.v2.uploader.upload(file.path);
-        const { public_id } = upload;
-        const url = cloudinary_1.v2.url(upload.public_id);
-        console.log(upload, "upload");
-        const photo = yield (0, register_1.registerPhoto)({
-            public_id,
-            url,
-            owner,
-            product,
-        });
-        console.log(photo, "photo");
-        savedPhotos.push(photo);
-        console.log(savedPhotos, "photos");
-        fs.unlink(file.path, (error) => {
-            if (error)
-                throw new appError_1.AppError(error.message);
-        });
-    }
-    return savedPhotos;
+exports.photoUploaderController = void 0;
+const s = __importStar(require("../services/photos"));
+const services_1 = require("../services");
+const photoUploaderController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sellerId = req.user.id;
+    const files = req.files;
+    const seller = yield (0, services_1.getSellerDataByIdService)(sellerId);
+    const photos = yield s.photoUploaderService(files, seller);
+    return res.status(201).json(photos);
 });
-exports.photoUploaderService = photoUploaderService;
+exports.photoUploaderController = photoUploaderController;

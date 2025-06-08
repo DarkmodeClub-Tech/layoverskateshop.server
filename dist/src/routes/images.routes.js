@@ -24,7 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const c = __importStar(require("../controllers/image.controllers"));
+const c = __importStar(require("../controllers/image.controller"));
 const m = __importStar(require("../middlewares"));
 const imageRouter = (0, express_1.Router)();
 imageRouter.post("/upload", m.authenticationMiddleware, m.verifyAdmPermissionMiddleware, m.uploadFileMiddleware.array("photos", 6), c.photoUploaderController);

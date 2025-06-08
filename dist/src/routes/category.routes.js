@@ -24,7 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const c = __importStar(require("../controllers/category.controllers"));
+const c = __importStar(require("../controllers/category.controller"));
 const m = __importStar(require("../middlewares"));
 const categoryRouter = (0, express_1.Router)();
 categoryRouter.post("/register", m.authenticationMiddleware, c.registerCategoryController);

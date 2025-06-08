@@ -9,7 +9,6 @@ export type TPhoto = {
 export type TPhotosRegisterData = {
   public_id: string;
   url: string;
-  owner?: Seller;
-  product?: Product;
-  profile?: Seller;
+  owner: Seller;
+  product?: Product | null;
 };

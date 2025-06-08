@@ -13,14 +13,11 @@ export class Photo {
   public_id: string;
 
   @T.ManyToOne(() => Product, (product) => product.photos)
-  product?: Product;
+  product: Product | null;
 
-  // @T.ManyToOne(() => Category)
-  // category?: Category;
+  // // @T.ManyToOne(() => Category)
+  // // category?: Category;
 
-  @T.ManyToOne(() => Seller, (seller) => seller.cover_photos)
-  owner: Seller;
-
-  @T.OneToOne(() => Seller, (profile) => profile.avatar)
-  profile: Seller;
+  @T.ManyToOne(() => Seller, (seller) => seller.photos)
+  owner: Seller | null;
 }

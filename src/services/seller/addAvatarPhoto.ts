@@ -10,7 +10,7 @@ export const addAvatarPhotoService = async (
 ): Promise<Seller> => {
   const sellerRepo = AppDataSource.getRepository(Seller);
   let seller = await getSellerDataByIdService(sellerId);
-  const photo = await photoUploaderService([file]);
+  const photo = await photoUploaderService([file], seller);
   seller.avatar = photo[0];
   sellerRepo.save(seller);
   seller = await getSellerDataByIdService(seller.id);
