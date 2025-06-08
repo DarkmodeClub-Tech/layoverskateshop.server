@@ -1,26 +1,26 @@
-import * as T from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import { User, Product, Photo } from ".";
 
-@T.Entity("sellers")
+@Entity("sellers")
 export class Seller extends User {
-  @T.Column({ default: true })
+  @Column({ default: true })
   adm: boolean;
 
-  @T.OneToMany(() => Product, (product) => product.seller, {
+  @OneToMany(() => Product, (product) => product.seller, {
     onDelete: "CASCADE",
   })
   products: Product[];
 
-  @T.OneToMany(() => Photo, (photo) => photo.owner, {
+  @OneToMany(() => Photo, (photo) => photo.owner, {
     onDelete: "CASCADE",
     eager: true,
   })
   photos: Photo[];
 
-  @T.OneToOne(() => Photo, (avatar) => avatar.owner, {
+  @OneToOne(() => Photo, (avatar) => avatar.owner, {
     onDelete: "CASCADE",
     eager: true,
   })
-  @T.JoinColumn()
+  @JoinColumn()
   avatar: Photo;
 }

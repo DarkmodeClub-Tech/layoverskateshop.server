@@ -1,26 +1,34 @@
-import * as T from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { Product, Customer } from ".";
 // import { OrderProducts } from "./orderProducts.entity";
 
-@T.Entity("orders")
+@Entity("orders")
 export class Order {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.Column({ default: true, nullable: true })
+  @Column({ default: true, nullable: true })
   active: boolean;
 
-  @T.ManyToMany(() => Product, (product) => product.orders)
+  @ManyToMany(() => Product, (product) => product.orders)
   products: Product[];
   // @OneToMany(() => OrderProducts, (cartProducts) => cartProducts.orders)
   // products: OrderProducts[];
 
-  @T.ManyToOne(() => Customer, (customer) => customer.orders)
+  @ManyToOne(() => Customer, (customer) => customer.orders)
   customer: Customer;
 
-  @T.CreateDateColumn()
+  @CreateDateColumn()
   created_at: Date;
 
-  @T.UpdateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date;
 }

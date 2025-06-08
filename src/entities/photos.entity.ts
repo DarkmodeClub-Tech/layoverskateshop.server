@@ -1,23 +1,23 @@
-import * as T from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Product, Seller, Category } from ".";
 
-@T.Entity("photos")
+@Entity("photos")
 export class Photo {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.Column({ length: 300 })
+  @Column({ length: 300 })
   url: string;
 
-  @T.Column()
+  @Column()
   public_id: string;
 
-  @T.ManyToOne(() => Product, (product) => product.photos)
+  @ManyToOne(() => Product, (product) => product.photos)
   product: Product | null;
 
   // // @T.ManyToOne(() => Category)
   // // category?: Category;
 
-  @T.ManyToOne(() => Seller, (seller) => seller.photos)
+  @ManyToOne(() => Seller, (seller) => seller.photos)
   owner: Seller | null;
 }

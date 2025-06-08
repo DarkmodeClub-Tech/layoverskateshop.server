@@ -1,15 +1,15 @@
-import * as T from "typeorm";
+import { Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Customer, CartProduct } from ".";
 
-@T.Entity("carts")
+@Entity("carts")
 export class Cart {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.OneToOne(() => Customer, (customer) => customer.cart)
+  @OneToOne(() => Customer, (customer) => customer.cart)
   customer: Customer;
 
-  @T.OneToMany(() => CartProduct, (cartProduct) => cartProduct.cart, {
+  @OneToMany(() => CartProduct, (cartProduct) => cartProduct.cart, {
     eager: true,
   })
   products: CartProduct[];

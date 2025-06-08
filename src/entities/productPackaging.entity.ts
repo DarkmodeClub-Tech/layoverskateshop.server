@@ -1,26 +1,26 @@
-import * as T from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from ".";
 
-@T.Entity("product_packaging")
+@Entity("product_packaging")
 export class ProductPackaging {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: number;
 
-  @T.Column({ length: 10 })
+  @Column({ length: 10 })
   packaging_type: string;
 
-  @T.Column()
+  @Column()
   box_length: number;
 
-  @T.Column()
+  @Column()
   box_height: number;
 
-  @T.Column()
+  @Column()
   box_width: number;
 
-  @T.Column()
+  @Column()
   box_weight: number;
 
-  @T.OneToOne(() => Product, (product) => product.packaging)
+  @OneToOne(() => Product, (product) => product.packaging)
   product?: Product;
 }

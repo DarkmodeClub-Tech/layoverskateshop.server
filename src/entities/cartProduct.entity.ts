@@ -1,24 +1,24 @@
-import * as T from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Cart, Product } from ".";
 
-@T.Entity("cart_products")
+@Entity("cart_products")
 export class CartProduct {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.Column()
+  @Column()
   cart_amount: number;
 
-  @T.Column("text", { array: true, default: [""] })
+  @Column("text", { array: true, default: [""] })
   requested_colors: string[];
 
-  @T.Column("text", { array: true, default: [""] })
+  @Column("text", { array: true, default: [""] })
   requested_sizes: string[];
 
-  @T.ManyToOne(() => Cart)
+  @ManyToOne(() => Cart)
   cart: Cart;
 
-  @T.ManyToOne(() => Product, {
+  @ManyToOne(() => Product, {
     eager: true,
   })
   product: Product;

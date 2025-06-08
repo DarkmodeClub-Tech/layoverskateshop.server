@@ -1,20 +1,27 @@
-import * as T from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { Photo, Product } from ".";
 
-@T.Entity("categories")
+@Entity("categories")
 export class Category {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.Column({ nullable: true })
+  @Column({ nullable: true })
   title: string;
 
-  @T.OneToMany(() => Product, (product) => product.category)
+  @OneToMany(() => Product, (product) => product.category)
   products: Product[];
 
-  @T.CreateDateColumn()
+  @CreateDateColumn()
   created_at: Date;
 
-  @T.UpdateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date;
 }

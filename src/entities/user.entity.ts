@@ -1,56 +1,63 @@
-import * as T from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { Exclude } from "class-transformer";
 import { Address } from ".";
 
-@T.Entity("users")
+@Entity("users")
 export class User {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.Column({ length: 80 })
+  @Column({ length: 80 })
   username: string;
 
-  @T.Column({ length: 80 })
+  @Column({ length: 80 })
   first_name: string;
 
-  @T.Column({ length: 80 })
+  @Column({ length: 80 })
   last_name: string;
 
-  @T.Column({ length: 120 })
+  @Column({ length: 120 })
   email: string;
 
   @Exclude()
-  @T.Column({ length: 150 })
+  @Column({ length: 150 })
   password: string;
 
-  @T.Column({ length: 11 })
+  @Column({ length: 11 })
   cpf: string;
 
-  @T.Column({ length: 14 })
+  @Column({ length: 14 })
   phone: string;
 
-  @T.Column({ default: true })
+  @Column({ default: true })
   is_active: boolean;
 
-  @T.Column({
+  @Column({
     type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
   })
   last_login: Date;
 
-  @T.Column({
+  @Column({
     type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
   })
   last_logout: Date;
 
-  @T.CreateDateColumn()
+  @CreateDateColumn()
   created_at: Date;
 
-  @T.UpdateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @T.ManyToOne(() => Address, (address) => address.users, {
+  @ManyToOne(() => Address, (address) => address.users, {
     eager: true,
     cascade: true,
   })

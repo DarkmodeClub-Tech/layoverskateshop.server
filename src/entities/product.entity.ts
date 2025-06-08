@@ -1,4 +1,15 @@
-import * as T from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import {
   Order,
   Seller,
@@ -8,63 +19,63 @@ import {
   ProductPackaging,
 } from ".";
 
-@T.Entity("products")
+@Entity("products")
 export class Product {
-  @T.PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @T.Column({ length: 100 })
+  @Column({ length: 100 })
   title: string;
 
-  @T.Column({ type: "decimal", precision: 10, scale: 2 })
+  @Column({ type: "decimal", precision: 10, scale: 2 })
   price: number;
 
-  @T.Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   promotional_price?: number;
 
-  @T.Column()
+  @Column()
   max_installments: number;
 
-  @T.Column({ default: true, nullable: true })
+  @Column({ default: true, nullable: true })
   available: boolean;
 
-  @T.Column({ default: 1 })
+  @Column({ default: 1 })
   stock_amount: number;
 
-  @T.Column({ default: "" })
+  @Column({ default: "" })
   description: string;
 
-  @T.Column("text", { array: true, default: [""] })
+  @Column("text", { array: true, default: [""] })
   available_sizes: string[];
 
-  @T.Column("text", { array: true, default: [""] })
+  @Column("text", { array: true, default: [""] })
   available_colors: string[];
 
-  @T.CreateDateColumn()
+  @CreateDateColumn()
   created_at: Date;
 
-  @T.UpdateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @T.OneToMany(() => CartProduct, (cartProduct) => cartProduct.product)
+  @OneToMany(() => CartProduct, (cartProduct) => cartProduct.product)
   carts: CartProduct[];
 
-  @T.ManyToMany(() => Order, (order) => order.products)
+  @ManyToMany(() => Order, (order) => order.products)
   orders: Order[];
 
-  @T.ManyToOne(() => Seller, (seller) => seller.products)
+  @ManyToOne(() => Seller, (seller) => seller.products)
   seller: Seller;
 
-  @T.ManyToOne(() => Category, (category) => category.products, {
+  @ManyToOne(() => Category, (category) => category.products, {
     eager: true,
     cascade: true,
   })
   category: Category;
 
-  @T.OneToMany(() => Photo, (photo) => photo.product, { eager: true })
+  @OneToMany(() => Photo, (photo) => photo.product, { eager: true })
   photos: Photo[];
 
-  @T.OneToOne(() => ProductPackaging, { eager: true, onDelete: "CASCADE" })
-  @T.JoinColumn()
+  @OneToOne(() => ProductPackaging, { eager: true, onDelete: "CASCADE" })
+  @JoinColumn()
   packaging: ProductPackaging;
 }
