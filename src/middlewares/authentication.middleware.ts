@@ -13,17 +13,19 @@ export const authenticationMiddleware = async (
     const errorMsg = {
       message: "Missing authorization token",
     };
-    return res.status(401).json(errorMsg);
+    res.status(401).json(errorMsg);
+    return;
   }
 
   token = token.split(" ")[1];
 
   jwt.verify(token, process.env.SECRET_KEY as string, (error, decoded: any) => {
     if (error) {
-      return res.status(401).json({
+      res.status(401).json({
         message: "Invalid token",
         error: error,
       });
+      return;
     }
     req.user = {
       id: decoded.sub,

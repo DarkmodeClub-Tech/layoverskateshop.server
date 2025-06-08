@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { AppError } from "../errors/appError";
 
 export const verifyAdmPermissionMiddleware = async (
   req: Request,
@@ -6,11 +7,8 @@ export const verifyAdmPermissionMiddleware = async (
   next: NextFunction
 ) => {
   const { adm } = req.user;
-
-  if (!adm)
-    return res
-      .status(403)
-      .json({ message: "You do not have permission to perform this action" });
+  const errorMessage = "You do not have permission to perform this action";
+  if (!adm) throw new AppError(errorMessage, 406);
 
   return next();
 };
