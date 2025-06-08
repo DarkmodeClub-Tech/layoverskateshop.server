@@ -1,14 +1,14 @@
 import AppDataSource from "../../data-source";
 import { Cart, CartProduct } from "../../entities";
 import { AppError } from "../../errors/appError";
-import { TProduct } from "../../interfaces/product";
+import { TCartProduct } from "../../interfaces/";
 import { retrieveCartService } from ".";
 import { createCartProductsService } from "../cartProducts/create";
 import { retrieveProductService } from "../products";
 
 export const addProductsToCartService = async (
   cart: Cart,
-  products: TProduct[]
+  products: TCartProduct[]
 ) => {
   let cartUpdated: Cart = cart;
   const cartProductRepo = AppDataSource.getRepository(CartProduct);

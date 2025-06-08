@@ -1,25 +1,12 @@
-import { User } from "./user.entity";
-import { Address } from "./address.entity";
-import { Cart } from "./cart.entity";
-import { Product } from "./product.entity";
-import { Order } from "./order.entity";
-import { Customer } from "./customer.entity";
-import { Seller } from "./seller.entity";
-import { Category } from "./category.entity";
-import { Photo } from "./photos.entity";
+export * from "./user.entity";
+export * from "./address.entity";
+export * from "./cart.entity";
+export * from "./product.entity";
+export * from "./order.entity";
+export * from "./customer.entity";
+export * from "./seller.entity";
+export * from "./category.entity";
+export * from "./photos.entity";
+export * from "./cartProduct.entity";
+export * from "./productPackaging.entity";
 // import { OrderProducts } from "./orderProducts.entity";
-import { CartProduct } from "./cartProduct.entity";
-
-export {
-  User,
-  Address,
-  Cart,
-  Product,
-  Order,
-  Customer,
-  Seller,
-  Category,
-  Photo,
-  // OrderProducts,
-  CartProduct,
-};

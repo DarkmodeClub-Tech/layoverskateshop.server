@@ -6,7 +6,7 @@ import * as c from "../controllers/";
 
 const sellerRouter = Router();
 
-sellerRouter.get("/products", c.getGlobalSellerAndProductsController);
+sellerRouter.get("/products", c.getGlobalSellerCategoriesAndProductsController);
 
 sellerRouter.get("/:id", c.getSellerDataByIdController);
 

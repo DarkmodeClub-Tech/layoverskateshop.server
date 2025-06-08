@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const entities_1 = require("../entities");
-const c = __importStar(require("../controllers/customer.controllers"));
+const c = __importStar(require("../controllers/customer.controller"));
 const m = __importStar(require("../middlewares"));
 const s = __importStar(require("../schemas/customer.schemas"));
 const customerRouter = (0, express_1.Router)();

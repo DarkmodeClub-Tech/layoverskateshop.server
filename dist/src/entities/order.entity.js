@@ -33,37 +33,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Order = void 0;
-const t = __importStar(require("typeorm"));
-const product_entity_1 = require("./product.entity");
-const customer_entity_1 = require("./customer.entity");
+const T = __importStar(require("typeorm"));
+const _1 = require(".");
 // import { OrderProducts } from "./orderProducts.entity";
 let Order = class Order {
 };
 exports.Order = Order;
 __decorate([
-    t.PrimaryGeneratedColumn("uuid"),
+    T.PrimaryGeneratedColumn("uuid"),
     __metadata("design:type", String)
 ], Order.prototype, "id", void 0);
 __decorate([
-    t.Column({ default: true, nullable: true }),
+    T.Column({ default: true, nullable: true }),
     __metadata("design:type", Boolean)
 ], Order.prototype, "active", void 0);
 __decorate([
-    t.ManyToMany(() => product_entity_1.Product, (product) => product.orders),
+    T.ManyToMany(() => _1.Product, (product) => product.orders),
     __metadata("design:type", Array)
 ], Order.prototype, "products", void 0);
 __decorate([
-    t.ManyToOne(() => customer_entity_1.Customer, (customer) => customer.orders),
-    __metadata("design:type", customer_entity_1.Customer)
+    T.ManyToOne(() => _1.Customer, (customer) => customer.orders),
+    __metadata("design:type", _1.Customer)
 ], Order.prototype, "customer", void 0);
 __decorate([
-    t.CreateDateColumn(),
+    T.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Order.prototype, "created_at", void 0);
 __decorate([
-    t.UpdateDateColumn(),
+    T.UpdateDateColumn(),
     __metadata("design:type", Date)
 ], Order.prototype, "updated_at", void 0);
 exports.Order = Order = __decorate([
-    t.Entity("orders")
+    T.Entity("orders")
 ], Order);

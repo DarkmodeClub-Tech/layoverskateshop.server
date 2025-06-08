@@ -34,11 +34,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProductController = exports.deactivateProductAddController = exports.updateProductController = exports.getProductsBySellerIdController = exports.getProductsController = exports.registerProductController = void 0;
 const s = __importStar(require("../services/products/"));
+const services_1 = require("../services");
 const registerProductController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerId = req.user.id;
     const files = req.files;
     const data = req.body;
-    const product = yield s.registerProductService(sellerId, data, files);
+    const seller = yield (0, services_1.getSellerDataByIdService)(sellerId);
+    const photos = yield (0, services_1.photoUploaderService)(files, seller);
+    const product = yield s.registerProductService(seller, data, photos);
     return res.status(201).json(product);
 });
 exports.registerProductController = registerProductController;

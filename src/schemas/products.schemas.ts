@@ -3,6 +3,7 @@ import { z } from "zod";
 export const registerProductRequestSchema = z.object({
   title: z.string(),
   price: z.string(),
+  promotionalPrice: z.string().optional(),
   description: z.string(),
   max_installments: z.string(),
   stock_amount: z.string(),

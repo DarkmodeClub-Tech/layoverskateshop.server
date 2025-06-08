@@ -1,10 +1,12 @@
 import * as T from "typeorm";
-import { Order } from "./order.entity";
-import { Seller } from "./seller.entity";
-import { Category } from "./category.entity";
-import { Photo } from "./photos.entity";
-import { CartProduct } from "./cartProduct.entity";
-import { ProductPackaging } from "./productPackaging.entity";
+import {
+  Order,
+  Seller,
+  Category,
+  Photo,
+  CartProduct,
+  ProductPackaging,
+} from ".";
 
 @T.Entity("products")
 export class Product {
@@ -14,8 +16,11 @@ export class Product {
   @T.Column({ length: 100 })
   title: string;
 
-  @T.Column()
+  @T.Column({ type: "decimal", precision: 10, scale: 2 })
   price: number;
+
+  @T.Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  promotional_price?: number;
 
   @T.Column()
   max_installments: number;

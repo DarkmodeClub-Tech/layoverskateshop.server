@@ -33,38 +33,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CartProduct = void 0;
-const t = __importStar(require("typeorm"));
-const cart_entity_1 = require("./cart.entity");
-const product_entity_1 = require("./product.entity");
+const T = __importStar(require("typeorm"));
+const _1 = require(".");
 let CartProduct = class CartProduct {
 };
 exports.CartProduct = CartProduct;
 __decorate([
-    t.PrimaryGeneratedColumn("uuid"),
+    T.PrimaryGeneratedColumn("uuid"),
     __metadata("design:type", String)
 ], CartProduct.prototype, "id", void 0);
 __decorate([
-    t.Column(),
+    T.Column(),
     __metadata("design:type", Number)
 ], CartProduct.prototype, "cart_amount", void 0);
 __decorate([
-    t.Column("text", { array: true, default: [""] }),
+    T.Column("text", { array: true, default: [""] }),
     __metadata("design:type", Array)
 ], CartProduct.prototype, "requested_colors", void 0);
 __decorate([
-    t.Column("text", { array: true, default: [""] }),
+    T.Column("text", { array: true, default: [""] }),
     __metadata("design:type", Array)
 ], CartProduct.prototype, "requested_sizes", void 0);
 __decorate([
-    t.ManyToOne(() => cart_entity_1.Cart),
-    __metadata("design:type", cart_entity_1.Cart)
+    T.ManyToOne(() => _1.Cart),
+    __metadata("design:type", _1.Cart)
 ], CartProduct.prototype, "cart", void 0);
 __decorate([
-    t.ManyToOne(() => product_entity_1.Product, {
+    T.ManyToOne(() => _1.Product, {
         eager: true,
     }),
-    __metadata("design:type", product_entity_1.Product)
+    __metadata("design:type", _1.Product)
 ], CartProduct.prototype, "product", void 0);
 exports.CartProduct = CartProduct = __decorate([
-    t.Entity("cart_products")
+    T.Entity("cart_products")
 ], CartProduct);

@@ -5,8 +5,8 @@ export const registerCategoryService = async (
   title: string
 ): Promise<Category> => {
   const categoryRepo = AppDataSource.getRepository(Category);
-
   let category = await categoryRepo.findOneBy({ title });
+
   if (category) return category;
 
   category = categoryRepo.create({ title });

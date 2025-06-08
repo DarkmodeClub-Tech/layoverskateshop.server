@@ -31,28 +31,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.photoUploaderService = void 0;
+require("dotenv/config");
 const cloudinary_1 = require("cloudinary");
 const fs = __importStar(require("fs"));
-require("dotenv/config");
 const appError_1 = require("../../errors/appError");
-const entities_1 = require("../../entities");
-const data_source_1 = __importDefault(require("../../data-source"));
-const photoUploaderService = (files) => __awaiter(void 0, void 0, void 0, function* () {
-    const photoRepo = data_source_1.default.getRepository(entities_1.Photo);
+const register_1 = require("./register");
+const photoUploaderService = (files, owner, product) => __awaiter(void 0, void 0, void 0, function* () {
     const savedPhotos = [];
     for (const file of files) {
         const upload = yield cloudinary_1.v2.uploader.upload(file.path);
-        const photo = photoRepo.create({
-            public_id: upload.public_id,
-            url: cloudinary_1.v2.url(upload.public_id),
+        const { public_id } = upload;
+        const url = cloudinary_1.v2.url(upload.public_id);
+        console.log(upload, "upload");
+        const photo = yield (0, register_1.registerPhoto)({
+            public_id,
+            url,
+            owner,
+            product,
         });
-        yield photoRepo.save(photo);
+        console.log(photo, "photo");
         savedPhotos.push(photo);
+        console.log(savedPhotos, "photos");
         fs.unlink(file.path, (error) => {
             if (error)
                 throw new appError_1.AppError(error.message);

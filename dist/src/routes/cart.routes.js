@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cartRouter = void 0;
 const express_1 = require("express");
-const c = __importStar(require("../controllers/cart.controllers"));
+const c = __importStar(require("../controllers/cart.controller"));
 const m = __importStar(require("../middlewares/"));
 exports.cartRouter = (0, express_1.Router)();
 exports.cartRouter.post("/register", m.authenticationMiddleware, c.createCartController);

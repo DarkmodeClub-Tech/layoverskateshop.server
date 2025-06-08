@@ -32,30 +32,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategoryController = exports.updateCategoryController = exports.getCategoriesController = exports.registerCategoryController = void 0;
-const s = __importStar(require("../services"));
-const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title } = req.body;
-    const category = yield s.registerCategoryService(title);
-    return res.status(201).json(category);
+exports.photoUploaderController = void 0;
+const s = __importStar(require("../services/photos"));
+const services_1 = require("../services");
+const photoUploaderController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sellerId = req.user.id;
+    const files = req.files;
+    const seller = yield (0, services_1.getSellerDataByIdService)(sellerId);
+    const photos = yield s.photoUploaderService(files, seller);
+    return res.status(201).json(photos);
 });
-exports.registerCategoryController = registerCategoryController;
-const getCategoriesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { offset, limit } = req.query;
-    const categories = yield s.getCategoriesService(Number(offset), Number(limit));
-    return res.status(200).json(categories);
-});
-exports.getCategoriesController = getCategoriesController;
-const updateCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const { id } = req.params;
-    const updatedData = yield s.updateCategoryService(id, data);
-    return res.status(200).json(updatedData);
-});
-exports.updateCategoryController = updateCategoryController;
-const deleteCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    yield s.deleteCategoryService(id);
-    return res.status(204).send();
-});
-exports.deleteCategoryController = deleteCategoryController;
+exports.photoUploaderController = photoUploaderController;

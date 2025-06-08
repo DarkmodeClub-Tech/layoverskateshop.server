@@ -32,30 +32,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategoryController = exports.updateCategoryController = exports.getCategoriesController = exports.registerCategoryController = void 0;
-const s = __importStar(require("../services"));
-const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title } = req.body;
-    const category = yield s.registerCategoryService(title);
-    return res.status(201).json(category);
+exports.removeProductsFromCartController = exports.insertProductsCartController = exports.createCartController = void 0;
+const s = __importStar(require("../services/cart"));
+const sc = __importStar(require("../services/customer"));
+const createCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.user;
+    const cart = yield s.createCartService();
+    return res.status(201).json(cart);
 });
-exports.registerCategoryController = registerCategoryController;
-const getCategoriesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { offset, limit } = req.query;
-    const categories = yield s.getCategoriesService(Number(offset), Number(limit));
-    return res.status(200).json(categories);
+exports.createCartController = createCartController;
+const insertProductsCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.user;
+    const { cart } = yield sc.retrieveCustomerService(id);
+    const { products } = req.body;
+    const cartProducts = yield s.addProductsToCartService(cart, products);
+    return res.status(200).json(cartProducts);
 });
-exports.getCategoriesController = getCategoriesController;
-const updateCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const { id } = req.params;
-    const updatedData = yield s.updateCategoryService(id, data);
-    return res.status(200).json(updatedData);
+exports.insertProductsCartController = insertProductsCartController;
+const removeProductsFromCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { products_ids } = req.body;
+    const { id } = req.user;
+    const { cart } = yield sc.retrieveCustomerService(id);
+    yield s.removeProductsFromCartService(cart, products_ids);
+    return res.status(200).send();
 });
-exports.updateCategoryController = updateCategoryController;
-const deleteCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    yield s.deleteCategoryService(id);
-    return res.status(204).send();
-});
-exports.deleteCategoryController = deleteCategoryController;
+exports.removeProductsFromCartController = removeProductsFromCartController;

@@ -21,7 +21,7 @@ const getSellerDataByIdService = (sellerId) => __awaiter(void 0, void 0, void 0,
     const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
     const sellerData = yield sellerRepo.findOneBy({ id: sellerId });
     if (!sellerData)
-        throw new appError_1.AppError("Not Found", 404);
+        throw new appError_1.AppError("Seller Not Found", 404);
     return (0, class_transformer_1.instanceToPlain)(sellerData);
 });
 exports.getSellerDataByIdService = getSellerDataByIdService;

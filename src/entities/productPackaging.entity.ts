@@ -1,26 +1,26 @@
-import * as t from "typeorm";
-import { Product } from "./product.entity";
+import * as T from "typeorm";
+import { Product } from ".";
 
-@t.Entity("product_packaging")
+@T.Entity("product_packaging")
 export class ProductPackaging {
-  @t.PrimaryGeneratedColumn("uuid")
+  @T.PrimaryGeneratedColumn("uuid")
   readonly id: number;
 
-  @t.Column({ length: 10 })
+  @T.Column({ length: 10 })
   packaging_type: string;
 
-  @t.Column()
+  @T.Column()
   box_length: number;
 
-  @t.Column()
+  @T.Column()
   box_height: number;
 
-  @t.Column()
+  @T.Column()
   box_width: number;
 
-  @t.Column()
+  @T.Column()
   box_weight: number;
 
-  @t.OneToOne(() => Product, (product) => product.packaging)
+  @T.OneToOne(() => Product, (product) => product.packaging)
   product?: Product;
 }

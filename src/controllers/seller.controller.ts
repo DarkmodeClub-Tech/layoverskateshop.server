@@ -1,14 +1,19 @@
 import { Request, Response } from "express";
-import * as s from "../services/seller";
+import * as s from "../services/";
 import { getProductsBySellerIdService } from "../services/products";
 
-export const getGlobalSellerAndProductsController = async (
+export const getGlobalSellerCategoriesAndProductsController = async (
   req: Request,
   res: Response
 ) => {
   const globalSeller = await s.getGlobalSellerService();
+  const categories = await s.getCategoriesService();
   const products = await getProductsBySellerIdService(globalSeller.id);
-  const results = { seller: globalSeller, products: products };
+  const results = {
+    seller: globalSeller,
+    categories: categories,
+    products: products,
+  };
   return res.status(200).json(results);
 };
 
