@@ -32,33 +32,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.photoUploaderService = void 0;
-require("dotenv/config");
-const cloudinary_1 = require("cloudinary");
-const fs = __importStar(require("fs"));
-const appError_1 = require("../../errors/appError");
-const register_1 = require("./register");
-const photoUploaderService = (files, owner, product) => __awaiter(void 0, void 0, void 0, function* () {
-    const savedPhotos = [];
-    for (const file of files) {
-        const upload = yield cloudinary_1.v2.uploader.upload(file.path);
-        const { public_id } = upload;
-        const url = cloudinary_1.v2.url(upload.public_id);
-        console.log(upload, "upload");
-        const photo = yield (0, register_1.registerPhoto)({
-            public_id,
-            url,
-            owner,
-            product,
-        });
-        console.log(photo, "photo");
-        savedPhotos.push(photo);
-        console.log(savedPhotos, "photos");
-        fs.unlink(file.path, (error) => {
-            if (error)
-                throw new appError_1.AppError(error.message);
-        });
-    }
-    return savedPhotos;
+exports.removeProductsFromCartController = exports.insertProductsCartController = exports.createCartController = void 0;
+const s = __importStar(require("../services/cart"));
+const sc = __importStar(require("../services/customer"));
+const createCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.user;
+    const cart = yield s.createCartService();
+    return res.status(201).json(cart);
 });
-exports.photoUploaderService = photoUploaderService;
+exports.createCartController = createCartController;
+const insertProductsCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.user;
+    const { cart } = yield sc.retrieveCustomerService(id);
+    const { products } = req.body;
+    const cartProducts = yield s.addProductsToCartService(cart, products);
+    return res.status(200).json(cartProducts);
+});
+exports.insertProductsCartController = insertProductsCartController;
+const removeProductsFromCartController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { products_ids } = req.body;
+    const { id } = req.user;
+    const { cart } = yield sc.retrieveCustomerService(id);
+    yield s.removeProductsFromCartService(cart, products_ids);
+    return res.status(200).send();
+});
+exports.removeProductsFromCartController = removeProductsFromCartController;

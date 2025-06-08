@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as c from "../controllers/cart.controllers";
+import * as c from "../controllers/cart.controller";
 import * as m from "../middlewares/";
 
 export const cartRouter: Router = Router();

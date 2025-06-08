@@ -15,9 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerPhoto = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
+const appError_1 = require("../../errors/appError");
 const registerPhoto = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const { public_id, url, owner, product } = data;
+    if (!owner)
+        throw new appError_1.AppError("owner is required", 400);
     const photosRepo = data_source_1.default.getRepository(entities_1.Photo);
-    const newPhoto = photosRepo.create(data);
+    let newPhoto = photosRepo.create({
+        public_id,
+        url,
+        owner,
+        product,
+    });
     yield photosRepo.save(newPhoto);
     return newPhoto;
 });

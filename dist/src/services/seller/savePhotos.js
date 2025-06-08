@@ -15,12 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.savePhotosService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
+const appError_1 = require("../../errors/appError");
 const photos_1 = require("../photos");
 const get_1 = require("./get");
 const savePhotosService = (sellerId, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const sellerRepo = data_source_1.default.getRepository(entities_1.Seller);
     const seller = yield (0, get_1.getSellerDataByIdService)(sellerId);
-    seller.cover_photos = yield (0, photos_1.photoUploaderService)(photos);
+    if (!seller)
+        throw new appError_1.AppError("Seller is not found.", 404);
+    seller.photos = yield (0, photos_1.photoUploaderService)(photos, seller);
     yield sellerRepo.save(seller);
     return yield (0, get_1.getSellerDataByIdService)(sellerId);
 });

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Customer } from "../entities";
-import * as c from "../controllers/customer.controllers";
+import * as c from "../controllers/customer.controller";
 import * as m from "../middlewares";
 import * as s from "../schemas/customer.schemas";
 

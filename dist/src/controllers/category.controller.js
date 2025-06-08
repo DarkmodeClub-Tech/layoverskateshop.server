@@ -32,33 +32,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.photoUploaderService = void 0;
-require("dotenv/config");
-const cloudinary_1 = require("cloudinary");
-const fs = __importStar(require("fs"));
-const appError_1 = require("../../errors/appError");
-const register_1 = require("./register");
-const photoUploaderService = (files, owner, product) => __awaiter(void 0, void 0, void 0, function* () {
-    const savedPhotos = [];
-    for (const file of files) {
-        const upload = yield cloudinary_1.v2.uploader.upload(file.path);
-        const { public_id } = upload;
-        const url = cloudinary_1.v2.url(upload.public_id);
-        console.log(upload, "upload");
-        const photo = yield (0, register_1.registerPhoto)({
-            public_id,
-            url,
-            owner,
-            product,
-        });
-        console.log(photo, "photo");
-        savedPhotos.push(photo);
-        console.log(savedPhotos, "photos");
-        fs.unlink(file.path, (error) => {
-            if (error)
-                throw new appError_1.AppError(error.message);
-        });
-    }
-    return savedPhotos;
+exports.deleteCategoryController = exports.updateCategoryController = exports.getCategoriesController = exports.registerCategoryController = void 0;
+const s = __importStar(require("../services"));
+const registerCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title } = req.body;
+    const category = yield s.registerCategoryService(title);
+    return res.status(201).json(category);
 });
-exports.photoUploaderService = photoUploaderService;
+exports.registerCategoryController = registerCategoryController;
+const getCategoriesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { offset, limit } = req.query;
+    const categories = yield s.getCategoriesService(Number(offset), Number(limit));
+    return res.status(200).json(categories);
+});
+exports.getCategoriesController = getCategoriesController;
+const updateCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    const { id } = req.params;
+    const updatedData = yield s.updateCategoryService(id, data);
+    return res.status(200).json(updatedData);
+});
+exports.updateCategoryController = updateCategoryController;
+const deleteCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    yield s.deleteCategoryService(id);
+    return res.status(204).send();
+});
+exports.deleteCategoryController = deleteCategoryController;

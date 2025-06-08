@@ -16,13 +16,18 @@ exports.registerProductService = void 0;
 const data_source_1 = __importDefault(require("../../data-source"));
 const entities_1 = require("../../entities");
 const productPackaging_entity_1 = require("../../entities/productPackaging.entity");
+const appError_1 = require("../../errors/appError");
 const category_1 = require("../category");
-const photos_1 = require("../photos");
-const seller_1 = require("../seller");
 const retrieve_1 = require("./retrieve");
-const registerProductService = (sellerId, data, photos) => __awaiter(void 0, void 0, void 0, function* () {
+const registerProductService = (seller, data, photos) => __awaiter(void 0, void 0, void 0, function* () {
     const productRepo = data_source_1.default.getRepository(entities_1.Product);
     const packagingRepo = data_source_1.default.getRepository(productPackaging_entity_1.ProductPackaging);
+    const productAlreadyExists = yield productRepo.findOneBy({
+        title: data.title,
+    });
+    if (productAlreadyExists) {
+        throw new appError_1.AppError("Product title already exists", 409);
+    }
     const { title, category, price, promotionalPrice, stock_amount, max_installments, description, available_colors, available_sizes, packaging_type, box_height, box_length, box_weight, box_width, } = data;
     let packaging = new productPackaging_entity_1.ProductPackaging();
     packaging.box_height = Number(box_height);
@@ -40,10 +45,10 @@ const registerProductService = (sellerId, data, photos) => __awaiter(void 0, voi
     product.description = description;
     product.available_sizes = available_sizes;
     product.available_colors = available_colors;
-    product.photos = yield (0, photos_1.photoUploaderService)(photos);
-    product.category = yield (0, category_1.registerCategoryService)(category);
-    product.seller = yield (0, seller_1.getSellerDataByIdService)(sellerId);
+    product.seller = seller;
     product.packaging = packaging;
+    product.photos = photos;
+    product.category = yield (0, category_1.registerCategoryService)(category);
     yield productRepo.save(product);
     product = yield (0, retrieve_1.retrieveProductService)(product.id);
     return product;

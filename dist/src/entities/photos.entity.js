@@ -52,16 +52,12 @@ __decorate([
 ], Photo.prototype, "public_id", void 0);
 __decorate([
     T.ManyToOne(() => _1.Product, (product) => product.photos),
-    __metadata("design:type", _1.Product)
+    __metadata("design:type", Object)
 ], Photo.prototype, "product", void 0);
 __decorate([
-    T.ManyToOne(() => _1.Seller, (seller) => seller.cover_photos),
-    __metadata("design:type", _1.Seller)
+    T.ManyToOne(() => _1.Seller, (seller) => seller.photos),
+    __metadata("design:type", Object)
 ], Photo.prototype, "owner", void 0);
-__decorate([
-    T.OneToOne(() => _1.Seller, (profile) => profile.avatar),
-    __metadata("design:type", _1.Seller)
-], Photo.prototype, "profile", void 0);
 exports.Photo = Photo = __decorate([
     T.Entity("photos")
 ], Photo);

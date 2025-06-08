@@ -1,5 +1,5 @@
 import AppDataSource from "../../data-source";
-import { Cart } from "../../entities/";
+import { Cart } from "../../entities";
 import { TCartProduct } from "../../interfaces/";
 import { addProductsToCartService } from "./addProducts";
 

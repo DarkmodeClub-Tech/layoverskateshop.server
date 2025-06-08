@@ -1,6 +1,7 @@
 import AppDataSource from "../../data-source";
-import { Product } from "../../entities";
+import { Photo, Product, Seller } from "../../entities";
 import { ProductPackaging } from "../../entities/productPackaging.entity";
+import { AppError } from "../../errors/appError";
 import { TRegisterProductRequest } from "../../interfaces/product";
 import { registerCategoryService } from "../category";
 import { photoUploaderService } from "../photos";
@@ -8,12 +9,20 @@ import { getSellerDataByIdService } from "../seller";
 import { retrieveProductService } from "./retrieve";
 
 export const registerProductService = async (
-  sellerId: string,
+  seller: Seller,
   data: TRegisterProductRequest,
-  photos: Express.Multer.File[]
+  photos: Photo[]
 ): Promise<Product> => {
   const productRepo = AppDataSource.getRepository(Product);
   const packagingRepo = AppDataSource.getRepository(ProductPackaging);
+
+  const productAlreadyExists = await productRepo.findOneBy({
+    title: data.title,
+  });
+
+  if (productAlreadyExists) {
+    throw new AppError("Product title already exists", 409);
+  }
 
   const {
     title,
@@ -49,10 +58,12 @@ export const registerProductService = async (
   product.description = description;
   product.available_sizes = available_sizes;
   product.available_colors = available_colors;
-  product.photos = await photoUploaderService(photos);
-  product.category = await registerCategoryService(category);
-  product.seller = await getSellerDataByIdService(sellerId);
+  product.seller = seller;
   product.packaging = packaging;
+  product.photos = photos;
+
+  product.category = await registerCategoryService(category);
+
   await productRepo.save(product);
 
   product = await retrieveProductService(product.id);
